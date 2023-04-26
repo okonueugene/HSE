@@ -822,7 +822,7 @@
                 ©
                 <script>
                     document.write(new Date().getFullYear());
-                </script>2023
+                </script>
                 , made with ❤️ by <a href="https://pixinvent.com" target="_blank" class="fw-semibold">Pixinvent</a>
             </div>
             <div>

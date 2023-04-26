@@ -17,6 +17,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400&display=swap">
 
     <!-- Icons -->
     <link rel="stylesheet" href="../../assets/vendor/fonts/fontawesome.css" />
@@ -39,6 +40,7 @@
     <!-- Helpers -->
     <script src="../../assets/vendor/js/helpers.js"></script>
     <script src="../../assets/js/config.js"></script>
+    
 
 
   
@@ -508,57 +510,104 @@
                 <!-- Content wrapper -->
                 <div class="content-wrapper">
                     <!-- Content -->
-                  
                     <div class="container-xxl flex-grow-1 container-p-y">
-                      <div class="row">
-                        <!-- Stop Fix Actions -->
-                        <div class="col-xl-3 col-md-4 col-6 mb-4">
-                          <div class="card">
-                            <div class="card-body">
-                              <h5 class="card-title mb-0">Stop Fix Actions</h5>
-                              <h4 class="mb-0">12/18</h4>
-                            </div>
+                        <div class="row t text-dark text-bold text-center border-bottom py-4">     
+                            <h5 class="mb-0">Site Details</h5>
                           </div>
-                        </div>
-                  
-                        <!-- Total Deviations  -->
-                        <div class="col-xl-3 col-md-4 col-6 mb-4">
-                          <div class="card">
-                            <div class="card-body">
-                              <h5 class="card-title mb-0">Immediate collective Actions(ICA)</h5>
-                              <h4 class="mb-0">2/5</h4>
-                            </div>
-                          </div>
-                        </div>
-                  
-                        <!-- Total Incidents -->
-                        <div class="col-xl-2 col-md-4 col-6 mb-4">
-                          <div class="card">
-                            <div class="card-body">
-                              <h5 class="card-title mb-0">Incidents</h5>
-                              <h4 class="mb-0">4</h4>
-                            </div>
-                          </div>
-                        </div>
-                  
-                        <!-- User mini profile -->
-                        <div class="col-xl-4 mb-4 col-lg-5 col-12">
-                          <div class="card">
-                            <div class="d-flex align-items-end row">
-                              <div class="col-7">
-                                <div class="card-body text-nowrap">
-                                  <h5 class="card-title mb-0">Welcome Back...</h5>
-                                  <p class="mb-2">John</p>
-                                  <!-- <h4 class="text-primary mb-1">$48.9k</h4> -->
-                                  <a href="javascript:;" class="btn btn-primary waves-effect waves-light">View Profile</a>
+                        <div class="row  py-4">
+                            <!-- Stop Fix Actions -->
+                            <div class="col-xl-3 col-md-4 col-6 mb-4">
+                              <div class="card">
+                                <div class="card-body">
+                                  <h5 class="card-title mb-0">Site Name</h5>
+                                  <h4 class="mb-0">12/18</h4>
                                 </div>
                               </div>
                             </div>
+                      
+                            <!-- Total Deviations  -->
+                            <div class="col-xl-3 col-md-4 col-6 mb-4">
+                              <div class="card">
+                                <div class="card-body">
+                                  <h5 class="card-title mb-0">Project Name</h5>
+                                  <h4 class="mb-0">2/5</h4>
+                                </div>
+                              </div>
+                            </div>
+                      
+                            <!-- Total Incidents -->
+                            <div class="col-xl-2 col-md-4 col-6 mb-4">
+                                <div class="card">
+                                  <div class="card-body">
+                                    <h5 class="card-title mb-0">Contractor Lead</h5>
+                                    <h4 class="mb-0">4</h4>
+                                  </div>
+                                </div>
+                              </div>    <div class="col-xl-2 col-md-4 col-6 mb-4">
+                                <div class="card">
+                                  <div class="card-body">
+                                    <h5 class="card-title mb-0">Auditor Details</h5>
+                                    <h4 class="mb-0">4</h4>
+                                  </div>
+                                </div>
+                              </div>
+                      
+                            <div class="col-xl-2 col-md-4 col-6 mb-4">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title mb-0 text-center">Time</h5>
+    
+                                        <div class="text-center text-body text-wrap fw-bold" id="clock">
+                                            <div  id="date-time"></div>
+                                          </div>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>  
+                          <div class="row t text-dark text-bold text-center py-4 border-bottom">     
+                            <h5 class="mb-0">Categories</h5>
                           </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <!-- Todays Attendance -->
+                          <div class="row py-4 ">
+                            <!-- Stop Fix Actions -->
+                            <div class="col-xl-3 col-md-4 col-6 mb-4">
+                              <div class="card">
+                                <div class="card-body">
+                                  <h5 class="card-title mb-0">Stop Fix Actions</h5>
+                                  <h4 class="mb-0">12/18</h4>
+                                </div>
+                              </div>
+                            </div>
+                      
+                            <!-- Total Deviations  -->
+                            <div class="col-xl-3 col-md-4 col-6 mb-4">
+                              <div class="card">
+                                <div class="card-body">
+                                  <h5 class="card-title mb-0">Immediate collective Actions(ICA)</h5>
+                                  <h4 class="mb-0">2/5</h4>
+                                </div>
+                              </div>
+                            </div>
+                      
+                            <!-- Total Incidents -->
+                            <div class="col-xl-2 col-md-4 col-6 mb-4">
+                              <div class="card">
+                                <div class="card-body">
+                                  <h5 class="card-title mb-0">Incidents</h5>
+                                  <h4 class="mb-0">4</h4>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-xl-3 col-md-4 col-6 mb-4">
+                                <div class="card">
+                                  <div class="card-body">
+                                    <h5 class="card-title mb-0">Reported Hazards</h5>
+                                    <h4 class="mb-0">5</h4>
+                                  </div>
+                                </div>
+                              </div>
+                          </div>
+                          <div class="row py-4">
+                            <!-- Todays Attendance -->
                         <div class="col-xl-3 col-md-4 col-6 mb-4">
                           <div class="card">
                             <div class="card-body">
@@ -608,7 +657,7 @@
                                 ©
                                 <script>
                                     document.write(new Date().getFullYear());
-                                </script>2023
+                                </script>
                                 , made with ❤️ by <a href="https://pixinvent.com" target="_blank" class="fw-semibold">Pixinvent</a>
                             </div>
                             <div>
@@ -661,5 +710,35 @@
 
 <!-- Page JS -->
 <script src="../../assets/js/dashboards-crm.js"></script>
+
+//clock
+<script>
+window.addEventListener("load", () => {
+  clock();
+  function clock() {
+    let value = new Date();
+let date = value.toLocaleString("en-us", {
+    weekday: "short",
+    month: "short",
+    day: "2-digit",
+});
+
+let time = value.toLocaleString("en-US", {
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+    hour12: true,
+   
+  }
+);
+
+document.getElementById("date-time").innerHTML = `${date} <br> ${time}`;
+
+setTimeout(clock, 1000);
+   
+  }
+});
+
+    </script>
 </body>
 </html>
