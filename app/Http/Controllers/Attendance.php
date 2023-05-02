@@ -10,7 +10,7 @@ class Attendance extends Controller
  
     public function index()
     {
-        $records = DB::table('attendances')->paginate(10);
+        $records =[];
 
         return view('admin/attendance', compact('records'));
     }

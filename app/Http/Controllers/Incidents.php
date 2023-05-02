@@ -9,7 +9,7 @@ class Incidents extends Controller
 {
     public function index()
     {
-        $incidents = DB::table('incidents')->paginate('10');
+        $incidents = [];
         
         return view('admin/incident', compact('incidents'));
     }

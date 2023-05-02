@@ -11,7 +11,7 @@ class Deviations extends Controller
     public function index()
     {
 
-        $deviations= DB::table('guards')->paginate('10');
+        $deviations= [];
 
         return view('admin/deviations', compact('deviations'));
     }
