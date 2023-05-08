@@ -23,8 +23,8 @@ jobs:
         run: chmod -R 777 storage bootstrap/cache
       - name: Clear caches
         run: php artisan cache:clear
-      - name: Migrate database
-        run: php artisan migrate --force
+#       - name: Migrate database
+#         run: php artisan migrate --force
       - name: Deploy to FTP
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
         with:
