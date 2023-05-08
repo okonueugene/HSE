@@ -14,9 +14,9 @@ jobs:
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.0'
+          php-version: '^8.0'
       - name: Install Dependencies
-        run: composer install --no-dev --prefer-dist --no-scripts -q -n
+        run: composer update
       - name: Generate key
         run: php artisan key:generate
       - name: Set directory permissions
