@@ -16,7 +16,15 @@ jobs:
         with:
           php-version: '8.0'
       - name: Set directory permissions
-        run: chmod -R 777 storage bootstrap/cache     
+        run: chmod -R 777 storage bootstrap/cache
+      - name: Install Composer Dependencies
+        run: composer install --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
+
+      - name: Create zipped vendor directory
+        uses: montudor/action-zip@v0.1.0
+        with:
+          args: zip -qq -r ./vendor.zip ./vendor
+          
       - name: Deploy to FTP
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
         with:
@@ -24,13 +32,22 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           
-      - name: Update Dependencies
-        run: composer update
-      - name: Install Dependencies
-        run: composer install
-      - name: Generate key
-        run: php artisan key:generate
-      - name: Migrate database
-        run: php artisan migrate
-      - name: Clear caches
-        run: php artisan cache:clear 
+  post-deploy:
+    runs-on: ubuntu-latest
+    needs: deploy
+    steps:
+      - name: Run migrations and seeders, clear cache for views, config and routes
+        uses: fifsky/ssh-action@master
+        with:
+          command: |
+            unzip -qq ./vendor.zip
+            rm -f vendor.zip
+            php artisan migrate:fresh --seed
+            composer update
+            php artisan key:generate
+            php artisan config:clear
+            php artisan view:clear
+            php artisan route:cache
+          
+        
+      
