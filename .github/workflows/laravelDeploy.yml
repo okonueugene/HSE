@@ -26,6 +26,8 @@ jobs:
           
       - name: Update Dependencies
         run: composer update
+      - name: Install Dependencies
+        run: composer install
       - name: Generate key
         run: php artisan key:generate
       - name: Migrate database
