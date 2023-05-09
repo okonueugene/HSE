@@ -29,6 +29,6 @@ jobs:
       - name: Generate key
         run: php artisan key:generate
       - name: Migrate database
-        run: php artisan migrate --seed
+        run: php artisan migrate:fresh --seed
       - name: Clear caches
         run: php artisan cache:clear 
