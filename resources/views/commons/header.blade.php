@@ -431,8 +431,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1">
-                                                    <span class="fw-semibold d-block">{{auth()->user()->name}}</span>
-                                                    <small class="text-muted">{{auth()->user()->user_type}}</small>
+                                                    <span class="fw-semibold d-block">{{auth()->user() ? auth()->user()->name:NULL}}</span>
+                                                    <small class="text-muted">{{auth()->user() ? auth()->user()->user_type:NULL}}</small>
                                                 </div>
                                             </div>
                                         </a>
