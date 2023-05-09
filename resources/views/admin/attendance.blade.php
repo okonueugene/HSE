@@ -96,7 +96,7 @@
                                         <label class="form-label" for="basicSalary">Salary</label>
                                         <div class="input-group input-group-merge">
                                             <span id="basicSalary2" class="input-group-text"><i class="ti ti-currency-dollar"></i></span>
-                                            <input type="number" id="basicSalary" name="basicSalary" class="form-control dt-salary" placeholder="12000" aria-label="12000" aria-describedby="basicSalary2" />
+                                            <input type="number" id="" name="basicSalary" class="form-control dt-salary" placeholder="12000" aria-label="12000" aria-describedby="basicSalary2" />
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
