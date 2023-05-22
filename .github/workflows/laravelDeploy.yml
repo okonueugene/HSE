@@ -24,13 +24,6 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
 
-          exclude: |
-            .git*
-            .github*
-            .env
-            .env.example
-            **/storage/**
-
       - name: Update Dependencies
         run: composer update
       - name: Install Dependencies
