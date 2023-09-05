@@ -107,20 +107,28 @@
                     );
 
                     // Display images if they exist
+                    // Display images if they exist
                     if (response.media.length > 0) {
                         var imagesHtml = '<h4>Images:</h4><div class="image-container">';
                         for (var i = 0; i < response.media.length; i++) {
                             const regex = /http:\/\/localhost\/storage\//;
-                            let image = response.media[i].original_url.replace(regex, '')
-                            //pass the image through the asset helper
+                            let image = response.media[i].original_url.replace(regex, '');
+                            // Pass the image through the asset helper
                             image = "{{ asset('storage') }}/" + image;
+
+                            // Create a container for each image and its title
+                            imagesHtml += '<div class="image-item">';
                             imagesHtml += '<img src="' + image + '" class="img-fluid" alt="img">';
+                            imagesHtml += '<div class="image-title">Image ' + (response.media[i].file_name) +
+                                '</div>';
+                            imagesHtml += '</div>';
                         }
-                        imagesHtml += '</div>';
+                        imagesHtml += '</div><br><br>'; // Add a line break between image groups
                         $('#badpractisesImages').html(imagesHtml);
                     } else {
                         $('#badpractisesImages').html('No images available.');
                     }
+
                 }
             });
         }
