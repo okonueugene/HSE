@@ -32,3 +32,5 @@ jobs:
         run: php artisan key:generate
       - name: Clear cache
         run: php artisan config:cache
+      - name: Storage link
+        run: php artisan storage:link

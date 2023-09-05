@@ -16,6 +16,10 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\UsersListController;
 use App\Http\Controllers\PermissionsController;
+use App\Http\Controllers\BadPractisesController;
+use App\Http\Controllers\ImprovementsController;
+use App\Http\Controllers\GoodPractisesController;
+use App\Http\Controllers\ReportedHazardsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,7 +42,6 @@ Route::get('/incidents', [Incidents::class, 'index'])->name('incidents');
 Route::get('/attendance', [Attendance::class, 'index'])->name('attendance');
 Route::get('/deviations', [Deviations::class, 'index'])->name('deviations');
 Route::get('/task', [Task::class, 'index'])->name('tasks');
-Route::get('/sor', [SORController::class, 'index'])->name('sor');
 Route::get('/icas', [ICASController::class, 'index'])->name('icas');
 Route::get('/sfa', [SFAController::class, 'index'])->name('sfa');
 Route::get('userslist', [UsersListController::class, 'index'])->name('userslist');
@@ -46,4 +49,16 @@ Route::get('roles', [RolesController::class, 'index'])->name('roles');
 Route::get('permissions', [PermissionsController::class, 'index'])->name('permissions');
 Route::get('faqs', [FAQController::class, 'index'])->name('faqs');
 Route::get('help', [HelpController::class, 'index'])->name('help');
+Route::get('hazards', [ReportedHazardsController::class, 'index'])->name('hazards');
+Route::get('improvements', [ImprovementsController::class, 'index'])->name('improvements');
+Route::get('goodpractises', [GoodPractisesController::class, 'index'])->name('goodpractises');
 
+//badpractises routes
+Route::get('badpractises', [BadPractisesController::class, 'index'])->name('badpractises');
+Route::get('badpractises/{id}', [BadPractisesController::class, 'show'])->name('badpractises.show');
+Route::delete('/badpractises/{id}', [BadpractisesController::class, 'destroy'])->name('badpractises.destroy');
+Route::put('/badpractises/{id}', [BadpractisesController::class, 'update'])->name('badpractises.update');
+
+//sor routes
+Route::get('/sor', [SORController::class, 'index'])->name('sor');
+Route::post('/sor', [SORController::class, 'store'])->name('sor.store');
