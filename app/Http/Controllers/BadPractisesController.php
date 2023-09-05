@@ -19,7 +19,6 @@ class BadPractisesController extends Controller
 
     public function index()
     {
-        //fetch all sor of type 1 with media where available
         $badpractices = SOR::where('type_id', 1)->with('media')->get();
         $badpractices->load('media');
 

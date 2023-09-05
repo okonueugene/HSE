@@ -49,15 +49,33 @@ Route::get('roles', [RolesController::class, 'index'])->name('roles');
 Route::get('permissions', [PermissionsController::class, 'index'])->name('permissions');
 Route::get('faqs', [FAQController::class, 'index'])->name('faqs');
 Route::get('help', [HelpController::class, 'index'])->name('help');
-Route::get('hazards', [ReportedHazardsController::class, 'index'])->name('hazards');
-Route::get('improvements', [ImprovementsController::class, 'index'])->name('improvements');
-Route::get('goodpractises', [GoodPractisesController::class, 'index'])->name('goodpractises');
 
 //badpractises routes
 Route::get('badpractises', [BadPractisesController::class, 'index'])->name('badpractises');
 Route::get('badpractises/{id}', [BadPractisesController::class, 'show'])->name('badpractises.show');
 Route::delete('/badpractises/{id}', [BadpractisesController::class, 'destroy'])->name('badpractises.destroy');
 Route::put('/badpractises/{id}', [BadpractisesController::class, 'update'])->name('badpractises.update');
+
+//goodpractises routes
+Route::get('goodpractises', [GoodPractisesController::class, 'index'])->name('goodpractises');
+Route::get('goodpractises/{id}', [GoodPractisesController::class, 'show'])->name('goodpractises.show');
+Route::delete('/goodpractises/{id}', [GoodpractisesController::class, 'destroy'])->name('goodpractises.destroy');
+Route::put('/goodpractises/{id}', [GoodpractisesController::class, 'update'])->name('goodpractises.update');
+
+//improvements routes
+Route::get('improvements', [ImprovementsController::class, 'index'])->name('improvements');
+Route::get('improvements/{id}', [ImprovementsController::class, 'show'])->name('improvements.show');
+Route::delete('/improvements/{id}', [ImprovementsController::class, 'destroy'])->name('improvements.destroy');
+Route::put('/improvements/{id}', [ImprovementsController::class, 'update'])->name('improvements.update');
+
+//reportedhazards routes
+Route::get('hazards', [ReportedHazardsController::class, 'index'])->name('hazards');
+Route::get('/reported-hazards', [ReportedHazardsController::class, 'index'])->name('reported-hazards.index');
+
+Route::get('hazards/{id}', [ReportedHazardsController::class, 'show'])->name('hazards.show');
+Route::delete('/hazards/{id}', [ReportedHazardsController::class, 'destroy'])->name('hazards.destroy');
+Route::put('/hazards/{id}', [ReportedHazardsController::class, 'update'])->name('hazards.update');
+
 
 //sor routes
 Route::get('/sor', [SORController::class, 'index'])->name('sor');
