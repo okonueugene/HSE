@@ -5,7 +5,7 @@
 
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> </span>Suggested badpractisess</h4>
-
+        <img src="{{ asset('storage/1/mpesa.png') }}" alt="img">
         <!-- DataTable with Buttons -->
         <div class="card">
             <div class="card-datatable table-responsive pt-0">
@@ -110,9 +110,11 @@
                     if (response.media.length > 0) {
                         var imagesHtml = '<h4>Images:</h4><div class="image-container">';
                         for (var i = 0; i < response.media.length; i++) {
-                            imagesHtml += '<img src="' + response.media[i].original_url + '" alt="Image ' + (i +
-                                    1) +
-                                '">';
+                            const regex = /http:\/\/localhost\/storage\//;
+                            let image = response.media[i].original_url.replace(regex, '')
+                            //pass the image through the asset helper
+                            image = "{{ asset('storage') }}/" + image;
+                            imagesHtml += '<img src="' + image + '" class="img-fluid" alt="img">';
                         }
                         imagesHtml += '</div>';
                         $('#badpractisesImages').html(imagesHtml);
