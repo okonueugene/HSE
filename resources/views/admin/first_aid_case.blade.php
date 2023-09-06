@@ -1,20 +1,10 @@
 @include('commons.header')
+
 <!-- Content wrapper -->
 <div class="content-wrapper">
-    <!-- Content -->
-
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> </span>Reported Hazards</h4>
-        <div>
-            <!-- Search input field -->
-            <form action="{{ route('reported-hazards.index') }}" method="GET">
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" name="search" placeholder="Search observations"
-                        value="{{ $search }}">
-                    <button class="btn btn-primary" type="submit">Search</button>
-                </div>
-            </form>
-        </div>
+        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> </span>First Aid Case Manager</h4>
+
         <!-- DataTable with Buttons -->
         <div class="card">
             <div class="card-datatable table-responsive pt-0">
@@ -22,74 +12,65 @@
                     <thead>
                         <tr>
                             <th>Id</th>
-                            <th>Observation</th>
-                            <th>Steps Taken</th>
+                            <th>Investigation</th>
+                            <th>Reporting Done</th>
                             <th>Date</th>
-                            <th>Status</th>
+                            <th>Description</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @if (count($hazards) < 1)
+                        @if (count($firstaidcases) == 0)
                             <tr>
-                                <td colspan="6" class="text-center">No data found.</td>
+                                <td colspan="8" class="text-center">No data found.</td>
                             </tr>
                         @endif
-                        @foreach ($hazards as $hazard)
+                        @foreach ($firstaidcases as $nearmiss)
                             <tr>
-                                <td>{{ $hazard->id }}</td>
-                                <td>{{ $hazard->observation }}</td>
-                                <td>{{ $hazard->steps_taken }}</td>
-                                <td>{{ $hazard->date }}</td>
-                                <td>
-                                    @if ($hazard->status == 0)
-                                        <span class="badge bg-danger">Open</span>
-                                    @else
-                                        <span class="badge bg-success">Closed</span>
-                                    @endif
-                                </td>
-                                {{-- show button --}}
+                                <td>{{ $case->id }}</td>
+                                <td>{{ $case->investigation_status }}</td>
+                                <td>{{ $case->incident_status }}</td>
+                                <td>{{ $case->incident_date }}</td>
+                                <td>{{ $case->incident_description }}</td>
                                 <td>
                                     <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
                                         data-bs-target="#showModal"
-                                        onclick="showDataModal({{ $hazard->id }})">View</button>
+                                        onclick="showDataModal({{ $case->id }})">View</button>
                                 </td>
                             </tr>
                         @endforeach
                     </tbody>
-
                 </table>
-
             </div>
+
         </div>
         <br>
         <div class="card card-bordered">
             <div class="card-inner">
                 <ul class="pagination justify-content-center" style="margin:10px 10px">
-                    {{ $hazards->links() }}
+                    {{ $firstaidcases->links() }}
                 </ul><!-- .pagination -->
             </div><!-- .card-inner -->
         </div>
     </div>
 </div>
 
-<!-- Modal for displaying hazards details -->
-
+<!-- Modal for displaying near miss details -->
 <div class="modal fade" id="showModal" tabindex="-1" role="dialog" aria-labelledby="showModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content">
             <!-- Modal header -->
             <div class="modal-header">
-                <h5 class="modal-title" id="showModalLabel">Hazard Details</h5>
+                <h5 class="modal-title" id="showModalLabel">Near Miss Details</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
             <!-- Modal body -->
             <div class="modal-body">
-                <!-- Display hazards details here -->
-                <div id="hazardsDetails"></div>
-                <div id="hazardsImages"></div>
+                <!-- Display firstaidcase details here -->
+                <div id="firstaidcaseDetails"></div>
+                <div id="firstaidcaseImages"></div>
             </div>
             <!-- Modal footer -->
             <div class="modal-footer">
@@ -109,18 +90,18 @@
     function showDataModal($id) {
         // Fetch data using ajax
         $.ajax({
-            url: '/hazards/' + $id,
+            url: '/nearmiss/' + $id,
             method: 'GET',
             dataType: 'json',
             success: function(response) {
                 console.log(response);
 
                 // Display badpractises details
-                $('#hazardsDetails').html(
-                    '<p><strong>Observation:</strong> ' + response.observation + '</p>' +
-                    '<p><strong>Status:</strong> ' + response.status + '</p>' +
-                    '<p><strong>Steps Taken:</strong> ' + response.steps_taken + '</p>' +
-                    '<p><strong>Date:</strong> ' + response.date + '</p>'
+                $('#firstaidcaseDetails').html(
+                    '<p><strong>Status:</strong> ' + response.investigation_status + '</p>' +
+                    '<p><strong>Steps Taken:</strong> ' + response.incident_status + '</p>' +
+                    '<p><strong>Date:</strong> ' + response.incident_date + '</p>' +
+                    '<p><strong>Date:</strong> ' + response.incident_description + '</p>'
                 );
 
                 // Display images if they exist
@@ -141,9 +122,9 @@
                         imagesHtml += '</div>';
                     }
                     imagesHtml += '</div><br><br>'; // Add a line break between image groups
-                    $('#hazardsImages').html(imagesHtml);
+                    $('#firstaidcaseImages').html(imagesHtml);
                 } else {
-                    $('#hazardsImages').html('No images available.');
+                    $('#firstaidcaseImages').html('No images available.');
                 }
 
             }

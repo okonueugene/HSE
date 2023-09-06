@@ -17,10 +17,11 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
             SorTypesSeeder::class,
+            IncidentSeeder::class,
         ]);
 
-        \App\Models\User::factory(10)->create();
-        \App\Models\SOR::factory(30)->create();
+        \App\Models\User::factory(30)->create();
+        \App\Models\SOR::factory(200)->create();
 
     }
 }

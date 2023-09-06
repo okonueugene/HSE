@@ -17,15 +17,29 @@ class BadPractisesController extends Controller
     public $type_id;
 
 
-    public function index()
+    public function index(Request $request)
     {
-        $badpractices = SOR::where('type_id', 1)->with('media')->get();
-        $badpractices->load('media');
+
+        $perPage
+        = 8; // Number of records per page
+
+        // Check if a search query is present
+        $search = $request->input('search');
+
+        $query = SOR::where('type_id', 1)->with('media');
+
+        // Apply search filter if a query is provided
+        if ($search) {
+            $query->where('observation', 'like', '%' . $search . '%');
+
+        }
+
+        $badpractises = $query->paginate($perPage);
 
         return view('admin/bad_practises')->with([
-            'badpractices' => $badpractices,
+            'badpractices' => $badpractises,
+            'search' => $search, // Pass search query to the view
         ]);
-
 
     }
 

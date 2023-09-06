@@ -83,7 +83,8 @@
         </li>
 
         <!-- Incidents -->
-        <li class="menu-item {{ request()->routeIs('incidents') ? 'active open' : '' }}">
+        <li
+            class="menu-item {{ request()->routeIs(['incidents', 'nearmiss', 'medicaltreatedcase', 'losttimeaccidents', 'firstaidcase', 'sif']) ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-layout-kanban"></i>
                 <div data-i18n="Incident Manager">Incident Manager</div>
@@ -95,28 +96,28 @@
                         <div data-i18n="Add Incident">Add Incident</div>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a href="{{ route('incidents') }}" class="menu-link">
+                <li class="menu-item {{ request()->routeIs('nearmiss') ? 'active open' : '' }}">
+                    <a href="{{ route('nearmiss') }}" class="menu-link">
                         <div data-i18n="Near Miss">Near Miss</div>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a href="{{ route('incidents') }}" class="menu-link">
+                <li class="menu-item {{ request()->routeIs('firstaidcase') ? 'active open' : '' }}">
+                    <a href="{{ route('firstaidcase') }}" class="menu-link">
                         <div data-i18n="First Aid Case">First Aid Case</div>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a href="{{ route('incidents') }}" class="menu-link">
+                <li class="menu-item {{ request()->routeIs('medicaltreatedcase') ? 'active open' : '' }}">
+                    <a href="{{ route('medicaltreatedcase') }}" class="menu-link">
                         <div data-i18n="Medical Treated Case">Medical Treated Case</div>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a href="{{ route('incidents') }}" class="menu-link">
+                <li class="menu-item {{ request()->routeIs('losttimeaccidents') ? 'active open' : '' }}">
+                    <a href="{{ route('losttimeaccidents') }}" class="menu-link">
                         <div data-i18n="Lost Time Accidents">Lost Time Accidents</div>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a href="{{ route('incidents') }}" class="menu-link">
+                <li class="menu-item {{ request()->routeIs('sif') ? 'active open' : '' }}">
+                    <a href="{{ route('sif') }}" class="menu-link">
                         <div data-i18n="SIF (SIF-p / SIF -a)">SIF (SIF-p / SIF -a)</div>
                     </a>
                 </li>
@@ -125,23 +126,24 @@
         </li>
 
         <!-- Deviations -->
-        <li class="menu-item {{ request()->routeIs('icas') ? 'active open' : '' }}">
+        <li class="menu-item {{ request()->routeIs(['icas', 'icas.create']) ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
                 <div data-i18n="Immediate collective Actions (ICA)">Immediate collective Actions (ICA)</div>
             </a>
 
             <ul class="menu-sub">
+                <li class="menu-item {{ request()->routeIs('icas.create') ? 'active open' : '' }}">
+                    <a href="{{ route('icas.create') }}" class="menu-link">
+                        <div data-i18n="Add ICA's">Add ICA's</div>
+                    </a>
+                </li>
+
                 <li class="menu-item {{ request()->routeIs('icas') ? 'active open' : '' }}">
                     <a href="{{ route('icas') }}" class="menu-link">
                         <div data-i18n="View ICA's">View ICA's</div>
                     </a>
                 </li>
-                <!-- <li class="menu-item">
-                  <a href="layouts-content-navbar.html" class="menu-link">
-                      <div data-i18n="Incident Kanban">Incident Kanban</div>
-                  </a>
-              </li> -->
 
             </ul>
         </li>

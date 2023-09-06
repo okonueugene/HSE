@@ -8,17 +8,29 @@ use App\Http\Controllers\Controller;
 
 class ImprovementsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
 
+        $perPage = 8; // Number of records per page
 
-        $improvements = SOR::where('type_id', 3)->with('media')->get();
+        // Check if a search query is present
+        $search = $request->input('search');
 
-        $improvements->load('media');
+        $query = SOR::where('type_id', 3)->with('media');
+
+        // Apply search filter if a query is provided
+        if ($search) {
+            $query->where('observation', 'like', '%' . $search . '%');
+        }
+
+        $improvements = $query->paginate($perPage);
 
         return view('admin/improvements')->with([
             'improvements' => $improvements,
+            'search' => $search, // Pass search query to the view
         ]);
+
+
     }
 
     public function show($id)

@@ -10,7 +10,7 @@ class ReportedHazardsController extends Controller
 {
     public function index(Request $request)
     {
-        $perPage = 1; // Number of records per page
+        $perPage = 8; // Number of records per page
 
         // Check if a search query is present
         $search = $request->input('search');

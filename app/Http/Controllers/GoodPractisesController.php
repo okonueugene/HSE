@@ -8,14 +8,28 @@ use App\Http\Controllers\Controller;
 
 class GoodPractisesController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $goodpractices = SOR::where('type_id', 2)->with('media')->get();
-        $goodpractices->load('media');
+        $perPage = 8; // Number of records per page
+
+        // Check if a search query is present
+        $search = $request->input('search');
+
+        $query = SOR::where('type_id', 2)->with('media');
+
+        // Apply search filter if a query is provided
+        if ($search) {
+            $query->where('observation', 'like', '%' . $search . '%');
+        }
+
+        $goodpractises = $query->paginate($perPage);
+
         return view('admin/good_practises')->with([
-            'goodpractices' => $goodpractices,
+            'goodpractices' => $goodpractises,
+            'search' => $search, // Pass search query to the view
         ]);
     }
+
 
     public function show($id)
     {

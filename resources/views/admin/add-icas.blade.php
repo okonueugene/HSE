@@ -4,7 +4,7 @@
     <!-- Content -->
 
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> </span>Safety Observation Records</h4>
+        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> </span>ICA Records</h4>
 
         <!-- DataTable with Buttons -->
         <div class="col-xl">
@@ -69,8 +69,8 @@
                             <input type="file" class="form-control" id="basic-default-image" name="images[]"
                                 multiple>
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label" for="basic-default-due">SOR Type</label>
+                        {{-- <div class="mb-3">
+                            <label class="form-label" for="basic-default-due">ICA Type</label>
                             <select class="form-select" id="basic-default-due" name="type_id">
                                 <option>Select Record Type</option>
                                 @foreach ($sor_types as $type)
@@ -83,7 +83,7 @@
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-                        </div>
+                        </div> --}}
                         <button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button>
                     </form>
 
