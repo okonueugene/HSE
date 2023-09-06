@@ -90,7 +90,7 @@
     function showDataModal($id) {
         // Fetch data using ajax
         $.ajax({
-            url: '/nearmiss/' + $id,
+            url: '/firstaidcase/' + $id,
             method: 'GET',
             dataType: 'json',
             success: function(response) {
