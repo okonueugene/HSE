@@ -6,7 +6,7 @@
         <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> </span>Medical Treated Case Manager</h4>
         <!-- Search input field -->
         <form action="{{ route('badpractises.search') }}" method="GET">
-            <div class="input-group mb-3 w-50">
+            <div class="input-group mb-3">
                 <input type="text" class="form-control" name="search" placeholder="Search Description"
                     value="{{ $search }}">
                 <button class="btn btn-primary" type="submit">Search</button>

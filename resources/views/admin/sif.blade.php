@@ -4,7 +4,18 @@
 <div class="content-wrapper">
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> </span>SIF Case Manager</h4>
+        <!-- Search input field -->
 
+        <div class="justify-content-end">
+            <!-- Search input field -->
+            <form action="{{ route('sif.search') }}" method="GET">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" name="search" placeholder="Search Description"
+                        value="{{ $search }}">
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </div>
+            </form>
+        </div>
         <!-- DataTable with Buttons -->
         <div class="card">
             <div class="card-datatable table-responsive pt-0">

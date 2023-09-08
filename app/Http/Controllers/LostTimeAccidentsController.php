@@ -22,7 +22,7 @@ class LostTimeAccidentsController extends Controller
 
         if ($search) {
 
-            $query->where('description', 'like', '%' . $search . '%');
+            $query->where('incident_description', 'like', '%' . $search . '%');
 
         }
 
