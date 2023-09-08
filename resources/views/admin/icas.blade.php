@@ -115,17 +115,17 @@
             success: function(response) {
                 console.log(response);
 
-                // Find the user and action owner names
-                var user = response.users.find(user => user.id === response.icas.user_id);
-                var actionOwner = response.users.find(user => user.id === response.icas.action_owner_id);
+                // Get the user and action owner names using the IDs
+                var user = response.users[response.icas.user_id];
+                var actionOwner = response.users[response.icas.action_owner_id];
 
                 // Display icadetails
                 $('#icasDetails').html(
                     '<p><strong>Observation:</strong> ' + response.icas.observation + '</p>' +
                     '<p><strong>Date:</strong> ' + response.icas.date + '</p>' +
                     '<p><strong>Status:</strong> ' + response.icas.status + '</p>' +
-                    '<p><strong>Assigned To:</strong> ' + actionOwner.name + '</p>' +
-                    '<p><strong>Assigned By:</strong> ' + user.name + '</p>'
+                    '<p><strong>Assigned To:</strong> ' + actionOwner + '</p>' +
+                    '<p><strong>Assigned By:</strong> ' + user + '</p>'
                 );
 
                 // Display images if any
@@ -153,6 +153,7 @@
             }
         });
     }
+
 
 
     // Delete ica

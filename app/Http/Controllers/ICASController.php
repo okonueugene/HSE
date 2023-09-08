@@ -86,7 +86,7 @@ class ICASController extends Controller
         $icas = Icas::findOrFail($id);
         $icas->load('media');
 
-        $users = User::whereIn('id', [$icas->user_id, $icas->action_owner_id])->get();
+        $users = User::whereIn('id', [$icas->user_id, $icas->action_owner_id])->pluck('name', 'id');
 
         $data = [
             'icas' => $icas,
