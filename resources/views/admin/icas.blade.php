@@ -141,7 +141,7 @@
                         imagesHtml += '<div class="image-item">';
                         imagesHtml += '<img src="' + image + '" class="img-fluid" alt="img">';
                         imagesHtml += '<div class="image-title">Image ' + (response.icas.media[i]
-                                .file_name) +
+                            .file_name) +
                             '</div>';
                         imagesHtml += '</div>';
                     }
@@ -153,6 +153,7 @@
             }
         });
     }
+
 
     // Delete ica
     function deleteIca($id) {
