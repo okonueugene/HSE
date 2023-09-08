@@ -36,4 +36,40 @@ class SIFController extends Controller
 
         ]);
     }
+
+    public function show($id)
+    {
+        $sif = Incident::findOrFail($id);
+        $sif->load('media');
+
+        return response()->json($sif);
+
+    }
+
+    public function update(Request $request, $id)
+    {
+        $sif = Incident::findOrFail($id);
+
+        $sif->assignee_id = $request->assignee_id;
+        $sif->assignor_id = $request->assignor_id;
+        $sif->observation = $request->observation;
+        $sif->status = $request->status;
+        $sif->steps_taken = $request->steps_taken;
+        $sif->date = $request->date;
+        $sif->type_id = $request->type_id;
+
+        $sif->save();
+
+        return response()->json($sif);
+
+    }
+
+    public function destroy($id)
+    {
+        $sif = Incident::findOrFail($id);
+        $sif->delete();
+
+        return response()->json('message: Successfully deleted');
+
+    }
 }

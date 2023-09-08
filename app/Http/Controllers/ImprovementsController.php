@@ -16,7 +16,7 @@ class ImprovementsController extends Controller
         // Check if a search query is present
         $search = $request->input('search');
 
-        $query = SOR::where('type_id', 3)->with('media');
+        $query = SOR::where('type_id', 4)->with('media');
 
         // Apply search filter if a query is provided
         if ($search) {
@@ -64,6 +64,6 @@ class ImprovementsController extends Controller
         $improvement = SOR::findOrfail($id);
         $improvement->delete();
 
-        return redirect()->back()->with('success', 'Improvement deleted successfully.');
+        return response()->json('Improvement deleted successfully.');
     }
 }

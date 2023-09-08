@@ -62,6 +62,6 @@ class GoodPractisesController extends Controller
         $goodpractice = SOR::findOrfail($id);
         $goodpractice->delete();
 
-        return redirect()->back()->with('success', 'Good Practice deleted successfully.');
+        return response()->json(['success' => 'Good Practice deleted successfully.']);
     }
 }

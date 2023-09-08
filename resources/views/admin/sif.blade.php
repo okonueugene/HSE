@@ -3,7 +3,7 @@
 <!-- Content wrapper -->
 <div class="content-wrapper">
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> </span>First Aid Case Manager</h4>
+        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> </span>SIF Case Manager</h4>
 
         <!-- DataTable with Buttons -->
         <div class="card">
@@ -33,9 +33,22 @@
                                 <td>{{ $case->incident_date }}</td>
                                 <td>{{ $case->incident_description }}</td>
                                 <td>
-                                    <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
-                                        data-bs-target="#showModal"
-                                        onclick="showDataModal({{ $case->id }})">View</button>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-secondary dropdown-toggle"
+                                            data-bs-toggle="dropdown" data-bs-display="static"
+                                            aria-expanded="false">Action </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="javascript:void(0)" class="dropdown-item"
+                                                    data-bs-toggle="modal" data-bs-target="#showModal"
+                                                    onclick="showDataModal({{ $case->id }})">View</a></li>
+                                            <li>
+                                                <a href="javascript:void(0)" class="dropdown-item"
+                                                    onclick="deleteData({{ $case->id }})">
+                                                    Delete
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach
@@ -45,7 +58,7 @@
 
         </div>
         <br>
-        <div class="card card-bordered">
+        <div class="card card-bordered w-50 mx-auto">
             <div class="card-inner">
                 <ul class="pagination justify-content-center" style="margin:10px 10px">
                     {{ $sifs->links() }}
@@ -62,7 +75,7 @@
         <div class="modal-content">
             <!-- Modal header -->
             <div class="modal-header">
-                <h5 class="modal-title" id="showModalLabel">Near Miss Details</h5>
+                <h5 class="modal-title" id="showModalLabel">SIF Case Details</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
@@ -127,6 +140,21 @@
                     $('#sifImages').html('No images available.');
                 }
 
+            }
+        });
+    }
+
+    function deleteData($id) {
+        $.ajax({
+            url: '/sif/' + $id,
+            method: 'DELETE',
+            dataType: 'json',
+            data: {
+                "_token": "{{ csrf_token() }}",
+            },
+            success: function(response) {
+                console.log(response);
+                location.reload();
             }
         });
     }

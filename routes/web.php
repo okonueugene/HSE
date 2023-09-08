@@ -88,11 +88,13 @@ Route::post('/sor', [SORController::class, 'store'])->name('sor.store');
 
 //icas routes
 Route::get('/icas', [ICASController::class, 'index'])->name('icas');
+Route::get('/icas-search', [ICASController::class, 'index'])->name('icas.search');
 Route::get('/add-icas', [ICASController::class, 'create'])->name('icas.create');
 Route::post('/add-icas', [ICASController::class, 'store'])->name('icas.store');
 Route::get('/icas/{id}', [ICASController::class, 'show'])->name('icas.show');
 Route::delete('/icas/{id}', [ICASController::class, 'destroy'])->name('icas.destroy');
 Route::put('/icas/{id}', [ICASController::class, 'update'])->name('icas.update');
+
 
 //incidents routes
 Route::get('/incidents', [Incidents::class, 'index'])->name('incidents');

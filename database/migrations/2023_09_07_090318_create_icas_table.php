@@ -12,14 +12,14 @@ return new class () extends Migration {
      */
     public function up()
     {
-        Schema::create('incidents', function (Blueprint $table) {
+        Schema::create('icas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('incident_type_id')->constrained('incident_type');
-            $table->date('incident_date');
-            $table->enum('investigation_status', ['open', 'closed']);
-            $table->text('incident_description');
-            $table->enum('incident_status', ['no', 'yes']);
+            $table->foreignId('action_owner_id')->constrained('users');
+            $table->text('observation');
+            $table->enum('status', ['open', 'closed']);
+            $table->text('steps_taken');
+            $table->date('date');
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ return new class () extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('incidents');
+        Schema::dropIfExists('icas');
     }
 };

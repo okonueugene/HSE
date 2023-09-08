@@ -68,6 +68,6 @@ class NearMissController extends Controller
         $nearmiss = Incident::findOrfail($id);
         $nearmiss->delete();
 
-        return redirect()->back()->with('success', 'Near Miss deleted successfully.');
+        return response()->json(['success' => 'Near Miss deleted successfully.']);
     }
 }

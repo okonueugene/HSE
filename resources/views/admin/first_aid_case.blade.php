@@ -4,7 +4,14 @@
 <div class="content-wrapper">
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> </span>First Aid Case Manager</h4>
-
+        <!-- Search input field -->
+        <form action="{{ route('badpractises.search') }}" method="GET">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" name="search" placeholder="Search observations"
+                    value="{{ $search }}">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </div>
+        </form>
         <!-- DataTable with Buttons -->
         <div class="card">
             <div class="card-datatable table-responsive pt-0">
@@ -25,7 +32,7 @@
                                 <td colspan="8" class="text-center">No data found.</td>
                             </tr>
                         @endif
-                        @foreach ($firstaidcases as $nearmiss)
+                        @foreach ($firstaidcases as $case)
                             <tr>
                                 <td>{{ $case->id }}</td>
                                 <td>{{ $case->investigation_status }}</td>
@@ -33,9 +40,22 @@
                                 <td>{{ $case->incident_date }}</td>
                                 <td>{{ $case->incident_description }}</td>
                                 <td>
-                                    <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
-                                        data-bs-target="#showModal"
-                                        onclick="showDataModal({{ $case->id }})">View</button>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-secondary dropdown-toggle"
+                                            data-bs-toggle="dropdown" data-bs-display="static"
+                                            aria-expanded="false">Action </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="javascript:void(0)" class="dropdown-item"
+                                                    data-bs-toggle="modal" data-bs-target="#showModal"
+                                                    onclick="showDataModal({{ $case->id }})">View</a></li>
+                                            <li>
+                                                <a href="javascript:void(0)" class="dropdown-item"
+                                                    onclick="deleteData({{ $case->id }})">
+                                                    Delete
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach
@@ -45,7 +65,7 @@
 
         </div>
         <br>
-        <div class="card card-bordered">
+        <div class="card card-bordered w-50 mx-auto">
             <div class="card-inner">
                 <ul class="pagination justify-content-center" style="margin:10px 10px">
                     {{ $firstaidcases->links() }}
@@ -62,7 +82,7 @@
         <div class="modal-content">
             <!-- Modal header -->
             <div class="modal-header">
-                <h5 class="modal-title" id="showModalLabel">Near Miss Details</h5>
+                <h5 class="modal-title" id="showModalLabel">First Aid Case Details</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
@@ -128,6 +148,30 @@
                 }
 
             }
+        });
+    }
+
+    // Delete data
+    function deleteData($id) {
+        // Get the CSRF token from the XSRF-TOKEN cookie
+        const csrfToken = document.cookie.split('; ')
+            .find(cookie => cookie.startsWith('XSRF-TOKEN='))
+            .split('=')[1];
+
+        // Set up Axios to include the CSRF token in the headers
+        axios.defaults.headers.common['X-XSRF-TOKEN'] = csrfToken;
+
+        // Send the DELETE request
+        axios({
+            method: 'DELETE',
+            url: '/firstaidcase/' + $id
+        }).then(response => {
+            // Handle the response here
+            console.log('Response from server:', response);
+            // Reload the page
+            location.reload();
+        }).catch(error => {
+            console.log('Error:', error);
         });
     }
 </script>

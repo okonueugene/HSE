@@ -36,4 +36,44 @@ class MedicalTreatedCaseController extends Controller
 
         ]);
     }
+
+    public function show($id)
+    {
+        $medicaltreatedcase = Incident::findOrFail($id);
+        $medicaltreatedcase->load('media');
+
+        return response()->json($medicaltreatedcase);
+
+    }
+
+    public function update(Request $request, $id)
+    {
+        $medicaltreatedcase = Incident::findOrFail($id);
+
+        $medicaltreatedcase->assignee_id = $request->assignee_id;
+        $medicaltreatedcase->assignor_id = $request->assignor_id;
+        $medicaltreatedcase->observation = $request->observation;
+        $medicaltreatedcase->status = $request->status;
+        $medicaltreatedcase->steps_taken = $request->steps_taken;
+        $medicaltreatedcase->date = $request->date;
+        $medicaltreatedcase->type_id = $request->type_id;
+
+        // Upload media
+        if ($request->hasFile('media')) {
+            $medicaltreatedcase->addMediaFromRequest('media')->toMediaCollection('medicaltreatedcases');
+        }
+
+        $medicaltreatedcase->save();
+
+        return response()->json($medicaltreatedcase);
+
+    }
+
+    public function destroy($id)
+    {
+        $medicaltreatedcase = Incident::findOrfail($id);
+        $medicaltreatedcase->delete();
+
+        return response()->json(['success' => 'Medical Treated Case deleted successfully.']);
+    }
 }

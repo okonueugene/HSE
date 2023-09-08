@@ -15,7 +15,7 @@ class ReportedHazardsController extends Controller
         // Check if a search query is present
         $search = $request->input('search');
 
-        $query = SOR::where('type_id', 4)->with('media');
+        $query = SOR::where('type_id', 3)->with('media');
 
         // Apply search filter if a query is provided
         if ($search) {
@@ -59,10 +59,11 @@ class ReportedHazardsController extends Controller
 
     public function destroy($id)
     {
+
         $reportedhazard = SOR::findOrfail($id);
         $reportedhazard->delete();
 
-        return redirect()->back()->with('success', 'Reported Hazard deleted successfully.');
+        return response()->json(['success' => 'Good Practice deleted successfully.']);
     }
 
 }

@@ -36,4 +36,43 @@ class FirstAidCaseController extends Controller
 
         ]);
     }
+
+    public function show($id)
+    {
+        $firstaidcase = Incident::findOrFail($id);
+        $firstaidcase->load('media');
+
+        return response()->json($firstaidcase);
+
+    }
+
+    public function update(Request $request, $id)
+    {
+        $firstaidcase = Incident::findOrFail($id);
+
+        $firstaidcase->assignee_id = $request->assignee_id;
+        $firstaidcase->assignor_id = $request->assignor_id;
+        $firstaidcase->observation = $request->observation;
+        $firstaidcase->status = $request->status;
+        $firstaidcase->steps_taken = $request->steps_taken;
+        $firstaidcase->date = $request->date;
+        $firstaidcase->type_id = $request->type_id;
+
+        // Upload media
+        if ($request->hasFile('media')) {
+            $firstaidcase->addMediaFromRequest('media')->toMediaCollection('firstaidcases');
+        }
+
+        $firstaidcase->save();
+
+        return response()->json($firstaidcase);
+    }
+
+    public function destroy($id)
+    {
+        $firstaidcase = Incident::findOrFail($id);
+        $firstaidcase->delete();
+
+        return response()->json(['success' => 'First Aid Case deleted successfully.']);
+    }
 }

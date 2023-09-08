@@ -2,110 +2,141 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\SOR;
+use App\Models\Icas;
 use App\Models\User;
-use App\Models\SorTypes;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class ICASController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('admin/icas');
+        $perPage = 9;
+
+        // Check if a search query is present
+
+        $search = $request->input('search');
+
+        $query = Icas::with('media');
+
+
+        // Apply search filter if a query is provided
+
+        if ($search) {
+
+            $query->where('observation', 'like', '%' . $search . '%');
+
+        }
+
+        $icas = $query->paginate($perPage);
+
+        return view('admin/icas')->with([
+
+            'icas' => $icas,
+
+            'search' => $search, // Pass search query to the view
+
+        ]);
     }
 
     public function create()
     {
-        //fetch all sor types
-        $sor_types = SorTypes::all();
-        //fetch all users
+
         $users = User::all();
         return view('admin/add-icas')->with([
-            'sor_types' => $sor_types,
             'users' => $users,
         ]);
     }
 
-    public function store()
+    public function store(Request $request)
     {
         $rules = [
-            'assignee_id' => 'required',
+
+            'action_owner_id' => 'required',
             'observation' => 'required',
             'status' => 'required',
             'steps_taken' => 'required',
-            'type_id' => 'required',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+
         ];
 
         $this->validate($request, $rules);
 
-        $sor = SOR::create([
-            'assignor_id' => auth()->user()->id,
-            'assignee_id' => $request->assignee_id,
+
+        $icas = Icas::create([
+            'user_id' => auth()->user()->id,
+            'action_owner_id' => $request->action_owner_id,
             'observation' => $request->observation,
             'status' => $request->status,
             'date' => date('Y-m-d'),
             'steps_taken' => $request->steps_taken,
-            'type_id' => $request->type_id,
         ]);
 
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
-                $sor->addMedia($image)->toMediaCollection('sor_images'); // Specify the media collection
+                $icas->addMedia($image)->toMediaCollection('icas_images');
             }
         }
 
-        return redirect()->back()->with('success', 'SOR created successfully.');
-    }
-
-    public function update(Request $request, $id)
-    {
-        $rules = [
-            'assignee_id' => 'required',
-            'observation' => 'required',
-            'status' => 'required',
-            'steps_taken' => 'required',
-            'type_id' => 'required',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ];
-
-        $this->validate($request, $rules);
-
-        $sor = SOR::find($id);
-        $sor->update([
-            'assignor_id' => auth()->user()->id,
-            'assignee_id' => $request->assignee_id,
-            'observation' => $request->observation,
-            'status' => $request->status,
-            'date' => date('Y-m-d'),
-            'steps_taken' => $request->steps_taken,
-            'type_id' => $request->type_id,
-        ]);
-
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
-                $sor->addMedia($image)->toMediaCollection('sor_images'); // Specify the media collection
-            }
-        }
-
-        return redirect()->back()->with('success', 'SOR updated successfully.');
+        return redirect()->back()->with('success', 'ICA created successfully.');
     }
 
     public function show($id)
     {
-        $sor = SOR::find($id);
-        $sor->load('media');
+        $icas = Icas::findOrFail($id);
+        $icas->load('media');
 
-        return response()->json($sor);
+        $users = User::whereIn('id', [$icas->user_id, $icas->action_owner_id])->get();
+
+        $data = [
+            'icas' => $icas,
+            'users' => $users,
+        ];
+
+        return response()->json($data);
+
+    }
+
+    public function update(Request $request, $id)
+    {
+        $icas = Icas::findOrFail($id);
+
+        $rules = [
+
+            'action_owner_id' => 'required',
+            'observation' => 'required',
+            'status' => 'required',
+            'steps_taken' => 'required',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+
+        ];
+
+        $this->validate($request, $rules);
+
+        $icas->update([
+            'user_id' => auth()->user()->id,
+            'action_owner_id' => $request->action_owner_id,
+            'observation' => $request->observation,
+            'status' => $request->status,
+            'date' => date('Y-m-d'),
+            'steps_taken' => $request->steps_taken,
+        ]);
+
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                $icas->addMedia($image)->toMediaCollection('icas_images');
+            }
+        }
+
+        return redirect()->back()->with('success', 'ICA updated successfully.');
     }
 
     public function destroy($id)
     {
-        $sor = SOR::find($id);
-        $sor->delete();
+        $icas = Icas::findOrFail($id);
+        $icas->delete();
 
-        return redirect()->back()->with('success', 'SOR deleted successfully.');
+        return response()->json(['success' => 'ICA deleted successfully.']);
     }
 
 }

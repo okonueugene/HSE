@@ -36,4 +36,40 @@ class LostTimeAccidentsController extends Controller
 
         ]);
     }
+
+    public function show($id)
+    {
+        $losttimeaccident = Incident::findOrFail($id);
+        $losttimeaccident->load('media');
+
+        return response()->json($losttimeaccident);
+
+    }
+
+    public function update(Request $request, $id)
+    {
+        $losttimeaccident = Incident::findOrFail($id);
+
+        $losttimeaccident->assignee_id = $request->assignee_id;
+        $losttimeaccident->assignor_id = $request->assignor_id;
+        $losttimeaccident->observation = $request->observation;
+        $losttimeaccident->status = $request->status;
+        $losttimeaccident->steps_taken = $request->steps_taken;
+        $losttimeaccident->date = $request->date;
+        $losttimeaccident->type_id = $request->type_id;
+
+        $losttimeaccident->save();
+
+        return response()->json($losttimeaccident);
+
+    }
+
+    public function destroy($id)
+    {
+        $losttimeaccident = Incident::findOrFail($id);
+        $losttimeaccident->delete();
+
+        return response()->json('message: Deleted Successfully');
+
+    }
 }

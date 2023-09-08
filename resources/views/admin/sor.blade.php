@@ -40,8 +40,9 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="basic-default-stepstaken">Steps Taken</label>
-                            <input type="text" class="form-control" name="steps_taken" id="basic-default-stepstaken"
-                                placeholder="steps taken">
+                            <textarea class="form-control" name="steps_taken" id="basic-default-stepstaken" placeholder="Steps taken"
+                                rows="4"></textarea>
+
                             <div class="error">
                                 @error('steps_taken')
                                     <div class="alert alert-danger">{{ $message }}</div>

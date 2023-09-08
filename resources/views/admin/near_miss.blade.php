@@ -3,8 +3,15 @@
 <!-- Content wrapper -->
 <div class="content-wrapper">
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> </span>Incident Manager</h4>
-
+        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> </span>Near Miss Manager</h4>
+        <!-- Search input field -->
+        <form action="{{ route('badpractises.search') }}" method="GET">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" name="search" placeholder="Search Description"
+                    value="{{ $search }}">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </div>
+        </form>
         <!-- DataTable with Buttons -->
         <div class="card">
             <div class="card-datatable table-responsive pt-0">
@@ -33,15 +40,38 @@
                                 <td>{{ $nearmiss->incident_date }}</td>
                                 <td>{{ $nearmiss->incident_description }}</td>
                                 <td>
-                                    <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
-                                        data-bs-target="#showModal"
-                                        onclick="showDataModal({{ $nearmiss->id }})">View</button>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-secondary dropdown-toggle"
+                                            data-bs-toggle="dropdown" data-bs-display="static"
+                                            aria-expanded="false">Action </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="javascript:void(0)" class="dropdown-item"
+                                                    data-bs-toggle="modal" data-bs-target="#showModal"
+                                                    onclick="showDataModal({{ $nearmiss->id }})">View</a></li>
+                                            <li>
+                                                <a href="javascript:void(0)" class="dropdown-item"
+                                                    onclick="deleteData({{ $nearmiss->id }})">
+                                                    Delete
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
+        </div>
+        <!-- Pagination -->
+        <br>
+
+        <div class="card card-bordered w-50 mx-auto">
+            <div class="card-inner">
+                <ul class="pagination justify-content-center" style="margin:10px 10px">
+                    {{ $nearmisses->links() }}
+                </ul><!-- .pagination -->
+            </div><!-- .card-inner -->
         </div>
         <!--/ DataTable with Buttons -->
     </div>
@@ -97,7 +127,6 @@
                 );
 
                 // Display images if they exist
-                // Display images if they exist
                 if (response.media.length > 0) {
                     var imagesHtml = '<h4>Images:</h4><div class="image-container">';
                     for (var i = 0; i < response.media.length; i++) {
@@ -120,6 +149,29 @@
                 }
 
             }
+        });
+    }
+
+    // Delete badpractises
+    function deleteData($id) {
+        // Get the CSRF token from the XSRF-TOKEN cookie
+        const csrfToken = document.cookie.split('; ')
+            .find(cookie => cookie.startsWith('XSRF-TOKEN='))
+            .split('=')[1];
+
+        // Set up Axios to include the CSRF token in the headers
+        axios.defaults.headers.common['X-XSRF-TOKEN'] = csrfToken;
+
+        // Send the DELETE request
+        axios({
+            method: 'DELETE',
+            url: '/nearmiss/' + $id
+        }).then(response => {
+            console.log(response);
+            // Reload the page
+            location.reload();
+        }).catch(error => {
+            console.error(error);
         });
     }
 </script>

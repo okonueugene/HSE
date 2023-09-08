@@ -74,7 +74,7 @@ class BadPractisesController extends Controller
         $badpractice = SOR::findOrFail($id);
         $badpractice->delete();
 
-        return redirect()->back()->with('success', 'Bad Practice deleted successfully.');
+        return response()->json(['message' => 'Bad Practice deleted successfully.']);
     }
 
 }

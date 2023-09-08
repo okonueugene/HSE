@@ -60,7 +60,10 @@
 
               <!-- Page JS -->
               <script src="../../assets/js/dashboards-crm.js"></script>
-
+              {{-- Axios CDN --}}
+              <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js"
+                  integrity="sha512-aoTNnqZcT8B4AmeCFmiSnDlc4Nj/KPaZyB5G7JnOnUEkdNpCZs1LCankiYi01sLTyWy+m2P+W4XM+BuQ3Q4/Dg=="
+                  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
               </body>
 
               </html>

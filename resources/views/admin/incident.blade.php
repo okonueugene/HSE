@@ -16,9 +16,9 @@
                     <form action="{{ route('incidents.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
-                            <label class="form-label" for="basic-default-observation">Incident Description</label>
-                            <input type="text" name="incident_description" class="form-control"
-                                id="basic-default-observation" placeholder="This ....">
+                            <label class="form-label" for="">Incident Description</label>
+                            <textarea class="form-control" name="incident_description" id="basic-default-observation" placeholder="This ...."
+                                rows="4"></textarea>
                             <div class="error">
                                 @error('incident_description')
                                     <div class="alert alert-danger">{{ $message }}</div>

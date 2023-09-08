@@ -50,9 +50,19 @@
                                 </td>
                                 {{-- show button --}}
                                 <td>
-                                    <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
-                                        data-bs-target="#showModal"
-                                        onclick="showDataModal({{ $hazard->id }})">View</button>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-secondary dropdown-toggle"
+                                            data-bs-toggle="dropdown" data-bs-display="static"
+                                            aria-expanded="false">Action </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="javascript:void(0)" class="dropdown-item"
+                                                    data-bs-toggle="modal" data-bs-target="#showModal"
+                                                    onclick="showDataModal({{ $hazard->id }})">View</a></li>
+                                            <li><a href="javascript:void(0)" class="dropdown-item"
+                                                    onclick="deleteHazard({{ $hazard->id }})">Delete</a></li>
+                                        </ul>
+                                    </div>
+
                                 </td>
                             </tr>
                         @endforeach
@@ -63,7 +73,7 @@
             </div>
         </div>
         <br>
-        <div class="card card-bordered">
+        <div class="card card-bordered w-50 mx-auto">
             <div class="card-inner">
                 <ul class="pagination justify-content-center" style="margin:10px 10px">
                     {{ $hazards->links() }}
@@ -104,8 +114,6 @@
 @include('commons.footer')
 
 <script>
-    console.log('Hello from improvemts page');
-
     function showDataModal($id) {
         // Fetch data using ajax
         $.ajax({
@@ -148,5 +156,33 @@
 
             }
         });
+    }
+
+    function deleteHazard(id) {
+        console.log(id);
+
+        // Get the CSRF token from the XSRF-TOKEN cookie
+        const csrfToken = document.cookie.split('; ')
+            .find(cookie => cookie.startsWith('XSRF-TOKEN='))
+            .split('=')[1];
+
+        // Set up Axios to include the CSRF token in the headers
+        axios.defaults.headers.common['X-XSRF-TOKEN'] = csrfToken;
+
+        // Send the DELETE request
+        axios({
+                method: 'DELETE',
+                url: `/hazards/${id}`,
+            })
+            .then(response => {
+                // Handle the success response
+                console.log(response.data);
+                // Reload the page or perform any necessary actions
+                location.reload();
+            })
+            .catch(error => {
+                // Handle the error response
+                console.error(error);
+            });
     }
 </script>
