@@ -42,19 +42,24 @@ class GoodPractisesController extends Controller
 
     public function update(Request $request, $id)
     {
+        //validate the data
+        $this->validate($request, array(
+         'observation' => 'required',
+         'status' => 'required',
+         'steps_taken' => 'required',
+         'date' => 'required',
+        ));
+
+
         $goodpractice = SOR::findOrfail($id);
 
-        $goodpractice->assignee_id = $request->assignee_id;
-        $goodpractice->assignor_id = $request->assignor_id;
-        $goodpractice->observation = $request->observation;
-        $goodpractice->status = $request->status;
-        $goodpractice->steps_taken = $request->steps_taken;
-        $goodpractice->date = $request->date;
-        $goodpractice->type_id = $request->type_id;
+        $goodpractice->observation = $request->input('observation');
+        $goodpractice->status = $request->input('status');
+        $goodpractice->date = $request->input('date');
+        $goodpractice->steps_taken = $request->input('steps_taken');
 
         $goodpractice->save();
 
-        return redirect()->back()->with('success', 'Good Practice updated successfully.');
     }
 
     public function destroy($id)

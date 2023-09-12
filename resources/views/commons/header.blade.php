@@ -46,7 +46,14 @@
     <script src="../../assets/js/config.js"></script>
 
 
+    <style>
+        #search {
+            position: relative;
+            width: 100%;
+            left: 50%;
 
+        }
+    </style>
 
 </head>
 

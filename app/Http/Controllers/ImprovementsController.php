@@ -16,7 +16,7 @@ class ImprovementsController extends Controller
         // Check if a search query is present
         $search = $request->input('search');
 
-        $query = SOR::where('type_id', 4)->with('media');
+        $query = SOR::where('type_id', 4)->with('media')->orderBy('id', 'DESC');
 
         // Apply search filter if a query is provided
         if ($search) {
@@ -44,19 +44,24 @@ class ImprovementsController extends Controller
 
     public function update(Request $request, $id)
     {
-        $improvement = SOR::findOrfail($id);
+        //validate the data
+        $this->validate($request, array(
+           'observation' => 'required',
+           'status' => 'required',
+           'steps_taken' => 'required',
+           'date' => 'required',
+        ));
 
-        $improvement->assignee_id = $request->assignee_id;
-        $improvement->assignor_id = $request->assignor_id;
-        $improvement->observation = $request->observation;
-        $improvement->status = $request->status;
-        $improvement->steps_taken = $request->steps_taken;
-        $improvement->date = $request->date;
-        $improvement->type_id = $request->type_id;
 
-        $improvement->save();
+        $reportedhazard = SOR::findOrfail($id);
 
-        return redirect()->back()->with('success', 'Improvement updated successfully.');
+        $reportedhazard->observation = $request->input('observation');
+        $reportedhazard->status = $request->input('status');
+        $reportedhazard->date = $request->input('date');
+        $reportedhazard->steps_taken = $request->input('steps_taken');
+
+        $reportedhazard->save();
+
     }
 
     public function destroy($id)

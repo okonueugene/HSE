@@ -56,17 +56,13 @@ class BadPractisesController extends Controller
     {
         $badpractice = SOR::findOrfail($id);
 
-        $badpractice->assignee_id = $request->assignee_id;
-        $badpractice->assignor_id = $request->assignor_id;
         $badpractice->observation = $request->observation;
         $badpractice->status = $request->status;
         $badpractice->steps_taken = $request->steps_taken;
         $badpractice->date = $request->date;
-        $badpractice->type_id = $request->type_id;
 
         $badpractice->save();
 
-        return redirect()->back()->with('success', 'Bad Practice updated successfully.');
     }
 
     public function destroy($id)

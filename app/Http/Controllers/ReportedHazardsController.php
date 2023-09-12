@@ -15,7 +15,7 @@ class ReportedHazardsController extends Controller
         // Check if a search query is present
         $search = $request->input('search');
 
-        $query = SOR::where('type_id', 3)->with('media');
+        $query = SOR::where('type_id', 3)->with('media')->orderBy('id', 'desc');
 
         // Apply search filter if a query is provided
         if ($search) {
@@ -42,19 +42,28 @@ class ReportedHazardsController extends Controller
 
     public function update(Request $request, $id)
     {
+
+        //validate the data
+        $this->validate($request, array(
+            'observation' => 'required',
+            'status' => 'required',
+            'steps_taken' => 'required',
+            'date' => 'required',
+        ));
+
+
         $reportedhazard = SOR::findOrfail($id);
 
-        $reportedhazard->assignee_id = $request->assignee_id;
-        $reportedhazard->assignor_id = $request->assignor_id;
-        $reportedhazard->observation = $request->observation;
-        $reportedhazard->status = $request->status;
-        $reportedhazard->steps_taken = $request->steps_taken;
-        $reportedhazard->date = $request->date;
-        $reportedhazard->type_id = $request->type_id;
+        $reportedhazard->observation = $request->input('observation');
+        $reportedhazard->status = $request->input('status');
+        $reportedhazard->date = $request->input('date');
+        $reportedhazard->steps_taken = $request->input('steps_taken');
 
         $reportedhazard->save();
 
-        return redirect()->back()->with('success', 'Reported Hazard updated successfully.');
+        return response()->json(['success' => 'Reported Hazard updated successfully.']);
+
+        // return redirect()->back()->with('success', 'Reported Hazard updated successfully.');
     }
 
     public function destroy($id)

@@ -58,28 +58,28 @@ Route::get('badpractises', [BadPractisesController::class, 'index'])->name('badp
 Route::get('badpractise-search', [BadPractisesController::class, 'index'])->name('badpractises.search');
 Route::get('badpractises/{id}', [BadPractisesController::class, 'show'])->name('badpractises.show');
 Route::delete('/badpractises/{id}', [BadpractisesController::class, 'destroy'])->name('badpractises.destroy');
-Route::put('/badpractises/{id}', [BadpractisesController::class, 'update'])->name('badpractises.update');
+Route::patch('/badpractises/{id}', [BadpractisesController::class, 'update'])->name('badpractises.update');
 
 //goodpractises routes
 Route::get('goodpractises', [GoodPractisesController::class, 'index'])->name('goodpractises');
 Route::get('goodpractise-search', [GoodPractisesController::class, 'index'])->name('goodpractises.search');
 Route::get('goodpractises/{id}', [GoodPractisesController::class, 'show'])->name('goodpractises.show');
 Route::delete('/goodpractises/{id}', [GoodpractisesController::class, 'destroy'])->name('goodpractises.destroy');
-Route::put('/goodpractises/{id}', [GoodpractisesController::class, 'update'])->name('goodpractises.update');
+Route::patch('/goodpractises/{id}', [GoodpractisesController::class, 'update'])->name('goodpractises.update');
 
 //improvements routes
 Route::get('improvements', [ImprovementsController::class, 'index'])->name('improvements');
 Route::get('improvement-search', [ImprovementsController::class, 'index'])->name('improvements.search');
 Route::get('improvements/{id}', [ImprovementsController::class, 'show'])->name('improvements.show');
 Route::delete('/improvements/{id}', [ImprovementsController::class, 'destroy'])->name('improvements.destroy');
-Route::put('/improvements/{id}', [ImprovementsController::class, 'update'])->name('improvements.update');
+Route::patch('/improvements/{id}', [ImprovementsController::class, 'update'])->name('improvements.update');
 
 //reportedhazards routes
 Route::get('hazards', [ReportedHazardsController::class, 'index'])->name('hazards');
 Route::get('/reported-hazards', [ReportedHazardsController::class, 'index'])->name('reported-hazards.index');
 Route::get('hazards/{id}', [ReportedHazardsController::class, 'show'])->name('hazards.show');
 Route::delete('/hazards/{id}', [ReportedHazardsController::class, 'destroy'])->name('hazards.destroy');
-Route::put('/hazards/{id}', [ReportedHazardsController::class, 'update'])->name('hazards.update');
+Route::patch('/hazards/{id}', [ReportedHazardsController::class, 'update'])->name('hazards.update');
 
 
 //sor routes
@@ -93,7 +93,7 @@ Route::get('/add-icas', [ICASController::class, 'create'])->name('icas.create');
 Route::post('/add-icas', [ICASController::class, 'store'])->name('icas.store');
 Route::get('/icas/{id}', [ICASController::class, 'show'])->name('icas.show');
 Route::delete('/icas/{id}', [ICASController::class, 'destroy'])->name('icas.destroy');
-Route::put('/icas/{id}', [ICASController::class, 'update'])->name('icas.update');
+Route::patch('/icas/{id}', [ICASController::class, 'update'])->name('icas.update');
 
 
 //incidents routes
@@ -105,32 +105,32 @@ Route::get('/nearmiss', [NearMissController::class, 'index'])->name('nearmiss');
 Route::get('/nearmiss-search', [NearMissController::class, 'index'])->name('nearmiss.search');
 Route::get('/nearmiss/{id}', [NearMissController::class, 'show'])->name('nearmiss.show');
 Route::delete('/nearmiss/{id}', [NearMissController::class, 'destroy'])->name('nearmiss.destroy');
-Route::put('/nearmiss/{id}', [NearMissController::class, 'update'])->name('nearmiss.update');
+Route::patch('/nearmiss/{id}', [NearMissController::class, 'update'])->name('nearmiss.update');
 
 //medicaltreatedcase routes
 Route::get('/medicaltreatedcase', [MedicalTreatedCaseController::class, 'index'])->name('medicaltreatedcase');
 Route::get('/medicaltreatedcase-search', [MedicalTreatedCaseController::class, 'index'])->name('medicaltreatedcase.search');
 Route::get('/medicaltreatedcase/{id}', [MedicalTreatedCaseController::class, 'show'])->name('medicaltreatedcase.show');
 Route::delete('/medicaltreatedcase/{id}', [MedicalTreatedCaseController::class, 'destroy'])->name('medicaltreatedcase.destroy');
-Route::put('/medicaltreatedcase/{id}', [MedicalTreatedCaseController::class, 'update'])->name('medicaltreatedcase.update');
+Route::patch('/medicaltreatedcase/{id}', [MedicalTreatedCaseController::class, 'update'])->name('medicaltreatedcase.update');
 
 //lost time accidents routes
 Route::get('/losttimeaccidents', [LostTimeAccidentsController::class, 'index'])->name('losttimeaccidents');
 Route::get('/losttimeaccidents-search', [LostTimeAccidentsController::class, 'index'])->name('losttimeaccidents.search');
 Route::get('/losttimeaccidents/{id}', [LostTimeAccidentsController::class, 'show'])->name('losttimeaccidents.show');
 Route::delete('/losttimeaccidents/{id}', [LostTimeAccidentsController::class, 'destroy'])->name('losttimeaccidents.destroy');
-Route::put('/losttimeaccidents/{id}', [LostTimeAccidentsController::class, 'update'])->name('losttimeaccidents.update');
+Route::patch('/losttimeaccidents/{id}', [LostTimeAccidentsController::class, 'update'])->name('losttimeaccidents.update');
 
 //firstaidcase routes
 Route::get('/firstaidcase', [FirstAidCaseController::class, 'index'])->name('firstaidcase');
 Route::get('/firstaidcase-search', [FirstAidCaseController::class, 'index'])->name('firstaidcase.search');
 Route::get('/firstaidcase/{id}', [FirstAidCaseController::class, 'show'])->name('firstaidcase.show');
 Route::delete('/firstaidcase/{id}', [FirstAidCaseController::class, 'destroy'])->name('firstaidcase.destroy');
-Route::put('/firstaidcase/{id}', [FirstAidCaseController::class, 'update'])->name('firstaidcase.update');
+Route::patch('/firstaidcase/{id}', [FirstAidCaseController::class, 'update'])->name('firstaidcase.update');
 
 //sif routes
 Route::get('/sif', [SIFController::class, 'index'])->name('sif');
 Route::get('/sif-search', [SIFController::class, 'index'])->name('sif.search');
 Route::get('/sif/{id}', [SIFController::class, 'show'])->name('sif.show');
 Route::delete('/sif/{id}', [SIFController::class, 'destroy'])->name('sif.destroy');
-Route::put('/sif/{id}', [SIFController::class, 'update'])->name('sif.update');
+Route::patch('/sif/{id}', [SIFController::class, 'update'])->name('sif.update');
