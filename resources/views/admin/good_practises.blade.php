@@ -8,7 +8,7 @@
         <div>
             <!-- Search input field -->
             <form action="{{ route('goodpractises.search') }}" method="GET">
-                <div class="input-group mb-3">
+                <div class="input-group mb-3 w-50" id="search">
                     <input type="text" class="form-control" name="search" placeholder="Search observations"
                         value="{{ $search }}">
                     <button class="btn btn-primary" type="submit">Search</button>
