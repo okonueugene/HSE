@@ -4,7 +4,7 @@
     <!-- Content -->
 
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> </span>Suggested goodpractises</h4>
+        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> </span>Good Practises</h4>
         <div>
             <!-- Search input field -->
             <form action="{{ route('goodpractises.search') }}" method="GET">

@@ -96,7 +96,7 @@
         <div class="modal-content">
             <!-- Modal header -->
             <div class="modal-header">
-                <h5 class="modal-title" id="showModalLabel">Suggested Improvements</h5>
+                <h5 class="modal-title" id="showModalLabel">Suggested Improvement Details</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <!-- Modal body -->
@@ -122,7 +122,7 @@
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header">
-                <h5 class="modal-title">Update improvement Details</h5>
+                <h5 class="modal-title">Update Improvement Details</h5>
             </div>
             <!-- Modal Body -->
             <div class="modal-body">

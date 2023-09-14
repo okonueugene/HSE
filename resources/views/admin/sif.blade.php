@@ -117,7 +117,7 @@
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header">
-                <h5 class="modal-title">Update Medical Tratment Case Details</h5>
+                <h5 class="modal-title">Update SIF Details</h5>
             </div>
             <!-- Modal Body -->
             <div class="modal-body">
