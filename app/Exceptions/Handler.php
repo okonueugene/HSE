@@ -2,8 +2,11 @@
 
 namespace App\Exceptions;
 
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Psr\Log\LogLevel;
+use Illuminate\Session\TokenMismatchException;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -44,5 +47,30 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+
+        $this->renderable(function (NotFoundHttpException $e, $request) {
+            if($request->wantsJson()) {
+                return response()->json([
+                    'message' => 'Object Not Found',
+                    'status'  => 404,
+                ]);
+            }
+        });
+    }
+
+    public function render($request, Throwable $exception)
+    {
+        if ($exception instanceof TokenMismatchException) {
+            return redirect()->route('login')->withErrors(['message' => 'CSRF token mismatch. Please log in again.']);
+        }
+
+        if ($exception instanceof NotFoundHttpException) {
+            return back()->with([
+                'delayMessage' => 'Page not found. Redirecting in 3 seconds...', // Your delay message
+                'delaySeconds' => 3, // Delay in seconds
+            ]);
+        }
+
+        return parent::render($request, $exception);
     }
 }
