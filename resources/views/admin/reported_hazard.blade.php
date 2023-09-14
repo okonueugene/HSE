@@ -18,7 +18,7 @@
         <!-- DataTable with Buttons -->
         <div class="card">
             <div class="table">
-                <table class="table table-hover table-bordered table-sm">
+                <table class="table table-hover table-bordered">
                     <thead>
                         <tr>
                             <th>Id</th>
