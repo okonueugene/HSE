@@ -137,7 +137,7 @@
                             <button class="btn btn-primary d-grid w-100">Sign in</button>
                         </div>
                     </form>
-                    <p class="text-center">{{ session('error') }}</p>
+                    <p class="text-center text-danger">{{ session('error') }}</p>
 
                     <div class="divider my-4">
                     </div>
