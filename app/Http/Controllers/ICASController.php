@@ -17,7 +17,7 @@ class ICASController extends Controller
 
         $search = $request->input('search');
 
-        $query = Icas::with('media');
+        $query = Icas::with('media')->orderBy('id', 'desc');
 
 
         // Apply search filter if a query is provided

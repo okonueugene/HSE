@@ -76,7 +76,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title mb-0">Immediate collective Actions(ICA)</h5>
-                        <h4 class="mb-0">2/5</h4>
+                        <h4 class="mb-0">{{ $data['icas'] }}</h4>
                     </div>
                 </div>
             </div>
@@ -86,7 +86,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title mb-0">Incidents</h5>
-                        <h4 class="mb-0">4</h4>
+                        <h4 class="mb-0">{{ $data['incidents'] }}</h4>
                     </div>
                 </div>
             </div>
@@ -94,7 +94,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title mb-0">Reported Hazards</h5>
-                        <h4 class="mb-0">5</h4>
+                        <h4 class="mb-0">{{ $data['incidents'] }}</h4>
                     </div>
                 </div>
             </div>
@@ -105,7 +105,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title mb-0">Reported Hazards</h5>
-                        <h4 class="mb-0">5</h4>
+                        <h4 class="mb-0">{{ $data['reported_hazards'] }}</h4>
                     </div>
                 </div>
             </div>
@@ -115,7 +115,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title mb-0">Suggested improvements</h5>
-                        <h4 class="mb-0">2</h4>
+                        <h4 class="mb-0">{{ $data['suggested_improvements'] }}</h4>
                     </div>
                 </div>
             </div>
@@ -125,7 +125,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title mb-0">Good practises</h5>
-                        <h4 class="mb-0">4</h4>
+                        <h4 class="mb-0">{{ $data['good_practises'] }}</h4>
                     </div>
                 </div>
             </div>
@@ -135,7 +135,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title mb-0">Bad Practises</h5>
-                        <h4 class="mb-0">3</h4>
+                        <h4 class="mb-0">{{ $data['bad_practises'] }}</h4>
                     </div>
                 </div>
             </div>
