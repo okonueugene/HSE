@@ -26,7 +26,7 @@ class BadPractisesController extends Controller
         // Check if a search query is present
         $search = $request->input('search');
 
-        $query = SOR::where('type_id', 1)->with('media');
+        $query = SOR::where('type_id', 1)->with('media')->orderBy('id', 'desc');
 
         // Apply search filter if a query is provided
         if ($search) {

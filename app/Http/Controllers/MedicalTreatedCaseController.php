@@ -16,7 +16,7 @@ class MedicalTreatedCaseController extends Controller
 
         $search = $request->input('search');
 
-        $query = Incident::where('incident_type_id', 3)->with('media');
+        $query = Incident::where('incident_type_id', 3)->with('media')->orderBy('id', 'desc');
 
         // Apply search filter if a query is provided
 
