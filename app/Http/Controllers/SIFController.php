@@ -50,13 +50,10 @@ class SIFController extends Controller
     {
         $sif = Incident::findOrFail($id);
 
-        $sif->assignee_id = $request->assignee_id;
-        $sif->assignor_id = $request->assignor_id;
-        $sif->observation = $request->observation;
-        $sif->status = $request->status;
-        $sif->steps_taken = $request->steps_taken;
-        $sif->date = $request->date;
-        $sif->type_id = $request->type_id;
+        $sif->incident_description = $request->input('description');
+        $sif->incident_date = $request->input('date');
+        $sif->incident_status = $request->input('status');
+        $sif->investigation_status = $request->input('investigation');
 
         $sif->save();
 

@@ -50,13 +50,12 @@ class LostTimeAccidentsController extends Controller
     {
         $losttimeaccident = Incident::findOrFail($id);
 
-        $losttimeaccident->assignee_id = $request->assignee_id;
-        $losttimeaccident->assignor_id = $request->assignor_id;
-        $losttimeaccident->observation = $request->observation;
-        $losttimeaccident->status = $request->status;
-        $losttimeaccident->steps_taken = $request->steps_taken;
-        $losttimeaccident->date = $request->date;
-        $losttimeaccident->type_id = $request->type_id;
+
+        $losttimeaccident->incident_description = $request->input('description');
+        $losttimeaccident->incident_date = $request->input('date');
+        $losttimeaccident->incident_status = $request->input('status');
+        $losttimeaccident->investigation_status = $request->input('investigation');
+
 
         $losttimeaccident->save();
 

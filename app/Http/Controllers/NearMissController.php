@@ -43,24 +43,22 @@ class NearMissController extends Controller
     {
         $nearmiss = Incident::findOrfail($id);
 
-        $nearmiss->assignee_id = $request->assignee_id;
-        $nearmiss->assignor_id = $request->assignor_id;
-        $nearmiss->observation = $request->observation;
-        $nearmiss->status = $request->status;
-        $nearmiss->steps_taken = $request->steps_taken;
-        $nearmiss->date = $request->date;
-        $nearmiss->type_id = $request->type_id;
 
-        // Upload media
-        if ($request->hasFile('media')) {
-            $nearmiss->addMediaFromRequest('media')->toMediaCollection('nearmisses');
-        }
+        $nearmiss->incident_description = $request->input('description');
+        $nearmiss->incident_date = $request->input('date');
+        $nearmiss->incident_status = $request->input('status');
+        $nearmiss->investigation_status = $request->input('investigation');
 
+
+        // // Upload media
+        // if ($request->hasFile('media')) {
+        //     $nearmiss->addMediaFromRequest('media')->toMediaCollection('nearmisses');
+        // }
 
 
         $nearmiss->save();
 
-        return redirect()->back()->with('success', 'Near Miss updated successfully.');
+        return response()->json(['success' => 'Near Miss updated successfully.']);
     }
 
     public function destroy($id)

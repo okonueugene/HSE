@@ -53,6 +53,10 @@
             left: 50%;
 
         }
+
+        p:first-letter {
+            text-transform: uppercase;
+        }
     </style>
 
 </head>

@@ -9,7 +9,7 @@
         <div>
             <!-- Search input field -->
             <form action="{{ route('icas.search') }}" method="GET">
-                <div class="input-group mb-3">
+                <div class="input-group mb-3 w-50" id="search">
                     <input type="text" class="form-control" name="search" placeholder="Search observations"
                         value="{{ $search }}">
                     <button class="btn btn-primary" type="submit">Search</button>
@@ -18,8 +18,8 @@
         </div>
         <!-- DataTable with Buttons -->
         <div class="card">
-            <div class="card-datatable table-responsive pt-0">
-                <table class="datatables-basic table dataTable" id="DataTables_Table_0">
+            <div class="table">
+                <table class="table table-hover table-bordered">
                     <thead>
                         <tr>
                             <th>Id</th>
@@ -41,17 +41,22 @@
                                 <td>{{ $ica->id }}</td>
                                 <td>{{ $ica->observation }}</td>
                                 <td>{{ $ica->date }}</td>
-                                <td>{{ $ica->status }}</td>
+                                <td>{{ $ica->status == 'open' ? 'Open' : 'Closed' }}</td>
                                 <td>{{ $ica->actionOwner->name }}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-secondary dropdown-toggle"
+                                        <button type="button" class="btn btn-secondary dropdown-toggle btn-sm"
                                             data-bs-toggle="dropdown" data-bs-display="static"
                                             aria-expanded="false">Action </button>
                                         <ul class="dropdown-menu">
                                             <li><a href="javascript:void(0)" class="dropdown-item"
                                                     data-bs-toggle="modal" data-bs-target="#showModal"
-                                                    onclick="showDataModal({{ $ica->id }})">View</a></li>
+                                                    onclick="showDataModal({{ $ica->id }})">View</a>
+                                            </li>
+                                            <li><a href="javascript:void(0)" class="dropdown-item"
+                                                    data-bs-toggle="modal" data-bs-target="#updateModal"
+                                                    data-ica-id="{{ $ica->id }}" onclick="editIca(this)">Edit</a>
+                                            </li>
                                             <li>
                                                 <a href="javascript:void(0)" class="dropdown-item"
                                                     onclick="deleteIca({{ $ica->id }})">
@@ -103,6 +108,62 @@
     </div>
 </div>
 
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h5 class="modal-title">Update Ica Details</h5>
+            </div>
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <form id="updateIcasForm">
+                    <!-- Observation field -->
+                    <div class="form-group">
+                        <label for="observation">Observation</label>
+                        <input type="text" class="form-control" id="observation" name="observation">
+                    </div>
+                    <!-- Steps Taken field -->
+                    <div class="form-group">
+                        <label for="steps_taken">Steps Taken</label>
+                        <input type="text" class="form-control" id="steps_taken" name="steps_taken">
+                    </div>
+                    <!-- Date field -->
+                    <div class="form-group">
+                        <label for="date">Date</label>
+                        <input type="date" class="form-control" id="date" name="date">
+                    </div>
+
+                    <!-- Status field -->
+                    <div class="form-group">
+                        <label for="status">Status</label>
+                        <select class="form-select" id="status" name="status">
+                            <option value="open">Open</option>
+                            <option value="closed">Closed</option>
+                        </select>
+
+                    </div>
+                    <!-- Media if present -->
+                    <!-- Media display area -->
+                    <div class="form-group">
+                        <label for="media">Media</label>
+                        <ul id="mediaList">
+                            <!-- Media items will be dynamically added here -->
+                        </ul>
+                    </div>
+
+                    <br>
+                    <!-- Submit button -->
+                    <button type="submit" class="btn btn-primary">Update</button>
+                    <!--Close button -->
+                    <button type="button" class="btn btn-secondary float-end" data-bs-dismiss="modal">Close</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 @include('commons.footer')
 
@@ -140,8 +201,8 @@
                         // Create a container for each image and its title
                         imagesHtml += '<div class="image-item">';
                         imagesHtml += '<img src="' + image + '" class="img-fluid" alt="img">';
-                        imagesHtml += '<div class="image-title">Image ' + (response.icas.media[i]
-                            .file_name) +
+                        imagesHtml += '<div class="image-title">' + (response.icas.media[i]
+                                .file_name) +
                             '</div>';
                         imagesHtml += '</div>';
                     }
@@ -173,6 +234,84 @@
         }).then(response => {
             console.log(response);
             location.reload();
+        });
+    }
+
+    // Edit ica
+    function editIca(button) {
+        // Retrieve the Icas ID from the data attribute
+        var icaId = $(button).data('ica-id');
+
+        // Send an AJAX request to fetch ica data
+        $.ajax({
+            url: '/icas/' + icaId,
+            method: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                console.log(response);
+                // Populate the form fields in the updateModal with the fetched data
+                $('#updateModal #observation').val(response.icas.observation);
+                $('#updateModal #steps_taken').val(response.icas.steps_taken);
+                $('#updateModal #date').val(response.icas.date);
+                $('#updateModal #status').val(response.icas.status);
+                // Add more fields as needed
+                // Display media if it exists
+                if (response.icas.media.length > 0) {
+                    var imagesHtml = '<h4>Images:</h4><div class="image-container">';
+                    for (var i = 0; i < response.icas.media.length; i++) {
+                        const regex = /http:\/\/localhost\/storage\//;
+                        let image = response.icas.media[i].original_url.replace(regex, '');
+                        // Pass the image through the asset helper
+                        image = "{{ asset('storage') }}/" + image;
+
+                        // Create a container for each image and its title
+                        imagesHtml += '<div class="image-item">';
+                        imagesHtml += '<img src="' + image + '" class="img-fluid" alt="img">';
+                        imagesHtml += '<div class="image-title">Image ' + (response.icas.media[i]
+                                .file_name) +
+                            '</div>';
+                        imagesHtml += '</div>';
+                    }
+                    imagesHtml += '</div><br><br>'; // Add a line break between image groups
+                    $('#mediaList').html(imagesHtml);
+                } else {
+                    $('#mediaList').html('No images available.');
+                }
+
+                // Display the updateModal
+                $('#updateModal').modal('show');
+            }
+        });
+        // AJAX request to update the Icas data when the user submits the form
+        $('#updateIcasForm').submit(function(e) {
+            // Prevent the default behaviour of the form submit event
+            e.preventDefault();
+
+            // Get the form data
+            var formData = {
+                observation: $('#updateModal #observation').val(),
+                steps_taken: $('#updateModal #steps_taken').val(),
+                date: $('#updateModal #date').val(),
+                status: $('#updateModal #status').val(),
+                // Add more fields as needed
+            };
+
+            // Send the PUT request
+            axios({
+                    method: 'PATCH',
+                    url: '/icas/' + icaId,
+                    data: formData,
+                })
+                .then(response => {
+                    // Handle the success response
+                    console.log(response.data);
+                    // Reload the page or perform any necessary actions
+                    location.reload();
+                })
+                .catch(error => {
+                    // Handle the error response
+                    console.error(error);
+                });
         });
     }
 </script>

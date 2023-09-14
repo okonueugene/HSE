@@ -29,7 +29,7 @@ class Incident extends Model implements HasMedia
 
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('incident_images'); // Specify the media collection name
+        $this->addMediaCollection('incident_images');
     }
 
     public function user()

@@ -50,13 +50,11 @@ class FirstAidCaseController extends Controller
     {
         $firstaidcase = Incident::findOrFail($id);
 
-        $firstaidcase->assignee_id = $request->assignee_id;
-        $firstaidcase->assignor_id = $request->assignor_id;
-        $firstaidcase->observation = $request->observation;
-        $firstaidcase->status = $request->status;
-        $firstaidcase->steps_taken = $request->steps_taken;
-        $firstaidcase->date = $request->date;
-        $firstaidcase->type_id = $request->type_id;
+        $firstaidcase->incident_description = $request->input('description');
+        $firstaidcase->incident_date = $request->input('date');
+        $firstaidcase->incident_status = $request->input('status');
+        $firstaidcase->investigation_status = $request->input('investigation');
+
 
         // Upload media
         if ($request->hasFile('media')) {

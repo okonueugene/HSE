@@ -101,21 +101,8 @@ class ICASController extends Controller
     {
         $icas = Icas::findOrFail($id);
 
-        $rules = [
-
-            'action_owner_id' => 'required',
-            'observation' => 'required',
-            'status' => 'required',
-            'steps_taken' => 'required',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-
-        ];
-
-        $this->validate($request, $rules);
-
         $icas->update([
-            'user_id' => auth()->user()->id,
-            'action_owner_id' => $request->action_owner_id,
+
             'observation' => $request->observation,
             'status' => $request->status,
             'date' => date('Y-m-d'),
@@ -128,7 +115,7 @@ class ICASController extends Controller
             }
         }
 
-        return redirect()->back()->with('success', 'ICA updated successfully.');
+        return response()->json(['success' => 'ICA updated successfully.']);
     }
 
     public function destroy($id)

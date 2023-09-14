@@ -50,18 +50,11 @@ class MedicalTreatedCaseController extends Controller
     {
         $medicaltreatedcase = Incident::findOrFail($id);
 
-        $medicaltreatedcase->assignee_id = $request->assignee_id;
-        $medicaltreatedcase->assignor_id = $request->assignor_id;
-        $medicaltreatedcase->observation = $request->observation;
-        $medicaltreatedcase->status = $request->status;
-        $medicaltreatedcase->steps_taken = $request->steps_taken;
-        $medicaltreatedcase->date = $request->date;
-        $medicaltreatedcase->type_id = $request->type_id;
+        $medicaltreatedcase->incident_description = $request->input('description');
+        $medicaltreatedcase->incident_date = $request->input('date');
+        $medicaltreatedcase->incident_status = $request->input('status');
+        $medicaltreatedcase->investigation_status = $request->input('investigation');
 
-        // Upload media
-        if ($request->hasFile('media')) {
-            $medicaltreatedcase->addMediaFromRequest('media')->toMediaCollection('medicaltreatedcases');
-        }
 
         $medicaltreatedcase->save();
 

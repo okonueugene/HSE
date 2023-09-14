@@ -41,8 +41,8 @@
                         <div class="mb-3">
                             <label class="form-label" for="basic-default-incident_status">Incident Status</label>
                             <select class="form-select" id="basic-default-incident_status" name="incident_status">
-                                <option value="open">Open</option>
-                                <option value="closed">Closed</option>
+                                <option value="no">Open</option>
+                                <option value="yes">Closed</option>
                             </select>
                             <div class="error">
                                 @error('incident_status')
@@ -51,9 +51,8 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label" for="basic-default-image">Images</label>
-                            <input type="file" class="form-control" id="basic-default-image" name="images[]"
-                                multiple>
+                            <label class="form-label" for="media">Media</label>
+                            <input type="file" class="form-control" id="media" name="media[]" multiple>
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="basic-default-due">Incident Type</label>

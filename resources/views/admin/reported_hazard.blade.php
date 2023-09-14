@@ -171,10 +171,6 @@
     </div>
 </div>
 
-
-
-
-
 <!-- / Content -->
 
 @include('commons.footer')
