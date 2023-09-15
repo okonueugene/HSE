@@ -8,6 +8,11 @@ class UsersListController extends Controller
 {
     public function index()
     {
-        return view('admin/userslist');
+
+        $users = \App\Models\User::orderBy('id', 'desc')->paginate(10);
+
+        return view('admin/userslist')->with([
+            'users' => $users,
+        ]);
     }
 }
