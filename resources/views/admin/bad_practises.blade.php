@@ -175,7 +175,6 @@
 
 @include('commons.footer')
 
-
 <script>
     function showDataModal($id) {
         // Fetch data using ajax
