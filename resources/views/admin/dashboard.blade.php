@@ -1,146 +1,113 @@
 @include('commons.header')
+
 <!-- Content wrapper -->
 <div class="content-wrapper">
     <!-- Content -->
-    <div class="container-xxl flex-grow-1 container-p-y">
-        <div class="row t text-dark text-bold text-center border-bottom py-4">
-            <h5 class="mb-0">Site Details</h5>
+    <div class="clock mx-auto w-25 pt-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="text-center">
+                    <span id="date-time"></span>
+                </div>
+            </div>
         </div>
-        <div class="row  py-4">
-            <!-- Stop Fix Actions -->
-            <div class="col-xl-3 col-md-4 col-6 mb-4">
-                <div class="card">
+    </div>
+    <div class="container-fluid w-100 h-100 pt-3">
+        <div class="row w-100 h-50 pt-5 mx-auto text-center">
+            <!-- First Row -->
+            <div class="col-md-3">
+                <div class="card mb-4 h-50 shadow-lg">
+                    <div class="card-header"> Live Number Of People On Site</div>
                     <div class="card-body">
-                        <h5 class="card-title mb-0">Site Name</h5>
-                        <h4 class="mb-0">12/18</h4>
-                    </div>
-                </div>
-            </div>
+                        <div class="content">
 
-            <!-- Total Deviations  -->
-            <div class="col-xl-3 col-md-4 col-6 mb-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title mb-0">Project Name</h5>
-                        <h4 class="mb-0">2/5</h4>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Total Incidents -->
-            <div class="col-xl-2 col-md-4 col-6 mb-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title mb-0">Contractor Lead</h5>
-                        <h4 class="mb-0">4</h4>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-2 col-md-4 col-6 mb-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title mb-0">Auditor Details</h5>
-                        <h4 class="mb-0">4</h4>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xl-2 col-md-4 col-6 mb-4">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <h5 class="card-title mb-0 text-center">Time</h5>
-
-                        <div class="text-center text-body text-wrap fw-bold" id="clock">
-                            <div id="date-time"></div>
                         </div>
+                        <div class="footer">7</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card mb-4 h-50 shadow-lg">
+                    <div class="card-header">Supervisor’s Detail</div>
+                    <div class="card-body">
+                        <div class="content">
+                        </div>
+                        <div class="footer">7</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 ">
+                <div class="card mb-4 h-50 shadow-lg">
+                    <div class="card-header"> Tasks Of The Day</div>
+                    <div class="card-body">
+                        <div class="content">
+
+                        </div>
+                        <div class="footer">7</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card mb-4 h-50 shadow-lg">
+                    <div class="card-header"> Incidents Recorded </div>
+                    <div class="card-body">
+                        <div class="content">
+
+                        </div>
+                        <div class="footer">7</div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row t text-dark text-bold text-center py-4 border-bottom">
-            <h5 class="mb-0">Categories</h5>
-        </div>
-        <div class="row py-4 ">
-            <!-- Stop Fix Actions -->
-            <div class="col-xl-3 col-md-4 col-6 mb-4">
-                <div class="card">
+        <div class="row w-100 h-50 pt-4 mx-auto text-center">
+            <!-- First Row -->
+            <div class="col-md-3">
+                <div class="card mb-4 h-50 shadow-lg">
+                    <div class="card-header">Immediate Corrective Actions</div>
                     <div class="card-body">
-                        <h5 class="card-title mb-0">Stop Fix Actions</h5>
-                        <h4 class="mb-0">12/18</h4>
-                    </div>
-                </div>
-            </div>
+                        <div class="content">
 
-            <!-- Total Deviations  -->
-            <div class="col-xl-3 col-md-4 col-6 mb-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title mb-0">Immediate collective Actions(ICA)</h5>
-                        <h4 class="mb-0">{{ $data['icas'] }}</h4>
+                        </div>
+                        <div class="footer">7</div>
                     </div>
                 </div>
             </div>
+            <div class="col-md-3">
+                <div class="card mb-4 h-50 shadow-lg">
+                    <div class="card-header"> Safety Observation Record</div>
+                    <div class="card-body">
+                        <div class="content">
 
-            <!-- Total Incidents -->
-            <div class="col-xl-2 col-md-4 col-6 mb-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title mb-0">Incidents</h5>
-                        <h4 class="mb-0">{{ $data['incidents'] }}</h4>
+                        </div>
+                        <div class="footer">7</div>
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-md-4 col-6 mb-4">
-                <div class="card">
+            <div class="col-md-3 ">
+                <div class="card mb-4 h-50 shadow-lg">
+                    <div class="card-header">Environmental Concerns</div>
                     <div class="card-body">
-                        <h5 class="card-title mb-0">Reported Hazards</h5>
-                        <h4 class="mb-0">{{ $data['incidents'] }}</h4>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row py-4">
-            <!-- Todays Attendance -->
-            <div class="col-xl-3 col-md-4 col-6 mb-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title mb-0">Reported Hazards</h5>
-                        <h4 class="mb-0">{{ $data['reported_hazards'] }}</h4>
-                    </div>
-                </div>
-            </div>
+                        <div class="content">
 
-            <!-- Total Deviations  -->
-            <div class="col-xl-3 col-md-4 col-6 mb-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title mb-0">Suggested improvements</h5>
-                        <h4 class="mb-0">{{ $data['suggested_improvements'] }}</h4>
+                        </div>
+                        <div class="footer">7</div>
                     </div>
                 </div>
             </div>
-
-            <!-- Total Tasks -->
-            <div class="col-xl-3 col-md-4 col-6 mb-4">
-                <div class="card">
+            <div class="col-md-3">
+                <div class="card mb-4 h-50 shadow-lg">
+                    <div class="card-header">Permits Applicable</div>
                     <div class="card-body">
-                        <h5 class="card-title mb-0">Good practises</h5>
-                        <h4 class="mb-0">{{ $data['good_practises'] }}</h4>
-                    </div>
-                </div>
-            </div>
+                        <div class="content">
 
-            <!-- Total Incidents -->
-            <div class="col-xl-3 col-md-4 col-6 mb-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title mb-0">Bad Practises</h5>
-                        <h4 class="mb-0">{{ $data['bad_practises'] }}</h4>
+                        </div>
+                        <div class="footer">7</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 </div>
 <!-- / Content -->
 @include('commons.footer')
