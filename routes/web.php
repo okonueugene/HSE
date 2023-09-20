@@ -8,23 +8,24 @@ use App\Http\Controllers\Deviations;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FAQController;
 use App\Http\Controllers\SFAController;
+use App\Http\Controllers\SIFController;
 use App\Http\Controllers\SORController;
 use App\Http\Controllers\HelpController;
 use App\Http\Controllers\ICASController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RolesController;
+use App\Http\Controllers\NearMissController;
 use App\Http\Controllers\UsersListController;
 use App\Http\Controllers\PermissionsController;
 use App\Http\Controllers\BadPractisesController;
+use App\Http\Controllers\FirstAidCaseController;
 use App\Http\Controllers\ImprovementsController;
 use App\Http\Controllers\GoodPractisesController;
 use App\Http\Controllers\ReportedHazardsController;
 use App\Http\Controllers\LostTimeAccidentsController;
-use App\Http\Controllers\FirstAidCaseController;
 use App\Http\Controllers\MedicalTreatedCaseController;
-use App\Http\Controllers\NearMissController;
-use App\Http\Controllers\SIFController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,14 +46,12 @@ Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
 Route::group(['middleware' => 'auth'], function () {
 
-
     Route::get('/dashboard', [Dashboard::class, 'index'])->name('dashboard');
     Route::get('/attendance', [Attendance::class, 'index'])->name('attendance');
     Route::get('/deviations', [Deviations::class, 'index'])->name('deviations');
     Route::get('/task', [Task::class, 'index'])->name('tasks');
     Route::get('/sfa', [SFAController::class, 'index'])->name('sfa');
     Route::get('userslist', [UsersListController::class, 'index'])->name('userslist');
-    Route::get('roles', [RolesController::class, 'index'])->name('roles');
     Route::get('permissions', [PermissionsController::class, 'index'])->name('permissions');
     Route::get('faqs', [FAQController::class, 'index'])->name('faqs');
     Route::get('help', [HelpController::class, 'index'])->name('help');
@@ -138,4 +137,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/sif/{id}', [SIFController::class, 'show'])->name('sif.show');
     Route::delete('/sif/{id}', [SIFController::class, 'destroy'])->name('sif.destroy');
     Route::patch('/sif/{id}', [SIFController::class, 'update'])->name('sif.update');
+
+    //roles routes
+    Route::get('roles', [RoleController::class, 'index'])->name('roles');
+    Route::post('roles', [RoleController::class, 'store'])->name('roles.store');
+    Route::patch('roles/{id}', [RoleController::class, 'update'])->name('roles.update');
+    Route::delete('roles/{id}', [RoleController::class, 'destroy'])->name('roles.destroy');
+    Route::get('roles/{id}', [RoleController::class, 'show'])->name('roles.show');
+
 });

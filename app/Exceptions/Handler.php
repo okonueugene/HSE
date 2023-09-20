@@ -65,11 +65,18 @@ class Handler extends ExceptionHandler
         }
 
         if ($exception instanceof NotFoundHttpException) {
-            return back()->with([
+            return back()->withErrors([
                 'delayMessage' => 'Page not found. Redirecting in 3 seconds...', // Your delay message
                 'delaySeconds' => 3, // Delay in seconds
             ]);
         }
+
+        //forbidden instance
+        if ($exception instanceof \Illuminate\Auth\Access\AuthorizationException) {
+            return redirect()->route('dashboard')->withErrors(['message' => 'You are not authorized to access this page.']);
+
+        }
+
 
         return parent::render($request, $exception);
     }

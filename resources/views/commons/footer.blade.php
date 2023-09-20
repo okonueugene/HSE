@@ -64,6 +64,15 @@
               <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js"
                   integrity="sha512-aoTNnqZcT8B4AmeCFmiSnDlc4Nj/KPaZyB5G7JnOnUEkdNpCZs1LCankiYi01sLTyWy+m2P+W4XM+BuQ3Q4/Dg=="
                   crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+              <!--Selector CDN-->
+              <!-- Scripts -->
+              <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/js/selectize.min.js"
+                  integrity="sha512-IOebNkvA/HZjMM7MxL0NYeLYEalloZ8ckak+NDtOViP7oiYzG5vn6WVXyrJDiJPhl4yRdmNAG49iuLmhkUdVsQ=="
+                  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+              <!-- Scripts -->
+              <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+                  integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+                  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
               </body>
 
               </html>

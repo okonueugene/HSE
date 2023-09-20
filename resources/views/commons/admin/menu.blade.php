@@ -30,19 +30,12 @@
     <ul class="menu-inner py-1 ps">
         <!-- Dashboards -->
         <li class="menu-item {{ request()->routeIs('dashboard') ? 'active open' : '' }}">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
+            <a href="{{ route('dashboard') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-smart-home"></i>
-                <div data-i18n="Dashboards">Dashboards</div>
+                <div data-i18n="Dashboard">Dashboard</div>
 
             </a>
-            <ul class="menu-sub">
-                <li class="menu-item {{ request()->routeIs('dashboard') ? 'active open' : '' }}">
-                    <a href="{{ route('dashboard') }}" class="menu-link">
-                        <div data-i18n="Default">Default</div>
-                    </a>
-                </li>
 
-            </ul>
         </li>
 
         <!-- Tasks -->
@@ -152,7 +145,7 @@
         <li class="menu-item {{ request()->routeIs('sfa') ? 'active open' : '' }}">
             <a href="{{ route('sfa') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-components"></i>
-                <div data-i18n="Stop Fix Actions">Stop Fix Actions</div>
+                <div data-i18n=" Permits Applicable"> Permits Applicable</div>
             </a>
         </li>
         <li class="menu-item">
@@ -164,7 +157,7 @@
         <li class="menu-item">
             <a href="{{ route('sfa') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-tree"></i>
-                <div data-i18n="Environment Issues">Environment Issues</div>
+                <div data-i18n="Environment Concerns">Environment Concerns</div>
             </a>
         </li>
 
@@ -186,7 +179,7 @@
 
             </ul>
         </li>
-        <li class="menu-item {{ request()->routeIs('contractors') ? 'active open' : '' }}">
+        {{-- <li class="menu-item {{ request()->routeIs('contractors') ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-users"></i>
                 <div data-i18n="Contractors">Contractors</div>
@@ -199,7 +192,7 @@
                 </li>
 
             </ul>
-        </li>
+        </li> --}}
 
         <li
             class="menu-item {{ request()->routeIs('roles') || request()->routeIs('permissions') ? 'active open' : '' }}">

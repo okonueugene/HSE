@@ -13,11 +13,11 @@ class UserController extends Controller
 {
     public function loginUser(Request $request)
     {
-        $rules=array(
+        $rules = array(
             'email' => 'required',
             'password' => 'required'
         );
-        $validator=Validator::make($request->all(), $rules);
+        $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
             return response()->json($validator->errors(), 403);
         }
@@ -26,14 +26,13 @@ class UserController extends Controller
 
         if ($user && Hash::check($request->password, $user->password)) {
             Auth::login($user, $request->has('remember-me'));
-        $user->update([
-            'last_login_at' => Carbon::now()->toDateTimeString(),
-            'last_login_ip' => $request->getClientIp(),
-        ]);
+            $user->update([
+                'last_login_at' => Carbon::now()->toDateTimeString(),
+                'last_login_ip' => $request->getClientIp(),
+            ]);
 
             return redirect()->route('dashboard');
-        }
-        else{
+        } else {
             //
             return redirect()->route('login')->with('error', 'Invalid login details');
         }
@@ -41,17 +40,17 @@ class UserController extends Controller
 
     public function registerUser(Request $request)
     {
-        $rules=array(
+        $rules = array(
             'name' => 'required',
             'email' => "required|email|unique:users,email,",
             'password' => 'required|min:8',
             'password_confirmed' => 'required|min:8|same:password'
         );
-        $validator=Validator::make($request->all(), $rules);
+        $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
             return response()->json($validator->errors(), 403);
-        } 
-   
+        }
+
         // if user already exists return error
         $user = User::where('email', $request->email)->first();
         if ($user) {
@@ -69,9 +68,9 @@ class UserController extends Controller
         $user->save();
 
 
-    return redirect()->route('login');
+        return redirect()->route('login');
     }
-    
+
     public function logout()
     {
         Auth::logout();
@@ -88,5 +87,5 @@ class UserController extends Controller
         return redirect()->route('dashboard');
     }
 
-    
+
 }
