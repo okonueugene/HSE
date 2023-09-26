@@ -10,6 +10,15 @@ use App\Http\Controllers\Controller;
 
 class Incidents extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:view_incident')->only(['index', 'show']);
+        $this->middleware('permission:add_incident')->only(['store']);
+        $this->middleware('permission:edit_incident')->only(['update']);
+        $this->middleware('permission:delete_incident')->only(['destroy']);
+    }
+
     public function index()
     {
         $incident_types = DB::table('incident_type')->get();

@@ -37,110 +37,120 @@
             </a>
 
         </li>
-
         <!-- Tasks -->
-        <li
-            class="menu-item {{ request()->routeIs(['sor', 'hazards', 'improvements', 'goodpractises', 'badpractises']) ? 'active open' : '' }}">
-            <a href="javascript:void(0)" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons ti ti-text-wrap-disabled"></i>
-                <div data-i18n="Safety Observation records (SOR's)">Safety Observation records (SOR's)</div>
-            </a>
+        @if (auth()->user()->hasPermissionTo('delete_sor') &&
+                auth()->user()->hasPermissionTo('view_sor') &&
+                auth()->user()->hasPermissionTo('add_sor'))
+            <li
+                class="menu-item {{ request()->routeIs(['sor', 'hazards', 'improvements', 'goodpractises', 'badpractises']) ? 'active open' : '' }}">
+                <a href="javascript:void(0)" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons ti ti-text-wrap-disabled"></i>
+                    <div data-i18n="Safety Observation records (SOR's)">Safety Observation records (SOR's)</div>
+                </a>
 
-            <ul class="menu-sub">
-                <li class="menu-item {{ request()->routeIs('sor') ? 'active' : '' }}">
-                    <a href="{{ route('sor') }}" class="menu-link">
-                        <div data-i18n="Add Record">Add Record</div>
-                    </a>
-                </li>
-                <li class="menu-item {{ request()->routeIs('hazards') ? 'active' : '' }}">
-                    <a href="{{ route('hazards') }}" class="menu-link">
-                        <div data-i18n="Reported Hazards">Reported Hazards</div>
-                    </a>
-                </li>
-                <li class="menu-item {{ request()->routeIs('improvements') ? 'active' : '' }}">
-                    <a href="{{ route('improvements') }}" class="menu-link">
-                        <div data-i18n="Suggested Improvements">Suggested Improvements</div>
-                    </a>
-                </li>
-                <li class="menu-item {{ request()->routeIs('goodpractises') ? 'active' : '' }}">
-                    <a href="{{ route('goodpractises') }}" class="menu-link">
-                        <div data-i18n="Good Practises">Good Practises</div>
-                    </a>
-                </li>
-                <li class="menu-item {{ request()->routeIs('badpractises') ? 'active' : '' }}">
-                    <a href="{{ route('badpractises') }}" class="menu-link">
-                        <div data-i18n="Bad Practises">Bad Practises</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
-
+                <ul class="menu-sub">
+                    <li class="menu-item {{ request()->routeIs('sor') ? 'active' : '' }}">
+                        <a href="{{ route('sor') }}" class="menu-link">
+                            <div data-i18n="Add Record">Add Record</div>
+                        </a>
+                    </li>
+                    <li class="menu-item {{ request()->routeIs('hazards') ? 'active' : '' }}">
+                        <a href="{{ route('hazards') }}" class="menu-link">
+                            <div data-i18n="Reported Hazards">Reported Hazards</div>
+                        </a>
+                    </li>
+                    <li class="menu-item {{ request()->routeIs('improvements') ? 'active' : '' }}">
+                        <a href="{{ route('improvements') }}" class="menu-link">
+                            <div data-i18n="Suggested Improvements">Suggested Improvements</div>
+                        </a>
+                    </li>
+                    <li class="menu-item {{ request()->routeIs('goodpractises') ? 'active' : '' }}">
+                        <a href="{{ route('goodpractises') }}" class="menu-link">
+                            <div data-i18n="Good Practises">Good Practises</div>
+                        </a>
+                    </li>
+                    <li class="menu-item {{ request()->routeIs('badpractises') ? 'active' : '' }}">
+                        <a href="{{ route('badpractises') }}" class="menu-link">
+                            <div data-i18n="Bad Practises">Bad Practises</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        @endif
         <!-- Incidents -->
-        <li
-            class="menu-item {{ request()->routeIs(['incidents', 'nearmiss', 'medicaltreatedcase', 'losttimeaccidents', 'firstaidcase', 'sif']) ? 'active open' : '' }}">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons ti ti-layout-kanban"></i>
-                <div data-i18n="Incident Manager">Incident Manager</div>
-            </a>
+        @if (auth()->user()->hasPermissionTo('view_incident') &&
+                auth()->user()->hasPermissionTo('add_incident') &&
+                auth()->user()->hasPermissionTo('edit_incident') &&
+                auth()->user()->hasPermissionTo('delete_incident'))
+            <li
+                class="menu-item {{ request()->routeIs(['incidents', 'nearmiss', 'medicaltreatedcase', 'losttimeaccidents', 'firstaidcase', 'sif']) ? 'active open' : '' }}">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons ti ti-layout-kanban"></i>
+                    <div data-i18n="Incident Manager">Incident Manager</div>
+                </a>
 
-            <ul class="menu-sub">
-                <li class="menu-item {{ request()->routeIs('incidents') ? 'active open' : '' }}">
-                    <a href="{{ route('incidents') }}" class="menu-link">
-                        <div data-i18n="Add Incident">Add Incident</div>
-                    </a>
-                </li>
-                <li class="menu-item {{ request()->routeIs('nearmiss') ? 'active open' : '' }}">
-                    <a href="{{ route('nearmiss') }}" class="menu-link">
-                        <div data-i18n="Near Miss">Near Miss</div>
-                    </a>
-                </li>
-                <li class="menu-item {{ request()->routeIs('firstaidcase') ? 'active open' : '' }}">
-                    <a href="{{ route('firstaidcase') }}" class="menu-link">
-                        <div data-i18n="First Aid Case">First Aid Case</div>
-                    </a>
-                </li>
-                <li class="menu-item {{ request()->routeIs('medicaltreatedcase') ? 'active open' : '' }}">
-                    <a href="{{ route('medicaltreatedcase') }}" class="menu-link">
-                        <div data-i18n="Medical Treated Case">Medical Treated Case</div>
-                    </a>
-                </li>
-                <li class="menu-item {{ request()->routeIs('losttimeaccidents') ? 'active open' : '' }}">
-                    <a href="{{ route('losttimeaccidents') }}" class="menu-link">
-                        <div data-i18n="Lost Time Accidents">Lost Time Accidents</div>
-                    </a>
-                </li>
-                <li class="menu-item {{ request()->routeIs('sif') ? 'active open' : '' }}">
-                    <a href="{{ route('sif') }}" class="menu-link">
-                        <div data-i18n="SIF (SIF-p / SIF -a)">SIF (SIF-p / SIF -a)</div>
-                    </a>
-                </li>
+                <ul class="menu-sub">
+                    <li class="menu-item {{ request()->routeIs('incidents') ? 'active open' : '' }}">
+                        <a href="{{ route('incidents') }}" class="menu-link">
+                            <div data-i18n="Add Incident">Add Incident</div>
+                        </a>
+                    </li>
+                    <li class="menu-item {{ request()->routeIs('nearmiss') ? 'active open' : '' }}">
+                        <a href="{{ route('nearmiss') }}" class="menu-link">
+                            <div data-i18n="Near Miss">Near Miss</div>
+                        </a>
+                    </li>
+                    <li class="menu-item {{ request()->routeIs('firstaidcase') ? 'active open' : '' }}">
+                        <a href="{{ route('firstaidcase') }}" class="menu-link">
+                            <div data-i18n="First Aid Case">First Aid Case</div>
+                        </a>
+                    </li>
+                    <li class="menu-item {{ request()->routeIs('medicaltreatedcase') ? 'active open' : '' }}">
+                        <a href="{{ route('medicaltreatedcase') }}" class="menu-link">
+                            <div data-i18n="Medical Treated Case">Medical Treated Case</div>
+                        </a>
+                    </li>
+                    <li class="menu-item {{ request()->routeIs('losttimeaccidents') ? 'active open' : '' }}">
+                        <a href="{{ route('losttimeaccidents') }}" class="menu-link">
+                            <div data-i18n="Lost Time Accidents">Lost Time Accidents</div>
+                        </a>
+                    </li>
+                    <li class="menu-item {{ request()->routeIs('sif') ? 'active open' : '' }}">
+                        <a href="{{ route('sif') }}" class="menu-link">
+                            <div data-i18n="SIF (SIF-p / SIF -a)">SIF (SIF-p / SIF -a)</div>
+                        </a>
+                    </li>
 
-            </ul>
-        </li>
-
+                </ul>
+            </li>
+        @endif
         <!-- Deviations -->
-        <li class="menu-item {{ request()->routeIs(['icas', 'icas.create']) ? 'active open' : '' }}">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
-                <div data-i18n="Immediate collective Actions (ICA)">Immediate collective Actions (ICA)</div>
-            </a>
+        @if (auth()->user()->hasPermissionTo('view_icas') &&
+                auth()->user()->hasPermissionTo('add_icas') &&
+                auth()->user()->hasPermissionTo('edit_icas') &&
+                auth()->user()->hasPermissionTo('delete_icas'))
+            <li class="menu-item {{ request()->routeIs(['icas', 'icas.create']) ? 'active open' : '' }}">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
+                    <div data-i18n="Immediate collective Actions (ICA)">Immediate collective Actions (ICA)</div>
+                </a>
 
-            <ul class="menu-sub">
-                <li class="menu-item {{ request()->routeIs('icas.create') ? 'active open' : '' }}">
-                    <a href="{{ route('icas.create') }}" class="menu-link">
-                        <div data-i18n="Add ICA's">Add ICA's</div>
-                    </a>
-                </li>
+                <ul class="menu-sub">
+                    <li class="menu-item {{ request()->routeIs('icas.create') ? 'active open' : '' }}">
+                        <a href="{{ route('icas.create') }}" class="menu-link">
+                            <div data-i18n="Add ICA's">Add ICA's</div>
+                        </a>
+                    </li>
 
-                <li class="menu-item {{ request()->routeIs('icas') ? 'active open' : '' }}">
-                    <a href="{{ route('icas') }}" class="menu-link">
-                        <div data-i18n="View ICA's">View ICA's</div>
-                    </a>
-                </li>
+                    <li class="menu-item {{ request()->routeIs('icas') ? 'active open' : '' }}">
+                        <a href="{{ route('icas') }}" class="menu-link">
+                            <div data-i18n="View ICA's">View ICA's</div>
+                        </a>
+                    </li>
 
-            </ul>
-        </li>
-
+                </ul>
+            </li>
+        @endif
         <!-- Time and Attendance -->
         <li class="menu-item {{ request()->routeIs('sfa') ? 'active open' : '' }}">
             <a href="{{ route('sfa') }}" class="menu-link">
@@ -148,12 +158,17 @@
                 <div data-i18n=" Permits Applicable"> Permits Applicable</div>
             </a>
         </li>
-        <li class="menu-item {{ request()->routeIs('user-tasks') ? 'active open' : '' }}">
-            <a href="{{ route('user-tasks') }}" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-list"></i>
-                <div data-i18n="Tasks">Tasks</div>
-            </a>
-        </li>
+        @if (auth()->user()->hasPermissionTo('add_tasks') &&
+                auth()->user()->hasPermissionTo('edit_tasks') &&
+                auth()->user()->hasPermissionTo('delete_tasks') &&
+                auth()->user()->hasPermissionTo('view_tasks'))
+            <li class="menu-item {{ request()->routeIs('user-tasks') ? 'active open' : '' }}">
+                <a href="{{ route('user-tasks') }}" class="menu-link">
+                    <i class="menu-icon tf-icons ti ti-list"></i>
+                    <div data-i18n="Tasks">Tasks</div>
+                </a>
+            </li>
+        @endif
         <li class="menu-item">
             <a href="{{ route('sfa') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-tree"></i>
@@ -161,10 +176,10 @@
             </a>
         </li>
         <!-- Apps & Pages -->
-        <li class="menu-header small text-uppercase">
-            <span class="menu-header-text">Management</span>
-        </li>
         @if (auth()->user()->hasPermissionTo('view_users'))
+            <li class="menu-header small text-uppercase">
+                <span class="menu-header-text">Management</span>
+            </li>
             <li class="menu-item {{ request()->routeIs('userslist') ? 'active open' : '' }}">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons ti ti-users"></i>

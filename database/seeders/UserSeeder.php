@@ -50,6 +50,10 @@ class UserSeeder extends Seeder
         'add_sor_types',
         'edit_sor_types',
         'delete_sor_types',
+        'add_tasks',
+        'edit_tasks',
+        'delete_tasks',
+        'view_tasks',
     ];
 
 

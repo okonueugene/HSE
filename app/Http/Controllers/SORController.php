@@ -10,6 +10,15 @@ use App\Http\Controllers\Controller;
 
 class SORController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:view_sor')->only(['index', 'show']);
+        $this->middleware('permission:add_sor')->only(['store']);
+        $this->middleware('permission:edit_sor')->only(['update']);
+        $this->middleware('permission:delete_sor')->only(['destroy']);
+    }
+
     public function index()
     {
         //fetch all sor types

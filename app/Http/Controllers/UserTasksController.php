@@ -9,9 +9,17 @@ use App\Http\Controllers\Controller;
 
 class UserTasksController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:view_tasks')->only(['index', 'show']);
+        $this->middleware('permission:add_tasks')->only(['store']);
+        $this->middleware('permission:edit_tasks')->only(['update']);
+        $this->middleware('permission:delete_tasks')->only(['destroy']);
+    }
     public function index()
     {
-        $tasks = Task::orderBy('created_at', 'desc')->with('media')->paginate(10);
+        $tasks = Task::orderBy('id', 'desc')->with('media')->paginate(10);
         return view('admin/task')->with([
             'tasks' => $tasks,
             'users' => User::all(),

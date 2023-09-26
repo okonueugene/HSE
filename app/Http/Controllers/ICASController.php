@@ -9,6 +9,15 @@ use App\Http\Controllers\Controller;
 
 class ICASController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:view_icas')->only(['index', 'show']);
+        $this->middleware('permission:add_icas')->only(['store']);
+        $this->middleware('permission:edit_icas')->only(['update']);
+        $this->middleware('permission:delete_icas')->only(['destroy']);
+    }
+
     public function index(Request $request)
     {
         $perPage = 9;

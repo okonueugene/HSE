@@ -71,10 +71,10 @@ class Handler extends ExceptionHandler
             ]);
         }
 
-        //forbidden instance
-        if ($exception instanceof \Illuminate\Auth\Access\AuthorizationException) {
-            return redirect()->route('dashboard')->withErrors(['message' => 'You are not authorized to access this page.']);
-
+        if ($exception instanceof \Spatie\Permission\Exceptions\UnauthorizedException) {
+            $this->renderable(function (\Spatie\Permission\Exceptions\UnauthorizedException $e, $request) {
+                return redirect()->route('dashboard')->withErrors(['message' => 'You are not authorized to access this page.']);
+            });
         }
 
 

@@ -71,7 +71,24 @@
                   crossorigin="anonymous" referrerpolicy="no-referrer"></script>
               <!-- Scripts -->
               <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
-              <script src="https://cdnjs.cloudflare.com/ajax/libs/izimodal/1.5.1/js/iziModal.min.js"></script>
+
+
+              <script>
+                  @if ($errors->any())
+                      window.onload = function() {
+                          // Loop through each error message and display it using IziToast
+                          @foreach ($errors->all() as $error)
+                              iziToast.error({
+                                  title: "Error",
+                                  message: "{{ $error }}",
+                                  position: "topRight",
+                                  timeout: 10000,
+                                  transitionIn: "fadeInDown"
+                              });
+                          @endforeach
+                      };
+                  @endif
+              </script>
 
               </body>
 

@@ -44,7 +44,7 @@
                     </div>
                     <div>
                         @if ($task->media)
-                            <h4>Task Media:</h4>
+                            <label class="form-label">Task Media</label>
                             <div class="row">
                                 @foreach ($task->media as $media)
                                     <div class="col-md-4 mb-3">
