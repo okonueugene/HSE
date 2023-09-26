@@ -14,8 +14,8 @@ return new class () extends Migration {
     {
         Schema::create('incidents', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('incident_type_id')->constrained('incident_type');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('incident_type_id')->constrained('incident_type')->onDelete('cascade');
             $table->date('incident_date');
             $table->enum('investigation_status', ['open', 'closed']);
             $table->text('incident_description');

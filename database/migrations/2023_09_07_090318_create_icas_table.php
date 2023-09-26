@@ -14,8 +14,8 @@ return new class () extends Migration {
     {
         Schema::create('icas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('action_owner_id')->constrained('users');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('action_owner_id')->constrained('users')->onDelete('cascade');
             $table->text('observation');
             $table->enum('status', ['open', 'closed']);
             $table->text('steps_taken');

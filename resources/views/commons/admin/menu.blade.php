@@ -144,14 +144,14 @@
         <!-- Time and Attendance -->
         <li class="menu-item {{ request()->routeIs('sfa') ? 'active open' : '' }}">
             <a href="{{ route('sfa') }}" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-components"></i>
+                <i class="menu-icon tf-icons ti ti-checklist"></i>
                 <div data-i18n=" Permits Applicable"> Permits Applicable</div>
             </a>
         </li>
-        <li class="menu-item">
-            <a href="{{ route('sfa') }}" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-trash"></i>
-                <div data-i18n="Waste Management">Waste Management</div>
+        <li class="menu-item {{ request()->routeIs('user-tasks') ? 'active open' : '' }}">
+            <a href="{{ route('user-tasks') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-list"></i>
+                <div data-i18n="Tasks">Tasks</div>
             </a>
         </li>
         <li class="menu-item">
@@ -160,25 +160,26 @@
                 <div data-i18n="Environment Concerns">Environment Concerns</div>
             </a>
         </li>
-
         <!-- Apps & Pages -->
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Management</span>
         </li>
-        <li class="menu-item {{ request()->routeIs('userslist') ? 'active open' : '' }}">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons ti ti-users"></i>
-                <div data-i18n="Users">Users</div>
-            </a>
-            <ul class="menu-sub">
-                <li class="menu-item {{ request()->routeIs('userslist') ? 'active open' : '' }}">
-                    <a href="{{ route('userslist') }}" class="menu-link">
-                        <div data-i18n="List">List</div>
-                    </a>
-                </li>
+        @if (auth()->user()->hasPermissionTo('view_users'))
+            <li class="menu-item {{ request()->routeIs('userslist') ? 'active open' : '' }}">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons ti ti-users"></i>
+                    <div data-i18n="Users">Users</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item {{ request()->routeIs('userslist') ? 'active open' : '' }}">
+                        <a href="{{ route('userslist') }}" class="menu-link">
+                            <div data-i18n="List">List</div>
+                        </a>
+                    </li>
 
-            </ul>
-        </li>
+                </ul>
+            </li>
+        @endif
         {{-- <li class="menu-item {{ request()->routeIs('contractors') ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-users"></i>
@@ -193,27 +194,30 @@
 
             </ul>
         </li> --}}
-
-        <li
-            class="menu-item {{ request()->routeIs('roles') || request()->routeIs('permissions') ? 'active open' : '' }}">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons ti ti-settings"></i>
-                <div data-i18n="Roles &amp; Permissions">Roles &amp; Permissions</div>
-            </a>
-            <ul class="menu-sub">
-                <li class="menu-item {{ request()->routeIs('roles') ? 'active open' : '' }}">
-                    <a href="{{ route('roles') }}" class="menu-link">
-                        <div data-i18n="Roles">Roles</div>
-                    </a>
-                </li>
-                <li class="menu-item {{ request()->routeIs('permissions') ? 'active open' : '' }}">
-                    <a href="{{ route('permissions') }}" class="menu-link">
-                        <div data-i18n="Permission">Permission</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
-
+        @if (auth()->user()->hasPermissionTo('view_roles') &&
+                auth()->user()->hasPermissionTo('view_permissions') &&
+                auth()->user()->hasPermissionTo('edit_roles') &&
+                auth()->user()->hasPermissionTo('edit_permissions'))
+            <li
+                class="menu-item {{ request()->routeIs('roles') || request()->routeIs('permissions') ? 'active open' : '' }}">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons ti ti-settings"></i>
+                    <div data-i18n="Roles &amp; Permissions">Roles &amp; Permissions</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item {{ request()->routeIs('roles') ? 'active open' : '' }}">
+                        <a href="{{ route('roles') }}" class="menu-link">
+                            <div data-i18n="Roles">Roles</div>
+                        </a>
+                    </li>
+                    <li class="menu-item {{ request()->routeIs('permissions') ? 'active open' : '' }}">
+                        <a href="{{ route('permissions') }}" class="menu-link">
+                            <div data-i18n="Permission">Permission</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        @endif
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Misc</span>
         </li>

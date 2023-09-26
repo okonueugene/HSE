@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Permission;
@@ -71,7 +72,6 @@ class RoleController extends Controller
 
         // Create the role
         $role = Role::create(['name' => $request->input('name')]);
-        dd($request->input('permissions'));
 
         // sync permissions
         $role->syncPermissions($request->input('permissions'));
@@ -103,7 +103,7 @@ class RoleController extends Controller
         $role = Role::find($id);
         $role->delete();
 
-        return response()->json($role);
+        return redirect()->route('roles')->with('success', 'Role has been deleted successfully');
     }
 
 }

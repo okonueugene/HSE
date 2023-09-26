@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Task;
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Incidents;
 use App\Http\Controllers\Attendance;
@@ -18,6 +17,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\NearMissController;
 use App\Http\Controllers\UsersListController;
+use App\Http\Controllers\UserTasksController;
 use App\Http\Controllers\PermissionsController;
 use App\Http\Controllers\BadPractisesController;
 use App\Http\Controllers\FirstAidCaseController;
@@ -49,9 +49,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', [Dashboard::class, 'index'])->name('dashboard');
     Route::get('/attendance', [Attendance::class, 'index'])->name('attendance');
     Route::get('/deviations', [Deviations::class, 'index'])->name('deviations');
-    Route::get('/task', [Task::class, 'index'])->name('tasks');
     Route::get('/sfa', [SFAController::class, 'index'])->name('sfa');
-    Route::get('userslist', [UsersListController::class, 'index'])->name('userslist');
     Route::get('permissions', [PermissionsController::class, 'index'])->name('permissions');
     Route::get('faqs', [FAQController::class, 'index'])->name('faqs');
     Route::get('help', [HelpController::class, 'index'])->name('help');
@@ -144,5 +142,21 @@ Route::group(['middleware' => 'auth'], function () {
     Route::patch('roles/{id}', [RoleController::class, 'update'])->name('roles.update');
     Route::delete('roles/{id}', [RoleController::class, 'destroy'])->name('roles.destroy');
     Route::get('roles/{id}', [RoleController::class, 'show'])->name('roles.show');
+
+    //userslist routes
+    Route::get('userslist', [UsersListController::class, 'index'])->name('userslist');
+    Route::post('userslist', [UsersListController::class, 'store'])->name('userslist.store');
+    Route::get('userslist/{id}/edit', [UsersListController::class, 'edit'])->name('userslist.edit');
+    Route::delete('userslist/{id}', [UsersListController::class, 'destroy'])->name('userslist.destroy');
+    Route::patch('userslist/{id}/update', [UsersListController::class, 'update'])->name('userslist.update');
+
+
+    //user tasks routes
+    Route::get('user-tasks', [UserTasksController::class, 'index'])->name('user-tasks');
+    Route::post('user-tasks', [UserTasksController::class, 'store'])->name('user-tasks.store');
+    Route::get('user-tasks/{id}', [UserTasksController::class, 'show'])->name('user-tasks.show');
+    Route::delete('user-tasks/{id}', [UserTasksController::class, 'destroy'])->name('user-tasks.destroy');
+    Route::post('user-tasks/{id}', [UserTasksController::class, 'update'])->name('user-tasks.update');
+    Route::get('user-tasks/{id}/edit', [UserTasksController::class, 'edit'])->name('user-tasks.edit');
 
 });

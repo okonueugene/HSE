@@ -5,113 +5,190 @@
     <!-- Content -->
 
     <div class="container-xxl flex-grow-1 container-p-y">
+        <div class="add-button ">
+            <a href="javascript:void(0)" class="btn btn-primary float-end" data-bs-toggle="modal"
+                data-bs-target="#addTaskModal">Add Task</a>
+        </div>
         <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> </span>Task Manager</h4>
 
         <!-- DataTable with Buttons -->
         <div class="card">
-            <div class="card-datatable table-responsive pt-0">
-                <table class="datatables-basic table">
+            <div class="table">
+                <table class="table table-hover table-bordered">
                     <thead>
                         <tr>
 
-                            <th>id</th>
+                            <th>Id</th>
                             <th>Name</th>
                             <th>Task Title</th>
-                            <th>Date</th>
-                            <th>Status</th>
-                            <th>Action</th>
+                            <th>Task Comments</th>
+                            <th>Due Date</th>
+                            <th>Task Status</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
-                        @foreach ($task as $incident)
+                        @foreach ($tasks as $task)
                             <tr>
-                                <td>{{ $incident->id }}</td>
-                                <td>{{ $incident->title }}</td>
-                                <td>{{ $incident->date }}</td>
-                                <td>{{ $incident->status }}</td>
+                                <td>{{ $task->id }}</td>
+                                <td>{{ $task->user->name }}</td>
+                                <td>{{ $task->title }}</td>
+                                <td>{{ $task->comments }}</td>
+                                <td>{{ $task->to }}</td>
+                                <td>{{ $task->status }}</td>
                                 <td>
-                                    <div class="dropdown">
-                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                            data-bs-toggle="dropdown">
-                                            <i class="ti ti-dots-vertical"></i>
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="javascript:void(0);"><i
-                                                    class="ti ti-pencil me-1"></i> Edit</a>
-                                            <a class="dropdown-item" href="javascript:void(0);"><i
-                                                    class="ti ti-trash me-1"></i> Delete</a>
-                                        </div>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-secondary dropdown-toggle btn-sm"
+                                            data-bs-toggle="dropdown" data-bs-display="static"
+                                            aria-expanded="false">Action </button>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a href="{{ route('user-tasks.show', $task->id) }}"
+                                                    class="dropdown-item">View</a>
+                                            </li>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('user-tasks.update', $task->id) }}"
+                                                    class="dropdown-item">Edit</a>
+                                            </li>
+
+                                            <li>
+                                                <form action="{{ route('user-tasks.destroy', $task->id) }}"
+                                                    method="POST"
+                                                    onsubmit="return confirm('Are you sure you want to delete this task?');">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="dropdown-item">Delete</button>
+                                                </form>
+                                            </li>
+                                        </ul>
                                     </div>
-                                </td>
                                 </td>
                             </tr>
                         @endforeach
                 </table>
             </div>
         </div>
-        <!-- Modal to add new record -->
-        <div class="offcanvas offcanvas-end" id="add-new-record">
-            <div class="offcanvas-header border-bottom">
-                <h5 class="offcanvas-title" id="exampleModalLabel">New Record</h5>
-                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
-                    aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body flex-grow-1">
-                <form class="add-new-record pt-0 row g-2" id="form-add-new-record" onsubmit="return false">
-                    <div class="col-sm-12">
-                        <label class="form-label" for="basicFullname">Full Name</label>
-                        <div class="input-group input-group-merge">
-                            <span id="basicFullname2" class="input-group-text"><i class="ti ti-user"></i></span>
-                            <input type="text" id="basicFullname" class="form-control dt-full-name"
-                                name="basicFullname" placeholder="John Doe" aria-label="John Doe"
-                                aria-describedby="basicFullname2" />
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <label class="form-label" for="basicPost">Post</label>
-                        <div class="input-group input-group-merge">
-                            <span id="basicPost2" class="input-group-text"><i class="ti ti-briefcase"></i></span>
-                            <input type="text" id="basicPost" name="basicPost" class="form-control dt-post"
-                                placeholder="Web Developer" aria-label="Web Developer" aria-describedby="basicPost2" />
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <label class="form-label" for="basicEmail">Email</label>
-                        <div class="input-group input-group-merge">
-                            <span class="input-group-text"><i class="ti ti-mail"></i></span>
-                            <input type="text" id="basicEmail" name="basicEmail" class="form-control dt-email"
-                                placeholder="john.doe@example.com" aria-label="john.doe@example.com" />
-                        </div>
-                        <div class="form-text">You can use letters, numbers & periods</div>
-                    </div>
-                    <div class="col-sm-12">
-                        <label class="form-label" for="basicDate">Joining Date</label>
-                        <div class="input-group input-group-merge">
-                            <span id="basicDate2" class="input-group-text"><i class="ti ti-calendar"></i></span>
-                            <input type="text" class="form-control dt-date" id="basicDate" name="basicDate"
-                                aria-describedby="basicDate2" placeholder="MM/DD/YYYY" aria-label="MM/DD/YYYY" />
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <label class="form-label" for="basicSalary">Salary</label>
-                        <div class="input-group input-group-merge">
-                            <span id="basicSalary2" class="input-group-text"><i
-                                    class="ti ti-currency-dollar"></i></span>
-                            <input type="number" id="basicSalary" name="basicSalary" class="form-control dt-salary"
-                                placeholder="12000" aria-label="12000" aria-describedby="basicSalary2" />
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <button type="submit" class="btn btn-primary data-submit me-sm-3 me-1">Submit</button>
-                        <button type="reset" class="btn btn-outline-secondary"
-                            data-bs-dismiss="offcanvas">Cancel</button>
-                    </div>
-                </form>
-            </div>
+        <br>
+        <div class="card card-bordered w-50 mx-auto">
+            <div class="card-inner">
+                <ul class="pagination justify-content-center" style="margin:10px 10px">
+                    {{ $tasks->links() }}
+                </ul><!-- .pagination -->
+            </div><!-- .card-inner -->
         </div>
+        <!-- Modal to add new record -->
+
         <!--/ DataTable with Buttons -->
 
     </div>
 </div>
+
+<!-- modal to add new record -->
+<div class="modal fade" id="addTaskModal" tabindex="-1" role="dialog" aria-labelledby="addTaskModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-content">
+            <!-- Modal header -->
+            <div class="modal-header">
+                <h5 class="modal-title" id="showModalLabel">Add Task</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form action="{{ route('user-tasks.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="mb-3">
+                        <label class="form-label">Title</label>
+                        <input type="text" class="form-control" name="title" placeholder="Enter Title" required>
+
+                        <div class="error">
+                            @error('title')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-control" name="description" placeholder="Enter Description" rows="4" required></textarea>
+                        <div class="error">
+                            @error('description')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Comments</label>
+                        <textarea class="form-control" name="comments" placeholder="Enter Comments" rows="4"></textarea>
+                        <div class="error">
+                            @error('comments')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Start Date</label>
+                        <input type="date" class="form-control" name="from" placeholder="Enter Start Date"
+                            required>
+                        <div class="error">
+                            @error('from')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Due Date</label>
+                        <input type="date" class="form-control" name="to" placeholder="Enter Due Date" required>
+                        <div class="error">
+                            @error('to')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Status</label>
+                        <select class="form-select" name="status">
+                            <option value="pending">Pending</option>
+                            <option value="completed">Completed</option>
+                        </select>
+                        <div class="error">
+                            @error('status')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Assign To</label>
+                        <select class="form-select" name="user_id" required>
+                            @foreach ($users as $user)
+                                <option value="{{ $user->id }}">{{ $user->name }}</option>
+                            @endforeach
+                        </select>
+                        <div class="error">
+                            @error('user_id')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Photos</label>
+                        <input type="file" class="form-control" id="media" name="media[]" multiple>
+                        <div class="error">
+                            @error('media')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary">Add Task</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <!-- / Content -->
 @include('commons.footer')

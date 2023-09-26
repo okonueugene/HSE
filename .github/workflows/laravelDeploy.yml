@@ -31,6 +31,6 @@ jobs:
       - name: Generate key
         run: php artisan key:generate
       - name: Clear cache
-        run: php artisan config:cache
+        run: php artisan optimize:clear && composer dump-autoload
       - name: Storage link
         run: php artisan storage:link

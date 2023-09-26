@@ -12,13 +12,21 @@ use Illuminate\Support\Facades\Hash;
 
 class UsersListController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:view_users');
+        $this->middleware('permission:add_users');
+        $this->middleware('permission:edit_users');
+        $this->middleware('permission:delete_users');
+    }
+
     public function index()
     {
-
         $users = User::orderBy('id', 'desc')->paginate(10);
 
         return view('admin/userslist')->with([
             'users' => $users,
+            'roles' => Role::all(),
         ]);
     }
 
@@ -30,69 +38,65 @@ class UsersListController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $rules = array(
             'name' => 'required',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|same:confirm-password',
-            'roles' => 'required'
-        ]);
+            'email' => "required|email|unique:users,email,",
+            'password' => 'required|min:8',
+            'password_confirmed' => 'required|min:8|same:password'
+        );
 
-        $input = $request->all();
-        $input['password'] = Hash::make($input['password']);
+        // create new user
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->save();
 
-        $user = User::create($input);
-        $user->assignRole($request->input('roles'));
+        //assign role
+        $role = Role::find($request->role);
 
-        return response()->json($user);
+        $user->assignRole($role);
+
+        return redirect()->route('userslist')->with('success', 'User has been created successfully');
+
     }
 
-    public function show($id)
-    {
-        $user = User::find($id);
-        return response()->json($user);
-    }
 
     public function edit($id)
     {
         $user = User::find($id);
-        $roles = Role::pluck('name', 'name')->all();
-        $userRole = $user->roles->pluck('name', 'name')->all();
+        $roles = Role::all();
 
-        return response()->json([
+        return view('admin/edituserlist')->with([
             'user' => $user,
             'roles' => $roles,
-            'userRole' => $userRole,
         ]);
     }
 
-    public function update(Request $request, $id)
-    {
-        $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email,'.$id,
-            'password' => 'same:confirm-password',
-            'roles' => 'required'
-        ]);
-
-        $input = $request->all();
-        if(!empty($input['password'])) {
-            $input['password'] = Hash::make($input['password']);
-        } else {
-            $input = Arr::except($input, array('password'));
-        }
-
-        $user = User::find($id);
-        $user->update($input);
-        DB::table('model_has_roles')->where('model_id', $id)->delete();
-
-        $user->assignRole($request->input('roles'));
-
-        return response()->json($user);
-    }
 
     public function destroy($id)
     {
         User::find($id)->delete();
-        return response()->json(['success' => 'User deleted successfully.']);
+        return redirect()->route('userslist')->with('success', 'User has been deleted successfully');
     }
+
+    public function update(Request $request, $id)
+    {
+        $user = User::find($id);
+
+        $user->update([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+        ]);
+
+        // Check if a role is provided in the request and update the user's role
+        if ($request->has('role')) {
+            DB::table('model_has_roles')->where('model_id', $id)->delete();
+            $role = Role::find($request->input('role'));
+            $user->assignRole($role);
+        }
+
+        return response()->json($user);
+    }
+
 }
