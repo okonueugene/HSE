@@ -22,7 +22,7 @@
                         <div class="content">
 
                         </div>
-                        <div class="footer">7</div>
+                        <div class="footer">{{ $data['attendance'] }}</div>
                     </div>
                 </div>
             </div>
@@ -32,7 +32,7 @@
                     <div class="card-body">
                         <div class="content">
                         </div>
-                        <div class="footer">7</div>
+                        <div class="footer">{{ $data['tasks'] }}</div>
                     </div>
                 </div>
             </div>
@@ -43,7 +43,7 @@
                         <div class="content">
 
                         </div>
-                        <div class="footer">7</div>
+                        <div class="footer">{{ $data['tasks'] }}</div>
                     </div>
                 </div>
             </div>
@@ -54,7 +54,7 @@
                         <div class="content">
 
                         </div>
-                        <div class="footer">7</div>
+                        <div class="footer">{{ $data['incidents'] }}</div>
                     </div>
                 </div>
             </div>
@@ -68,7 +68,7 @@
                         <div class="content">
 
                         </div>
-                        <div class="footer">7</div>
+                        <div class="footer">{{ $data['icas'] }}</div>
                     </div>
                 </div>
             </div>
@@ -79,7 +79,7 @@
                         <div class="content">
 
                         </div>
-                        <div class="footer">7</div>
+                        <div class="footer">{{ $data['sors'] }}</div>
                     </div>
                 </div>
             </div>

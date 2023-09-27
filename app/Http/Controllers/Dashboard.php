@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\SOR;
 use App\Models\Icas;
+use App\Models\Task;
+use App\Models\User;
 use App\Models\Incident;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -16,15 +19,16 @@ class Dashboard extends Controller
     {
         //initialize data array to hold the data
         $data = array();
-        $data['bad_practises'] = SOR::where('type_id', 1)->count();
-        $data['good_practises'] = SOR::where('type_id', 2)->count();
-        $data['reported_hazards'] = SOR::where('type_id', 3)->count();
-        $data['icas'] = Icas::count();
-        $data['suggested_improvements'] = SOR::where('type_id', 4)->count();
-        $data['incidents'] = Incident::count();
-
-
-
+        //Live Number Of People On Site
+        $data['attendance'] = User::where('last_login_at', '>=', Carbon::today())->count();
+        //Tasks Of The Day
+        $data['tasks'] = Task::where('created_at', '>=', Carbon::today())->count();
+        //Incidents Recorded
+        $data['incidents'] = Incident::where('created_at', '>=', Carbon::today())->count();
+        //Immediate Corrective Actions
+        $data['icas'] = Icas::where('created_at', '>=', Carbon::today())->count();
+        //Safety Observation Record
+        $data['sors'] = SOR::where('created_at', '>=', Carbon::today())->count();
 
         return view('admin/dashboard', compact('data'));
     }

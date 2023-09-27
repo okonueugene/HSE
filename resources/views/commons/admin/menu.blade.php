@@ -152,8 +152,8 @@
             </li>
         @endif
         <!-- Time and Attendance -->
-        <li class="menu-item {{ request()->routeIs('sfa') ? 'active open' : '' }}">
-            <a href="{{ route('sfa') }}" class="menu-link">
+        <li class="menu-item {{ request()->routeIs('permits') ? 'active open' : '' }}">
+            <a href="{{ route('permits') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-checklist"></i>
                 <div data-i18n=" Permits Applicable"> Permits Applicable</div>
             </a>
@@ -169,8 +169,8 @@
                 </a>
             </li>
         @endif
-        <li class="menu-item">
-            <a href="{{ route('sfa') }}" class="menu-link">
+        <li class="menu-item  {{ request()->routeIs('environment') ? 'active open' : '' }}">
+            <a href="{{ route('environment') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-tree"></i>
                 <div data-i18n="Environment Concerns">Environment Concerns</div>
             </a>
