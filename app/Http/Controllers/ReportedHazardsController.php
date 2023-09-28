@@ -8,6 +8,14 @@ use App\Http\Controllers\Controller;
 
 class ReportedHazardsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:view_reported_hazard')->only(['index', 'show']);
+        $this->middleware('permission:edit_reported_hazard')->only(['update']);
+        $this->middleware('permission:delete_reported_hazard')->only(['destroy']);
+    }
+
     public function index(Request $request)
     {
         $perPage = 8; // Number of records per page

@@ -8,6 +8,14 @@ use App\Http\Controllers\Controller;
 
 class NearMissController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:view_near_miss')->only(['index', 'show']);
+        $this->middleware('permission:edit_near_miss')->only(['update']);
+        $this->middleware('permission:delete_near_miss')->only(['destroy']);
+    }
+
     public function index(Request $request)
     {
         $perPage = 8; // Number of records per page

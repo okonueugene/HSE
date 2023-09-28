@@ -8,8 +8,17 @@ use App\Http\Controllers\Controller;
 
 class LostTimeAccidentsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:view_lost_time_accident')->only(['index', 'show']);
+        $this->middleware('permission:edit_lost_time_accident')->only(['update']);
+        $this->middleware('permission:delete_lost_time_accident')->only(['destroy']);
+    }
+
     public function index(Request $request)
     {
+
         $perPage = 8;
 
         // Check if a search query is present

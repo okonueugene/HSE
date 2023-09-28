@@ -8,13 +8,13 @@ use App\Http\Controllers\Controller;
 
 class BadPractisesController extends Controller
 {
-    public $assignee_id;
-    public $assignor_id;
-    public $observation;
-    public $status;
-    public $steps_taken;
-    public $date;
-    public $type_id;
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:view_bad_practise')->only(['index', 'show']);
+        $this->middleware('permission:edit_bad_practise')->only(['update']);
+        $this->middleware('permission:delete_bad_practise')->only(['destroy']);
+    }
 
 
     public function index(Request $request)

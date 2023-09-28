@@ -8,6 +8,14 @@ use App\Http\Controllers\Controller;
 
 class FirstAidCaseController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:view_first_aid_case')->only(['index', 'show']);
+        $this->middleware('permission:edit_first_aid_case')->only(['update']);
+        $this->middleware('permission:delete_first_aid_case')->only(['destroy']);
+    }
+
     public function index(Request $request)
     {
         $perPage = 8;

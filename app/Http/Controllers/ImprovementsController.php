@@ -8,6 +8,14 @@ use App\Http\Controllers\Controller;
 
 class ImprovementsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:view_improvement')->only(['index', 'show']);
+        $this->middleware('permission:edit_improvement')->only(['update']);
+        $this->middleware('permission:delete_improvement')->only(['destroy']);
+    }
+
     public function index(Request $request)
     {
 

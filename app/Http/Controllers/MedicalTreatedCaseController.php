@@ -8,6 +8,14 @@ use App\Http\Controllers\Controller;
 
 class MedicalTreatedCaseController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:view_medical_treated_case')->only(['index', 'show']);
+        $this->middleware('permission:edit_medical_treated_case')->only(['update']);
+        $this->middleware('permission:delete_medical_treated_case')->only(['destroy']);
+    }
+    
     public function index(Request $request)
     {
         $perPage = 8;
