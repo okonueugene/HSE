@@ -109,7 +109,32 @@ class UserSeeder extends Seeder
 
         $role->syncPermissions($permissions);
 
+
+
         $user->assignRole([$role->id]);
+
+        $user1 = new User();
+
+        $user1->name = 'User';
+        $user1->email = 'user@domain.com';
+        $user1->password = Hash::make('12345678');
+
+        $user1->save();
+
+        $role1 = Role::create(['name' => 'User']);
+
+        //pick half of the permissions randomly
+        $permissions1 = Permission::pluck('id', 'id')->random(count($permissions) / 2)->all();
+
+        $role1->syncPermissions($permissions1);
+
+        $user1->assignRole([$role1->id]);
+
+
+
+
+
+
 
 
     }
