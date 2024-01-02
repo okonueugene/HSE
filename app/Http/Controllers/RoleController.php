@@ -65,7 +65,7 @@ class RoleController extends Controller
         $messages = [
             'name.required' => 'Role name is required',
             'name.unique' => 'Role name already exists',
-            'permissions.required' => 'Permissions is required',
+            'permissions.required' => 'Permissions are required',
         ];
 
         $this->validate($request, $rules, $messages);
