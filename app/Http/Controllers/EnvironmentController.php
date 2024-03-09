@@ -16,4 +16,9 @@ class EnvironmentController extends Controller
 
         return view('admin/environment_concerns')->with('concerns', $concerns);
     }
+
+    public function environmentalPolicyChecklist()
+    {
+        return view('admin/environmental_policy_checklist');
+    }
 }

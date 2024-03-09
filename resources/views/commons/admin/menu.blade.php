@@ -132,7 +132,7 @@
             <li class="menu-item {{ request()->routeIs(['icas', 'icas.create']) ? 'active open' : '' }}">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
-                    <div data-i18n="Immediate collective Actions (ICA)">Immediate collective Actions (ICA)</div>
+                    <div data-i18n="Immediate Corrective Actions (ICA)">Immediate Corrective Actions (ICA)</div>
                 </a>
 
                 <ul class="menu-sub">

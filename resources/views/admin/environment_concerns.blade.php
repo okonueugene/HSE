@@ -4,8 +4,10 @@
     <!-- Content -->
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="add-button ">
-            <a href="javascript:void(0)" class="btn btn-primary float-end" data-bs-toggle="modal"
-                data-bs-target="#addModal">Add Concern</a>
+            <a href="{{ route('environmental-policy-checklist') }}" class="btn btn-primary float-end mx-2">Add Policy
+                Checklist</a>
+            <a href="#" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#addModal">Add Free
+                Form</a>
         </div>
         <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> </span>Enviromental Concern</h4>
 
@@ -71,25 +73,13 @@
     </div>
 </div>
 
-<!-- / Content wrapper -->
-<!-- Add Modal -->
-<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content shadow-lg border-0">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addModalLabel">Add Concern</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
 
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn me-auto" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Add Concern</button>
-            </div>
-        </div>
-    </div>
-</div>
+
+
+
+<!-- / Content wrapper -->
+
+
 
 
 @include('commons.footer')
