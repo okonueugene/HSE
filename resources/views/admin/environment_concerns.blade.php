@@ -17,7 +17,7 @@
                     <thead>
                         <tr>
 
-                            <th>id</th>
+                            <th>Id</th>
                             <th>Name</th>
                             <th>Date</th>
                             <th>SOR</th>
@@ -72,9 +72,55 @@
         </div>
     </div>
 </div>
-
-
-
+{{-- addModal --}}
+<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addModalLabel">Add Free Form</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    @csrf
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Type</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="comment" class="form-label">Comment</label>
+                        <textarea class="form-control" id="comment" name="comment" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="corrective_action" class="form-label">Corrective Action</label>
+                        <textarea class="form-control" id="corrective_action" name="corrective_action" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="status" class="form-label">Status</label>
+                        <select class="form-select" id="status" name="status" required>
+                            <option value="Pending">Pending</option>
+                            <option value="Approved">Approved</option>
+                            <option value="Rejected">Rejected</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="project_manager" class="form-label">Project Manager</label>
+                        <input type="text" class="form-control" id="project_manager" name="project_manager" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="auditor" class="form-label">Auditor</label>
+                        <input type="text" class="form-control" id="auditor" name="auditor" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /addModal -->
 
 
 <!-- / Content wrapper -->
