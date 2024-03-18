@@ -37,9 +37,9 @@ class Dashboard extends Controller
         // Personnel Present
         $data['personells'] = PersonelPresent::where('created_at', '>=', Carbon::today())->first()->number;
         //Fire Marshal
-        $data['fire_marshal'] = FirstResponder::where('created_at', '>=', Carbon::today())->where('type', 'fire_marshal')->first()->name;
+        $data['fire_marshal'] = FirstResponder::where('created_at', '>=', Carbon::today())->where('type', 'fire_marshal')->first()->name ?? 'No Fire Marshal Assigned';
         //First Aider
-        $data['first_aider'] = FirstResponder::where('created_at', '>=', Carbon::today())->where('type', 'first_aider')->first()->name;
+        $data['first_aider'] = FirstResponder::where('created_at', '>=', Carbon::today())->where('type', 'first_aider')->first()->name ?? 'No First Aider Assigned';
 
         return view('admin/dashboard', compact('data'));
     }
