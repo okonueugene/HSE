@@ -33,9 +33,9 @@ class Dashboard extends Controller
         //Safety Observation Record
         $data['sors'] = SOR::where('created_at', '>=', Carbon::today())->count();
         // Supervisor
-        $data['supervisor'] = Supervisor::where('created_at', '>=', Carbon::today())->first()->name;
+        $data['supervisor'] = Supervisor::where('created_at', '>=', Carbon::today())->first()->name ?? 'No Supervisor Assigned';
         // Personnel Present
-        $data['personells'] = PersonelPresent::where('created_at', '>=', Carbon::today())->first()->number;
+        $data['personells'] = PersonelPresent::where('created_at', '>=', Carbon::today())->first()->number ?? 0;
         //Fire Marshal
         $data['fire_marshal'] = FirstResponder::where('created_at', '>=', Carbon::today())->where('type', 'fire_marshal')->first()->name ?? 'No Fire Marshal Assigned';
         //First Aider
