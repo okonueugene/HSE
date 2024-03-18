@@ -13,6 +13,7 @@
     <meta name="description" content="" />
 
     <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon/favicon.ico') }}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css" />
     <!-- Select2 -->
     <link rel="stylesheet"
