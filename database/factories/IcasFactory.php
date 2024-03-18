@@ -21,7 +21,7 @@ class IcasFactory extends Factory
     {
         return [
             'user_id' => fake()->randomElement(User::pluck('id')->toArray()),
-            'action_owner_id' => fake()->randomElement(User::pluck('id')->toArray()),
+            'action_owner' => fake()->name(),
             'observation' => fake()->text(),
             'status' => fake()->randomElement(['open', 'closed']),
             'steps_taken' => fake()->text(),

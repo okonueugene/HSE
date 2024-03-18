@@ -36,7 +36,7 @@ class SORController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'assignee_id' => 'required',
+            'action_owner' => 'required',
             'observation' => 'required',
             'status' => 'required',
             'steps_taken' => 'required',
@@ -48,7 +48,7 @@ class SORController extends Controller
 
         $sor = SOR::create([
             'assignor_id' => auth()->user()->id,
-            'assignee_id' => $request->assignee_id,
+            'action_owner' => $request->action_owner,
             'observation' => $request->observation,
             'status' => $request->status,
             'date' => date('Y-m-d'),
@@ -63,6 +63,14 @@ class SORController extends Controller
         }
 
         return redirect()->back()->with('success', 'SOR created successfully.');
+    }
+
+    //open sor
+    public function openSor()
+    {
+        $sors = SOR::where('status', 0)->orderBy('id', 'desc')->paginate(10);
+        $sors->load('media');
+        return view('admin/open_sors')->with('sors', $sors);
     }
 
 }

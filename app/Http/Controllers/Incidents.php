@@ -63,4 +63,13 @@ class Incidents extends Controller
         return redirect()->route('incidents')->with('success', 'Incident has been added successfully');
 
     }
+
+    public function openIncidents()
+    {
+        $incidents = Incident::where('incident_status', 'no')->where('investigation_status', 'open')->orderBy('created_at', 'desc')->paginate(10);
+
+        $incidents->load('media', 'user', 'incidentType');
+
+        return view('admin/open_incidents', ['incidents' => $incidents]);
+    }
 }

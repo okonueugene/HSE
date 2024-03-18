@@ -17,24 +17,26 @@
                     <thead>
                         <tr>
 
-                            <th>Id</th>
-                            <th>Name</th>
-                            <th>Date</th>
-                            <th>SOR</th>
-                            <th>Duration</th>
+                            <th>Type</th>
+                            <th>Comment</th>
+                            <th>Corrective Action</th>
                             <th>Status</th>
+                            <th>Project Manager</th>
+                            <th>Auditor</th>
                             <th>Action</th>
                         </tr>
                     </thead>
+
                     <tbody class="table-border-bottom-0">
-                        @foreach ($concerns as $permit)
+                        @foreach ($concerns as $concern)
+
                             <tr>
-                                <td>{{ $permit->id }}</td>
-                                <td>{{ $permit->user->name }}</td>
-                                <td>{{ $permit->date }}</td>
-                                <td>{{ $permit->sor }}</td>
-                                <td>{{ $permit->duration }}</td>
-                                <td>{{ $permit->status }}</td>
+                                <td>{{ $concern->type }}</td>
+                                <td>{{ $concern->comment }}</td>
+                                <td>{{ $concern->corrective_action }}</td>
+                                <td>{{ $concern->status }}</td>
+                                <td>{{ $concern->project_manager }}</td>
+                                <td>{{ $concern->auditor }}</td>
                                 <td>
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-secondary dropdown-toggle btn-sm"
@@ -85,7 +87,17 @@
                     @csrf
                     <div class="mb-3">
                         <label for="name" class="form-label">Type</label>
-                        <input type="text" class="form-control" id="name" name="name" required>
+                        <select class="form-select" id="type" name="type" required>
+                            <option value="" selected>Select Type</option>
+                            <option value="Waste Management">Waste Management</option>
+                            <option value="Water Management">Water Management</option>
+                            <option value="Air Management">Air Management</option>
+                            <option value="Noise Management">Noise Management</option>
+                            <option value="Soil Management">Soil Management</option>
+                            <option value="Biodiversity Management">Biodiversity Management</option>
+                            <option value="Energy Management">Energy Management</option>
+                            <option value="Chemical Management">Chemical Management</option>
+                            <option value="Other">Other</option>
                     </div>
                     <div class="mb-3">
                         <label for="comment" class="form-label">Comment</label>

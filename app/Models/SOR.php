@@ -16,7 +16,7 @@ class SOR extends Model implements HasMedia
 
     protected $fillable = [
         'assignor_id',
-        'assignee_id',
+        'action_owner',
         'observation',
         'status',
         'steps_taken',

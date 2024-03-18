@@ -30,7 +30,7 @@ class SORFactory extends Factory
         // 'date',
         // 'type_id',
         'assignor_id' => fake()->randomElement(User::pluck('id')->toArray()),
-        'assignee_id' => fake()->randomElement(User::pluck('id')->toArray()),
+        'action_owner' => fake()->name(),
         'observation' => fake()->text(),
         'status' => fake()->randomElement([0, 1]),
         'steps_taken' => fake()->text(),

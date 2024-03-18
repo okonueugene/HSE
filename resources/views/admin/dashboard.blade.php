@@ -17,7 +17,7 @@
             <!-- First Row -->
             <div class="col-md-3">
                 <div class="card mb-4 h-50 shadow-lg">
-                    <div class="card-header"> Live Number Of People On Site</div>
+                    <div class="card-header">Site Name</div>
                     <div class="card-body">
                         <div class="content">
 
@@ -32,7 +32,53 @@
                     <div class="card-body">
                         <div class="content">
                         </div>
-                        <div class="footer">{{ $data['tasks'] }}</div>
+                        <div class="footer">{{ $data['supervisor'] }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 ">
+                <div class="card mb-4 h-50 shadow-lg">
+                    <div class="card-header"> Fire Martial’s Detail</div>
+                    <div class="card-body">
+                        <div class="content">
+
+                        </div>
+                        <div class="footer">{{ $data['fire_marshal'] }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card mb-4 h-50 shadow-lg">
+                    <div class="card-header"> First Aider’s Detail</div>
+                    <div class="card-body">
+                        <div class="content">
+
+                        </div>
+                        <div class="footer">{{ $data['first_aider'] }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row w-100 h-50 pt-5 mx-auto text-center">
+            <!-- First Row -->
+            <div class="col-md-3">
+                <div class="card mb-4 h-50 shadow-lg">
+                    <div class="card-header"> Live Number Of People On Site</div>
+                    <div class="card-body">
+                        <div class="content">
+
+                        </div>
+                        <div class="footer">{{ $data['personells'] }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card mb-4 h-50 shadow-lg">
+                    <div class="card-header">Supervisor’s Detail</div>
+                    <div class="card-body">
+                        <div class="content">
+                        </div>
+                        <div class="footer">{{ $data['supervisor'] }}</div>
                     </div>
                 </div>
             </div>
@@ -110,7 +156,7 @@
 
 </div>
 <!-- / Content -->
-@include('commons.footer')
+{{-- @include('commons.footer') --}}
 
 
 <script>

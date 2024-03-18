@@ -15,7 +15,7 @@ return new class () extends Migration {
         Schema::create('s_o_r_s', function (Blueprint $table) {
             $table->id();
             $table->foreignId('assignor_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('assignee_id')->constrained('users')->onDelete('cascade');
+            $table->string('action_owner');
             $table->foreignId('type_id')->constrained('sor_types')->onDelete('cascade');
             $table->text('observation')->nullable();
             $table->string('status')->default('open');

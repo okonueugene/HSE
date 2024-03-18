@@ -51,16 +51,10 @@
 
                         <div class="mb-3">
                             <label class="form-label" for="basic-default-actionowner">Action Owner</label>
-                            <select class="form-select" id="basic-default-actionowner" name="action_owner_id">
-                                <option>Select Action Owner</option>
-                                @foreach ($users as $user)
-                                    <option value="{{ $user->id }}">{{ $user->name }} {{ $user->surname }}
-                                    </option>
-                                @endforeach
-
-                            </select>
+                            <input type="text" name="action_owner" class="form-control" id="basic-default-actionowner"
+                                placeholder="Action Owner">
                             <div class="error">
-                                @error('action_owner_id')
+                                @error('action_owner')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>

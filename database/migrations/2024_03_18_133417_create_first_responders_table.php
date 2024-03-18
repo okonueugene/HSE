@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class () extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      *
@@ -12,14 +13,12 @@ return new class () extends Migration {
      */
     public function up()
     {
-        Schema::create('icas', function (Blueprint $table) {
+        Schema::create('first_responders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->string('action_owner');
-            $table->text('observation');
-            $table->enum('status', ['open', 'closed', 'pending'])->default('open');
-            $table->text('steps_taken');
+            $table->unsignedBigInteger('user_id');
+            $table->string('name');
             $table->date('date');
+            $table->string('type');
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ return new class () extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('icas');
+        Schema::dropIfExists('first_responders');
     }
 };

@@ -8,7 +8,10 @@ use App\Models\Icas;
 use App\Models\Task;
 use App\Models\User;
 use App\Models\Incident;
+use App\Models\Supervisor;
 use Illuminate\Http\Request;
+use App\Models\PersonelPresent;
+use App\Models\FirstResponder;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
@@ -29,6 +32,14 @@ class Dashboard extends Controller
         $data['icas'] = Icas::where('created_at', '>=', Carbon::today())->count();
         //Safety Observation Record
         $data['sors'] = SOR::where('created_at', '>=', Carbon::today())->count();
+        // Supervisor
+        $data['supervisor'] = Supervisor::where('created_at', '>=', Carbon::today())->first()->name;
+        // Personnel Present
+        $data['personells'] = PersonelPresent::where('created_at', '>=', Carbon::today())->first()->number;
+        //Fire Marshal
+        $data['fire_marshal'] = FirstResponder::where('created_at', '>=', Carbon::today())->where('type', 'fire_marshal')->first()->name;
+        //First Aider
+        $data['first_aider'] = FirstResponder::where('created_at', '>=', Carbon::today())->where('type', 'first_aider')->first()->name;
 
         return view('admin/dashboard', compact('data'));
     }

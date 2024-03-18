@@ -16,25 +16,22 @@
                 <table class="table table-hover table-bordered">
                     <thead>
                         <tr>
-
-                            <th>id</th>
-                            <th>Name</th>
+                            <th>Type Of Permit</th>
                             <th>Date</th>
-                            <th>SOR</th>
-                            <th>Duration</th>
-                            <th>Status</th>
+                            <th>Authorized Person</th>
+                            <th>Competent Person</th>
+                            <th>Area Owner</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
                         @foreach ($permits as $permit)
                             <tr>
-                                <td>{{ $permit->id }}</td>
-                                <td>{{ $permit->user->name }}</td>
+                                <td>{{ $permit->type_of_permit }}</td>
                                 <td>{{ $permit->date }}</td>
-                                <td>{{ $permit->sor }}</td>
-                                <td>{{ $permit->duration }}</td>
-                                <td>{{ $permit->status }}</td>
+                                <td>{{ $permit->authorized_person }}</td>
+                                <td>{{ $permit->competent_person }}</td>
+                                <td>{{ $permit->area_owner }}</td>
                                 <td>
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-secondary dropdown-toggle btn-sm"
@@ -88,6 +85,54 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="type_of_permit" class="form-label">Type Of Permit</label>
+                                <select class="form-select" id="type_of_permit" name="type_of_permit" required>
+                                    <option value="">Select Permit</option>
+                                    <option value="General Work">General Work</option>
+                                    <option value="Hot Work">Hot Work</option>
+                                    <option value="Cold Work">Cold Work</option>
+                                    <option value="Confined Space Entry">Confined Space Entry</option>
+                                    <option value="Work At Height">Work At Height</option>
+                                    <option value="Excavation/Demolition">Excavation/Demolition</option>
+                                    <option value="Live Electrical Work">Live Electrical Work</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="date" class="form-label">Date</label>
+                                <input type="date" class="form-control" id="date" name="date" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="authorized_person" class="form-label">Authorized Person</label>
+                                <input type="text" class="form-control" id="authorized_person" name="authorized_person"
+                                    placeholder="Authorized Person" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="competent_person" class="form-label">Competent Person</label>
+                                <input type="text" class="form-control" id="competent_person" name="competent_person"
+                                    placeholder="Competent Person" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="area_owner" class="form-label">Area Owner</label>
+                                <input type="text" class="form-control" id="area_owner" name="area_owner"
+                                    placeholder="Area Owner" required>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="modal-footer">

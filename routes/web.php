@@ -24,9 +24,14 @@ use App\Http\Controllers\BadPractisesController;
 use App\Http\Controllers\FirstAidCaseController;
 use App\Http\Controllers\ImprovementsController;
 use App\Http\Controllers\GoodPractisesController;
+use App\Http\Controllers\FirstRespondersController;
 use App\Http\Controllers\ReportedHazardsController;
+use App\Http\Controllers\PersonnelPresentController;
+use App\Http\Controllers\SupervisorDetailController;
 use App\Http\Controllers\LostTimeAccidentsController;
 use App\Http\Controllers\MedicalTreatedCaseController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -87,6 +92,7 @@ Route::group(['middleware' => 'auth'], function () {
     //sor routes
     Route::get('/sor', [SORController::class, 'index'])->name('sor');
     Route::post('/sor', [SORController::class, 'store'])->name('sor.store');
+    Route::get('/sor/open', [SORController::class, 'openSor'])->name('sor.open-sors');
 
     //icas routes
     Route::get('/icas', [ICASController::class, 'index'])->name('icas');
@@ -101,6 +107,7 @@ Route::group(['middleware' => 'auth'], function () {
     //incidents routes
     Route::get('/incidents', [Incidents::class, 'index'])->name('incidents');
     Route::post('/incidents', [Incidents::class, 'store'])->name('incidents.store');
+    Route::get('/open-incidents', [Incidents::class, 'openIncidents'])->name('open-incidents');
 
     //nearmiss routes
     Route::get('/nearmiss', [NearMissController::class, 'index'])->name('nearmiss');
@@ -164,5 +171,17 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('environment', [EnvironmentController::class, 'index'])->name('environment');
     //return view environmental_policy_checklist
     Route::get('environmental-policy-checklist', [EnvironmentController::class, 'environmentalPolicyChecklist'])->name('environmental-policy-checklist');
+
+    //supervisor routes
+    Route::get('supervisor', [SupervisorDetailController::class, 'index'])->name('supervisor');
+    Route::post('supervisor', [SupervisorDetailController::class, 'store'])->name('supervisor.store');
+
+    //personnel present routes
+    Route::get('personnel', [PersonnelPresentController::class, 'index'])->name('personnel');
+    Route::post('personnel', [PersonnelPresentController::class, 'store'])->name('personnel.store');
+
+    //first responder routes
+    Route::get('first-responder', [FirstRespondersController::class, 'index'])->name('first-responder');
+    Route::post('first-responder', [FirstRespondersController::class, 'store'])->name('first-responder.store');
 
 });

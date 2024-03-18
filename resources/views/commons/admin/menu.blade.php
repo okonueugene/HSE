@@ -35,8 +35,26 @@
                 <div data-i18n="Dashboard">Dashboard</div>
 
             </a>
-
         </li>
+        <li class="menu-item {{ request()->routeIs('supervisor') ? 'active open' : '' }}">
+            <a href="{{ route('supervisor') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-crown"></i>
+                <div data-i18n="Supervisor’s Detail">Supervisor’s Detail</div>
+
+            </a>
+        </li>
+        <li class="menu-item {{ request()->routeIs('personnel') ? 'active open' : '' }}">
+            <a href="{{ route('personnel') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-user"></i>
+                <div data-i18n="Personnel Detail">Personnel Detail</div>
+
+            </a>
+        </li>
+        <li class="menu-item {{ request()->routeIs('first-responder') ? 'active open' : '' }}">
+            <a href="{{ route('first-responder') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-plus"></i>
+                <div data-i18n="First Responder Detail">First Responder Detail</div>
+            </a>
         <!-- Tasks -->
         @if (auth()->user()->hasPermissionTo('delete_sor') &&
                 auth()->user()->hasPermissionTo('view_sor') &&
@@ -45,13 +63,18 @@
                 class="menu-item {{ request()->routeIs(['sor', 'hazards', 'improvements', 'goodpractises', 'badpractises']) ? 'active open' : '' }}">
                 <a href="javascript:void(0)" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons ti ti-text-wrap-disabled"></i>
-                    <div data-i18n="Safety Observation records (SOR's)">Safety Observation records (SOR's)</div>
+                    <div data-i18n="Safety Observation Records (SOR's)">Safety Observation Records (SOR's)</div>
                 </a>
 
                 <ul class="menu-sub">
                     <li class="menu-item {{ request()->routeIs('sor') ? 'active' : '' }}">
                         <a href="{{ route('sor') }}" class="menu-link">
                             <div data-i18n="Add Record">Add Record</div>
+                        </a>
+                    </li>
+                    <li class="menu-item {{ request()->routeIs('sor.open-sors') ? 'active' : '' }}">
+                        <a href="{{ route('sor.open-sors') }}" class="menu-link">
+                            <div data-i18n="Open SOR's">Open SOR's</div>
                         </a>
                     </li>
                     <li class="menu-item {{ request()->routeIs('hazards') ? 'active' : '' }}">
@@ -93,6 +116,11 @@
                     <li class="menu-item {{ request()->routeIs('incidents') ? 'active open' : '' }}">
                         <a href="{{ route('incidents') }}" class="menu-link">
                             <div data-i18n="Add Incident">Add Incident</div>
+                        </a>
+                    </li>
+                    <li class="menu-item {{ request()->routeIs('open-incidents') ? 'active open' : '' }}">
+                        <a href="{{ route('open-incidents') }}" class="menu-link">
+                            <div data-i18n="Open Incidents">Open Incidents</div>
                         </a>
                     </li>
                     <li class="menu-item {{ request()->routeIs('nearmiss') ? 'active open' : '' }}">
