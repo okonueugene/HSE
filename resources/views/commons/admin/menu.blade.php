@@ -27,21 +27,21 @@
         <li class="menu-item {{ request()->routeIs('supervisor') ? 'active open' : '' }}">
             <a href="{{ route('supervisor') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-crown"></i>
-                <div data-i18n="Supervisor’s Detail">Supervisor’s Detail</div>
+                <div data-i18n="Supervisor’s">Supervisor’s</div>
 
             </a>
         </li>
         <li class="menu-item {{ request()->routeIs('personnel') ? 'active open' : '' }}">
             <a href="{{ route('personnel') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-user"></i>
-                <div data-i18n="Personnel Detail">Personnel Detail</div>
+                <div data-i18n="Personnel">Personnel</div>
 
             </a>
         </li>
         <li class="menu-item {{ request()->routeIs('first-responder') ? 'active open' : '' }}">
             <a href="{{ route('first-responder') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-plus"></i>
-                <div data-i18n="First Responder Detail">First Responder Detail</div>
+                <div data-i18n="First Responder">First Responder</div>
             </a>
         <!-- Tasks -->
         @if (auth()->user()->hasPermissionTo('delete_sor') &&

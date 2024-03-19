@@ -55,7 +55,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', [Dashboard::class, 'index'])->name('dashboard');
     Route::get('/attendance', [Attendance::class, 'index'])->name('attendance');
     Route::get('/deviations', [Deviations::class, 'index'])->name('deviations');
-    Route::get('/permits', [PermitsController::class, 'index'])->name('permits');
     Route::get('permissions', [PermissionsController::class, 'index'])->name('permissions');
     Route::get('faqs', [FAQController::class, 'index'])->name('faqs');
     Route::get('help', [HelpController::class, 'index'])->name('help');
@@ -143,6 +142,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/sif/{id}', [SIFController::class, 'show'])->name('sif.show');
     Route::delete('/sif/{id}', [SIFController::class, 'destroy'])->name('sif.destroy');
     Route::patch('/sif/{id}', [SIFController::class, 'update'])->name('sif.update');
+
+    //permits routes
+    Route::get('/permits', [PermitsController::class, 'index'])->name('permits');
+    Route::post('/permits', [PermitsController::class, 'store'])->name('permits.store');
+    Route::patch('/permits/{id}', [PermitsController::class, 'update'])->name('permits.update');
+    Route::delete('/permits/{id}', [PermitsController::class, 'destroy'])->name('permits.destroy');
 
     //roles routes
     Route::get('roles', [RoleController::class, 'index'])->name('roles');

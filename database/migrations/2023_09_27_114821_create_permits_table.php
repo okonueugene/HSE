@@ -15,6 +15,14 @@ return new class extends Migration
     {
         Schema::create('permits', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->date('date');
+            $table->string('type');
+            $table->string('authorized_person');
+            $table->string('area_owner');
+            $table->string('competent_person');
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
