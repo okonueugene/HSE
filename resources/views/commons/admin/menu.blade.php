@@ -2,10 +2,8 @@
     style="touch-action: none; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
     <div class="app-brand demo">
         <a href="{{ route('dashboard') }}" class="app-brand-link">
-            <span class="app-brand-logo demo">
-                <img src="{{ asset('images/Opticom Logo.png') }}" alt="Brand Logo" class="img-fluid" width="200px"
-                    height="200px">
-            </span>
+                <img src="{{ asset('images/Opticom Logo.png') }}" alt="Brand Logo" class="img-fluid" width="90px"
+                    height="90px">
             <span class="app-brand-text demo menu-text fw-bold">{{ env('APP_NAME') }}</span>
         </a>
 
