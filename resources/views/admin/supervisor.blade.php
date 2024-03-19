@@ -6,13 +6,11 @@
     <div class="container-xxl flex-grow-1 container-p-y">
 
         <div class="add-button">
-            <a href="#" class="btn btn-primary float-end" data-bs-toggle="modal"
+            <a href="#" class="btn btn-primary btn-sm float-end" data-bs-toggle="modal"
                 data-bs-target="#addSupervisorModal">Add
                 Supervisor</a>
         </div>
         <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> </span>Supervisor’s Details</h4>
-
-
 
         <!-- DataTable with Buttons -->
         <div class="card">
@@ -83,8 +81,6 @@
             </div>
         </div>
     </div>
-
-</div>
 
 </div>
 

@@ -5,7 +5,7 @@
 
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="add-button">
-            <a href="#" class="btn btn-primary float-end mx-2" data-bs-toggle="modal"
+            <a href="#" class="btn btn-primary btn-sm  float-end mx-2" data-bs-toggle="modal"
                 data-bs-target="#addPersonellModal">Add
                 Personnel</a>
         </div>
@@ -92,7 +92,6 @@
             </div>
         </div>
     </div>
-</div>
 </div>
 {{-- addPersonellModal --}}
 <div class="modal fade" id="addPersonellModal" tabindex="-1" aria-labelledby="addPersonellModalLabel"

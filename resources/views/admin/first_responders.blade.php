@@ -4,7 +4,7 @@
     <!-- Content -->
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="add-button ">
-            <a href="#" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#addFirstResponderModal">Add
+            <a href="#" class="btn btn-primary btn-sm float-end" data-bs-toggle="modal" data-bs-target="#addFirstResponderModal">Add
                 First Responder</a>
         </div>
         <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> </span>First Responder</h4>
@@ -87,8 +87,6 @@
             </div>
         </div>
     </div>
-</div>
-
 </div>
 
 {{-- addFirstResponderModal --}}
