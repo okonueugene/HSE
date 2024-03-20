@@ -48,17 +48,21 @@
                                             <li><a href="javascript:void(0)" class="dropdown-item"
                                                     data-bs-toggle="modal" data-bs-target="#showModal"
                                                     onclick="showDataModal({{ $nearmiss->id }})">View</a></li>
-                                            <li><a href="javascript:void(0)" class="dropdown-item"
-                                                    data-bs-toggle="modal" data-bs-target="#updateModal"
-                                                    data-nearmiss-id="{{ $nearmiss->id }}"
-                                                    onclick="editnearmiss(this)">Edit</a></li>
-
-                                            <li>
-                                                <a href="javascript:void(0)" class="dropdown-item"
-                                                    onclick="deleteData({{ $nearmiss->id }})">
-                                                    Delete
-                                                </a>
-                                            </li>
+                                            @if (auth()->user()->can('edit_near_miss'))
+                                                <li><a href="javascript:void(0)" class="dropdown-item"
+                                                        data-bs-toggle="modal" data-bs-target="#updateModal"
+                                                        data-nearmiss-id="{{ $nearmiss->id }}"
+                                                        onclick="editnearmiss(this)">Edit</a>
+                                                </li>
+                                            @endif
+                                            @if (auth()->user()->can('delete_near_miss'))
+                                                <li>
+                                                    <a href="javascript:void(0)" class="dropdown-item"
+                                                        onclick="deleteData({{ $nearmiss->id }})">
+                                                        Delete
+                                                    </a>
+                                                </li>
+                                            @endif
                                         </ul>
                                     </div>
                                 </td>

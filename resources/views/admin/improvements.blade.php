@@ -59,13 +59,17 @@
                                                 <li><a href="javascript:void(0)" class="dropdown-item"
                                                         data-bs-toggle="modal" data-bs-target="#showModal"
                                                         onclick="showDataModal({{ $improvement->id }})">View</a></li>
-                                                <li><a href="javascript:void(0)" class="dropdown-item"
-                                                        data-bs-toggle="modal" data-bs-target="#updateModal"
-                                                        data-improvement-id="{{ $improvement->id }}"
-                                                        onclick="editimprovement(this)">Edit</a></li>
-                                                <li><a href="javascript:void(0)" class="dropdown-item"
-                                                        onclick="deleteImprovement({{ $improvement->id }})">Delete</a>
-                                                </li>
+                                                @if (auth()->user()->can('edit_improvement'))
+                                                    <li><a href="javascript:void(0)" class="dropdown-item"
+                                                            data-bs-toggle="modal" data-bs-target="#updateModal"
+                                                            data-improvement-id="{{ $improvement->id }}"
+                                                            onclick="editimprovement(this)">Edit</a></li>
+                                                @endif
+                                                @if (auth()->user()->can('delete_improvement'))
+                                                    <li><a href="javascript:void(0)" class="dropdown-item"
+                                                            onclick="deleteImprovement({{ $improvement->id }})">Delete</a>
+                                                    </li>
+                                                @endif
                                             </ul>
                                         </div>
                                     </td>

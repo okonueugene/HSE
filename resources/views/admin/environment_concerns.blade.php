@@ -3,12 +3,15 @@
 <div class="content-wrapper">
     <!-- Content -->
     <div class="container-xxl flex-grow-1 container-p-y">
-        <div class="add-button ">
-            <a href="{{ route('environmental-policy-checklist') }}" class="btn btn-primary float-end mx-2">Add Policy
-                Checklist</a>
-            <a href="#" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#addModal">Add Free
-                Form</a>
-        </div>
+        @if (auth()->user()->can('add_environment'))
+            <div class="add-button ">
+                <a href="{{ route('environmental-policy-checklist') }}" class="btn btn-primary float-end mx-2">Add Policy
+                    Checklist</a>
+                <a href="#" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#addModal">Add
+                    Free
+                    Form</a>
+            </div>
+        @endif
         <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> </span>Enviromental Concern</h4>
 
         <div class="card">
@@ -29,7 +32,6 @@
 
                     <tbody class="table-border-bottom-0">
                         @foreach ($concerns as $concern)
-
                             <tr>
                                 <td>{{ $concern->type }}</td>
                                 <td>{{ $concern->comment }}</td>
@@ -49,11 +51,13 @@
                                                     class="dropdown-item">View</a>
                                             </li>
                                             </li>
-                                            <li>
-                                                <a href="{{ route('user-concerns.update', $permit->id) }}"
-                                                    class="dropdown-item">Edit</a>
-                                            </li>
-
+                                            @if (auth()->user()->can('update_environment'))
+                                                <li>
+                                                    <a href="{{ route('user-concerns.update', $permit->id) }}"
+                                                        class="dropdown-item">Edit</a>
+                                                </li>
+                                            @endif
+                                            @if (auth()->user()->can('delete_environment'))
                                             <li>
                                                 <form action="{{ route('user-concerns.destroy', $permit->id) }}"
                                                     method="POST"
@@ -63,6 +67,7 @@
                                                     <button type="submit" class="dropdown-item">Delete</button>
                                                 </form>
                                             </li>
+                                        @endif
                                         </ul>
                                     </div>
                                 </td>

@@ -48,18 +48,21 @@
                                             <li><a href="javascript:void(0)" class="dropdown-item"
                                                     data-bs-toggle="modal" data-bs-target="#showModal"
                                                     onclick="showDataModal({{ $case->id }})">View</a></li>
-                                            <li><a href="javascript:void(0)" class="dropdown-item"
-                                                    data-bs-toggle="modal" data-bs-target="#updateModal"
-                                                    data-lostTimeAccident-id="{{ $case->id }}"
-                                                    onclick="editLostTimeAccidents(this)">Edit</a>
-                                            </li>
-
-                                            <li>
-                                                <a href="javascript:void(0)" class="dropdown-item"
-                                                    onclick="deleteData({{ $case->id }})">
-                                                    Delete
-                                                </a>
-                                            </li>
+                                            @if (auth()->user()->can('edit_lost_time_accident'))
+                                                <li><a href="javascript:void(0)" class="dropdown-item"
+                                                        data-bs-toggle="modal" data-bs-target="#updateModal"
+                                                        data-lostTimeAccident-id="{{ $case->id }}"
+                                                        onclick="editLostTimeAccidents(this)">Edit</a>
+                                                </li>
+                                            @endif
+                                            @if (auth()->user()->can('delete_lost_time_accident'))
+                                                <li>
+                                                    <a href="javascript:void(0)" class="dropdown-item"
+                                                        onclick="deleteData({{ $case->id }})">
+                                                        Delete
+                                                    </a>
+                                                </li>
+                                            @endif
                                         </ul>
                                     </div>
                                 </td>

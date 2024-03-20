@@ -59,15 +59,19 @@
                                                 <li><a href="javascript:void(0)" class="dropdown-item"
                                                         data-bs-toggle="modal" data-bs-target="#showModal"
                                                         onclick="showDataModal({{ $goodpractise->id }})">View</a></li>
-                                                <li><a href="javascript:void(0)" class="dropdown-item"
-                                                        data-bs-toggle="modal" data-bs-target="#updateModal"
-                                                        data-goodpractise-id="{{ $goodpractise->id }}"
-                                                        onclick="editgoodpractise(this)">Edit</a></li>
-                                                <li>
-                                                    <a href="javascript:void(0)" class="dropdown-item"
-                                                        onclick="deleteData({{ $goodpractise->id }})">Delete</a>
+                                                @if (auth()->user()->can('edit_good_practise'))
+                                                    <li><a href="javascript:void(0)" class="dropdown-item"
+                                                            data-bs-toggle="modal" data-bs-target="#updateModal"
+                                                            data-goodpractise-id="{{ $goodpractise->id }}"
+                                                            onclick="editgoodpractise(this)">Edit</a></li>
+                                                @endif
+                                                @if (auth()->user()->can('delete_good_practise'))
+                                                    <li>
+                                                        <a href="javascript:void(0)" class="dropdown-item"
+                                                            onclick="deleteData({{ $goodpractise->id }})">Delete</a>
 
-                                                </li>
+                                                    </li>
+                                                @endif
                                             </ul>
                                         </div>
 

@@ -4,10 +4,9 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Spatie\Permission\Models\Role;
 
 class UserSeeder extends Seeder
 {
@@ -82,11 +81,35 @@ class UserSeeder extends Seeder
         'add_bad_practise',
         'edit_bad_practise',
         'delete_bad_practise',
-
-
+        'view_supervisor',
+        'add_supervisor',
+        'edit_supervisor',
+        'delete_supervisor',
+        'view_personnel_present',
+        'add_personnel_present',
+        'edit_personnel_present',
+        'delete_personnel_present',
+        'view_first_responder',
+        'add_first_responder',
+        'edit_first_responder',
+        'delete_first_responder',
+        'view_environment',
+        'add_environment',
+        'edit_environment',
+        'delete_environment',
+        'view_environmental_policies',
+        'add_environmental_policies',
+        'edit_environmental_policies',
+        'delete_environmental_policies',
+        'edit_supervisors',
+        'delete_supervisors',
+        'view_supervisors',
+        'add_permit',
+        'edit_permit',
+        'delete_permit',
+        'view_permit',
+        
     ];
-
-
 
     public function run()
     {
@@ -109,8 +132,6 @@ class UserSeeder extends Seeder
 
         $role->syncPermissions($permissions);
 
-
-
         $user->assignRole([$role->id]);
 
         $user1 = new User();
@@ -129,13 +150,6 @@ class UserSeeder extends Seeder
         $role1->syncPermissions($permissions1);
 
         $user1->assignRole([$role1->id]);
-
-
-
-
-
-
-
 
     }
 }

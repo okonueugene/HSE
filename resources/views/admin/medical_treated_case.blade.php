@@ -48,18 +48,21 @@
                                             <li><a href="javascript:void(0)" class="dropdown-item"
                                                     data-bs-toggle="modal" data-bs-target="#showModal"
                                                     onclick="showDataModal({{ $case->id }})">View</a></li>
-                                            <li><a href="javascript:void(0)" class="dropdown-item"
-                                                    data-bs-toggle="modal" data-bs-target="#updateModal"
-                                                    data-medicaltreatedcase-id="{{ $case->id }}"
-                                                    onclick="editmedicaltreatedcase(this)">Edit</a>
-                                            </li>
-
-                                            <li>
-                                                <a href="javascript:void(0)" class="dropdown-item"
-                                                    onclick="deleteData({{ $case->id }})">
-                                                    Delete
-                                                </a>
-                                            </li>
+                                            @if (auth()->user()->can('edit_medical_treated_case'))
+                                                <li><a href="javascript:void(0)" class="dropdown-item"
+                                                        data-bs-toggle="modal" data-bs-target="#updateModal"
+                                                        data-medicaltreatedcase-id="{{ $case->id }}"
+                                                        onclick="editmedicaltreatedcase(this)">Edit</a>
+                                                </li>
+                                            @endif
+                                            @if (auth()->user()->can('delete_medical_treated_case'))
+                                                <li>
+                                                    <a href="javascript:void(0)" class="dropdown-item"
+                                                        onclick="deleteData({{ $case->id }})">
+                                                        Delete
+                                                    </a>
+                                                </li>
+                                            @endif
                                         </ul>
                                     </div>
                                 </td>

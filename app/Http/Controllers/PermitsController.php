@@ -9,6 +9,16 @@ use App\Http\Controllers\Controller;
 
 class PermitsController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:view_permit');
+        $this->middleware('permission:add_permit');
+        $this->middleware('permission:update_permit');
+        $this->middleware('permission:delete_permit');
+    }
+
     public function index()
     {
         $permits = Permit::orderBy('id', 'desc')->paginate(10);

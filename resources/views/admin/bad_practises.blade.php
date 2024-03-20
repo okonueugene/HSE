@@ -58,12 +58,17 @@
                                                 <li><a href="javascript:void(0)" class="dropdown-item"
                                                         data-bs-toggle="modal" data-bs-target="#showModal"
                                                         onclick="showDataModal({{ $badpractise->id }})">View</a></li>
-                                                <li><a href="javascript:void(0)" class="dropdown-item"
-                                                        data-bs-toggle="modal" data-bs-target="#updateModal"
-                                                        data-badpractise-id="{{ $badpractise->id }}"
-                                                        onclick="editbadpractise(this)">Edit</a></li>
-                                                <li><a href="javascript:void(0)" class="dropdown-item"
-                                                        onclick="deleteData({{ $badpractise->id }})">Delete</a>
+                                                @if (auth()->user()->can('update_badpractise'))
+                                                    <li><a href="javascript:void(0)" class="dropdown-item"
+                                                            data-bs-toggle="modal" data-bs-target="#updateModal"
+                                                            data-badpractise-id="{{ $badpractise->id }}"
+                                                            onclick="editbadpractise(this)">Edit</a></li>
+                                                @endif
+                                                @if (auth()->user()->can('delete_badpractise'))
+                                                    <li><a href="javascript:void(0)" class="dropdown-item"
+                                                            onclick="deleteData({{ $badpractise->id }})">Delete</a>
+                                                    </li>
+                                                @endif
 
                                             </ul>
                                         </div>

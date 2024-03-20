@@ -2,8 +2,8 @@
     style="touch-action: none; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
     <div class="app-brand demo">
         <a href="{{ route('dashboard') }}" class="app-brand-link">
-                <img src="{{ asset('images/Opticom Logo.png') }}" alt="Brand Logo" class="img-fluid" width="90px"
-                    height="90px">
+            <img src="{{ asset('images/Opticom Logo.png') }}" alt="Brand Logo" class="img-fluid" width="90px"
+                height="90px">
             <span class="app-brand-text demo menu-text fw-bold">{{ env('APP_NAME') }}</span>
         </a>
 
@@ -24,29 +24,34 @@
 
             </a>
         </li>
-        <li class="menu-item {{ request()->routeIs('supervisor') ? 'active open' : '' }}">
-            <a href="{{ route('supervisor') }}" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-crown"></i>
-                <div data-i18n="Supervisor’s">Supervisor’s</div>
+        @if (auth()->user()->hasPermissionTo('view_supervisor'))
+            <li class="menu-item {{ request()->routeIs('supervisor') ? 'active open' : '' }}">
+                <a href="{{ route('supervisor') }}" class="menu-link">
+                    <i class="menu-icon tf-icons ti ti-crown"></i>
+                    <div data-i18n="Supervisor’s">Supervisor’s</div>
 
-            </a>
-        </li>
-        <li class="menu-item {{ request()->routeIs('personnel') ? 'active open' : '' }}">
-            <a href="{{ route('personnel') }}" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-user"></i>
-                <div data-i18n="Personnel">Personnel</div>
+                </a>
+            </li>
+        @endif
+        @if (auth()->user()->hasPermissionTo('view_personnel_present'))
+            <li class="menu-item {{ request()->routeIs('personnel') ? 'active open' : '' }}">
+                <a href="{{ route('personnel') }}" class="menu-link">
+                    <i class="menu-icon tf-icons ti ti-user"></i>
+                    <div data-i18n="Personnel">Personnel</div>
 
-            </a>
-        </li>
-        <li class="menu-item {{ request()->routeIs('first-responder') ? 'active open' : '' }}">
-            <a href="{{ route('first-responder') }}" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-plus"></i>
-                <div data-i18n="First Responder">First Responder</div>
-            </a>
+                </a>
+            </li>
+        @endif
+        @if (auth()->user()->hasPermissionTo('view_first_responder'))
+            <li class="menu-item {{ request()->routeIs('first-responder') ? 'active open' : '' }}">
+                <a href="{{ route('first-responder') }}" class="menu-link">
+                    <i class="menu-icon tf-icons ti ti-plus"></i>
+                    <div data-i18n="First Responder">First Responder</div>
+                </a>
+            </li>
+        @endif
         <!-- Tasks -->
-        @if (auth()->user()->hasPermissionTo('delete_sor') &&
-                auth()->user()->hasPermissionTo('view_sor') &&
-                auth()->user()->hasPermissionTo('add_sor'))
+        @if (auth()->user()->hasPermissionTo('view_sor'))
             <li
                 class="menu-item {{ request()->routeIs(['sor', 'hazards', 'improvements', 'goodpractises', 'badpractises']) ? 'active open' : '' }}">
                 <a href="javascript:void(0)" class="menu-link menu-toggle">
@@ -55,11 +60,13 @@
                 </a>
 
                 <ul class="menu-sub">
-                    <li class="menu-item {{ request()->routeIs('sor') ? 'active' : '' }}">
-                        <a href="{{ route('sor') }}" class="menu-link">
-                            <div data-i18n="Add Record">Add Record</div>
-                        </a>
-                    </li>
+                    @if (auth()->user()->hasPermissionTo('add_sor'))
+                        <li class="menu-item {{ request()->routeIs('sor') ? 'active' : '' }}">
+                            <a href="{{ route('sor') }}" class="menu-link">
+                                <div data-i18n="Add Record">Add Record</div>
+                            </a>
+                        </li>
+                    @endif
                     <li class="menu-item {{ request()->routeIs('sor.open-sors') ? 'active' : '' }}">
                         <a href="{{ route('sor.open-sors') }}" class="menu-link">
                             <div data-i18n="Open SOR's">Open SOR's</div>
@@ -89,10 +96,8 @@
             </li>
         @endif
         <!-- Incidents -->
-        @if (auth()->user()->hasPermissionTo('view_incident') &&
-                auth()->user()->hasPermissionTo('add_incident') &&
-                auth()->user()->hasPermissionTo('edit_incident') &&
-                auth()->user()->hasPermissionTo('delete_incident'))
+        @if (auth()->user()->hasPermissionTo('view_incident'))
+
             <li
                 class="menu-item {{ request()->routeIs(['incidents', 'nearmiss', 'medicaltreatedcase', 'losttimeaccidents', 'firstaidcase', 'sif']) ? 'active open' : '' }}">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -101,11 +106,13 @@
                 </a>
 
                 <ul class="menu-sub">
-                    <li class="menu-item {{ request()->routeIs('incidents') ? 'active open' : '' }}">
-                        <a href="{{ route('incidents') }}" class="menu-link">
-                            <div data-i18n="Add Incident">Add Incident</div>
-                        </a>
-                    </li>
+                    @if (auth()->user()->hasPermissionTo('add_incident'))
+                        <li class="menu-item {{ request()->routeIs('incidents') ? 'active open' : '' }}">
+                            <a href="{{ route('incidents') }}" class="menu-link">
+                                <div data-i18n="Add Incident">Add Incident</div>
+                            </a>
+                        </li>
+                    @endif
                     <li class="menu-item {{ request()->routeIs('open-incidents') ? 'active open' : '' }}">
                         <a href="{{ route('open-incidents') }}" class="menu-link">
                             <div data-i18n="Open Incidents">Open Incidents</div>
@@ -141,10 +148,7 @@
             </li>
         @endif
         <!-- Deviations -->
-        @if (auth()->user()->hasPermissionTo('view_icas') &&
-                auth()->user()->hasPermissionTo('add_icas') &&
-                auth()->user()->hasPermissionTo('edit_icas') &&
-                auth()->user()->hasPermissionTo('delete_icas'))
+        @if (auth()->user()->hasPermissionTo('view_icas'))
             <li class="menu-item {{ request()->routeIs(['icas', 'icas.create']) ? 'active open' : '' }}">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
@@ -152,11 +156,13 @@
                 </a>
 
                 <ul class="menu-sub">
-                    <li class="menu-item {{ request()->routeIs('icas.create') ? 'active open' : '' }}">
-                        <a href="{{ route('icas.create') }}" class="menu-link">
-                            <div data-i18n="Add ICA's">Add ICA's</div>
-                        </a>
-                    </li>
+                    @if (auth()->user()->hasPermissionTo('add_icas'))
+                        <li class="menu-item {{ request()->routeIs('icas.create') ? 'active open' : '' }}">
+                            <a href="{{ route('icas.create') }}" class="menu-link">
+                                <div data-i18n="Add ICA's">Add ICA's</div>
+                            </a>
+                        </li>
+                    @endif
 
                     <li class="menu-item {{ request()->routeIs('icas') ? 'active open' : '' }}">
                         <a href="{{ route('icas') }}" class="menu-link">

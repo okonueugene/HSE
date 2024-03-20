@@ -35,7 +35,8 @@
 
     <!-- Core CSS -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/css/rtl/core.css') }}" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="{{ asset('assets/vendor/css/rtl/theme-default.css') }}" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/css/rtl/theme-default.css') }}"
+        class="template-customizer-theme-css" />
     <link rel="stylesheet" href="{{ asset('assets/css/demo.css') }}" />
 
     <!-- Vendors CSS -->
@@ -572,9 +573,14 @@
                         </ul>
                     </div>
                     @if (session('error'))
-                        <div class="alert alert-danger">
-                            {{ session('error') }}
-                        </div>
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
+                        <script>
+                            iziToast.error({
+                                title: 'Error',
+                                message: '{{ session('error') }}',
+                                position: 'topRight'
+                            });
+                        </script>
                     @endif
 
                     <!-- Search Small Screens -->

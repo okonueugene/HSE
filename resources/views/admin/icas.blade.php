@@ -53,16 +53,21 @@
                                                     data-bs-toggle="modal" data-bs-target="#showModal"
                                                     onclick="showDataModal({{ $ica->id }})">View</a>
                                             </li>
-                                            <li><a href="javascript:void(0)" class="dropdown-item"
-                                                    data-bs-toggle="modal" data-bs-target="#updateModal"
-                                                    data-ica-id="{{ $ica->id }}" onclick="editIca(this)">Edit</a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0)" class="dropdown-item"
-                                                    onclick="deleteIca({{ $ica->id }})">
-                                                    Delete
-                                                </a>
-                                            </li>
+                                            @if (auth()->user()->can('edit_icas'))
+                                                <li><a href="javascript:void(0)" class="dropdown-item"
+                                                        data-bs-toggle="modal" data-bs-target="#updateModal"
+                                                        data-ica-id="{{ $ica->id }}"
+                                                        onclick="editIca(this)">Edit</a>
+                                                </li>
+                                            @endif
+                                            @if (auth()->user()->can('delete_icas'))
+                                                <li>
+                                                    <a href="javascript:void(0)" class="dropdown-item"
+                                                        onclick="deleteIca({{ $ica->id }})">
+                                                        Delete
+                                                    </a>
+                                                </li>
+                                            @endif
                                         </ul>
                                     </div>
                                 </td>
