@@ -94,11 +94,7 @@
     @media (min-width:320px)
     {
         .clock {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
+            display: none;
         }
         .container-fluid {
             display: flex;
