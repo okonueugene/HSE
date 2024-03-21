@@ -174,19 +174,26 @@ Route::group(['middleware' => 'auth'], function () {
 
     //enviromental routes
     Route::get('environment', [EnvironmentController::class, 'index'])->name('environment');
+
     //return view environmental_policy_checklist
     Route::get('environmental-policy-checklist', [EnvironmentController::class, 'environmentalPolicyChecklist'])->name('environmental-policy-checklist');
 
     //supervisor routes
     Route::get('supervisor', [SupervisorDetailController::class, 'index'])->name('supervisor');
     Route::post('supervisor', [SupervisorDetailController::class, 'store'])->name('supervisor.store');
+    Route::patch('supervisor/{id}', [SupervisorDetailController::class, 'update'])->name('supervisor.update');
+    Route::delete('supervisor/{id}', [SupervisorDetailController::class, 'destroy'])->name('supervisor.destroy');
 
     //personnel present routes
     Route::get('personnel', [PersonnelPresentController::class, 'index'])->name('personnel');
     Route::post('personnel', [PersonnelPresentController::class, 'store'])->name('personnel.store');
+    Route::patch('personnel/{id}', [PersonnelPresentController::class, 'update'])->name('personnel.update');
+    Route::delete('personnel/{id}', [PersonnelPresentController::class, 'destroy'])->name('personnel.destroy');
 
     //first responder routes
     Route::get('first-responder', [FirstRespondersController::class, 'index'])->name('first-responder');
     Route::post('first-responder', [FirstRespondersController::class, 'store'])->name('first-responder.store');
+    Route::patch('first-responder/{id}', [FirstRespondersController::class, 'update'])->name('first-responder.update');
+    Route::delete('first-responder/{id}', [FirstRespondersController::class, 'destroy'])->name('first-responder.destroy');
 
 });

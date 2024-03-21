@@ -153,10 +153,11 @@
             </div>
         </div>
     </div>
-
 </div>
 <!-- / Content -->
-{{-- @include('commons.footer') --}}
+<div class="footer" style="position: fixed; bottom: 0; width: 100%;">
+    @include('commons.footer')
+</div>
 
 
 <script>

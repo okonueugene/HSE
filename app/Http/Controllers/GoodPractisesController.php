@@ -8,6 +8,14 @@ use App\Http\Controllers\Controller;
 
 class GoodPractisesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:view_good_practise')->only(['index', 'show']);
+        $this->middleware('permission:edit_good_practise')->only(['update']);
+        $this->middleware('permission:delete_good_practise')->only(['destroy']);
+    }
+    
     public function index(Request $request)
     {
         $perPage = 8; // Number of records per page

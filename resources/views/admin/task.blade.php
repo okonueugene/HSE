@@ -5,10 +5,12 @@
     <!-- Content -->
 
     <div class="container-xxl flex-grow-1 container-p-y">
-        <div class="add-button ">
-            <a href="javascript:void(0)" class="btn btn-primary float-end" data-bs-toggle="modal"
-                data-bs-target="#addTaskModal">Add Task</a>
-        </div>
+        @if (auth()->user()->can('add_tasks'))
+            <div class="add-button ">
+                <a href="javascript:void(0)" class="btn btn-primary float-end" data-bs-toggle="modal"
+                    data-bs-target="#addTaskModal">Add Task</a>
+            </div>
+        @endif
         <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> </span>Task Manager</h4>
 
         <!-- DataTable with Buttons -->
@@ -47,20 +49,23 @@
                                                     class="dropdown-item">View</a>
                                             </li>
                                             </li>
-                                            <li>
-                                                <a href="{{ route('user-tasks.update', $task->id) }}"
-                                                    class="dropdown-item">Edit</a>
-                                            </li>
-
-                                            <li>
-                                                <form action="{{ route('user-tasks.destroy', $task->id) }}"
-                                                    method="POST"
-                                                    onsubmit="return confirm('Are you sure you want to delete this task?');">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="dropdown-item">Delete</button>
-                                                </form>
-                                            </li>
+                                            @if (auth()->user()->can('edit_tasks'))
+                                                <li>
+                                                    <a href="{{ route('user-tasks.update', $task->id) }}"
+                                                        class="dropdown-item">Edit</a>
+                                                </li>
+                                            @endif
+                                            @if (auth()->user()->can('delete_tasks'))
+                                                <li>
+                                                    <form action="{{ route('user-tasks.destroy', $task->id) }}"
+                                                        method="POST"
+                                                        onsubmit="return confirm('Are you sure you want to delete this task?');">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="dropdown-item">Delete</button>
+                                                    </form>
+                                                </li>
+                                            @endif
                                         </ul>
                                     </div>
                                 </td>

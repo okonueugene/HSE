@@ -73,7 +73,7 @@ class Handler extends ExceptionHandler
 
         if ($exception instanceof \Spatie\Permission\Exceptions\UnauthorizedException) {
             $this->renderable(function (\Spatie\Permission\Exceptions\UnauthorizedException $e, $request) {
-                return redirect()->route('dashboard')->with('error', 'You do not have the required permissions to access this page.');
+                return redirect()->back()->with('error', 'You do not have the required permissions to access this page.');
 
             });
         }

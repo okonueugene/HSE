@@ -5,10 +5,12 @@
 
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="fw-semibold mb-4 mx-auto text-center">Roles List</h4>
-        <div class="button btn-success float-end">
-            <a href="javascript:void(0)" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                data-bs-target="#addRoleModal">Add Role</a>
-        </div>
+        @if (auth()->user()->can('add_roles'))
+            <div class="button btn-success float-end">
+                <a href="javascript:void(0)" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                    data-bs-target="#addRoleModal">Add Role</a>
+            </div>
+        @endif
         <p class="mb-4 mx-auto text-center">
             A role provided access to predefined menus and features so that depending on <br> assigned role an
             administrator can have access to what user needs.
@@ -40,18 +42,25 @@
                                                     data-bs-toggle="dropdown" data-bs-display="static"
                                                     aria-expanded="false">Action </button>
                                                 <ul class="dropdown-menu">
-                                                    <li><a href="javascript:void(0)" class="dropdown-item"
-                                                            data-bs-toggle="modal" data-bs-target="#editRoleModal"
-                                                            data-role-id="{{ $role->id }}"
-                                                            onclick="editRole(this)">Edit</a></li>
-                                                    <li>
-                                                        <form action="{{ route('roles.destroy', $role->id) }}"
-                                                            method="POST">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="dropdown-item">Delete</button>
-                                                        </form>
-                                                    </li>
+                                                    @if (auth()->user()->can('edit_roles'))
+                                                        <li>
+                                                            <a href="javascript:void(0)" class="dropdown-item"
+                                                                data-bs-toggle="modal" data-bs-target="#editRoleModal"
+                                                                data-role-id="{{ $role->id }}"
+                                                                onclick="editRole(this)">Edit</a>
+                                                        </li>
+                                                    @endif
+                                                    @if (auth()->user()->can('delete_roles'))
+                                                        <li>
+                                                            <form action="{{ route('roles.destroy', $role->id) }}"
+                                                                method="POST">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit"
+                                                                    class="dropdown-item">Delete</button>
+                                                            </form>
+                                                        </li>
+                                                    @endif
                                                 </ul>
                                             </div>
                                         </td>
@@ -164,7 +173,9 @@
 </div>
 
 @include('commons.footer')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/js/selectize.min.js" integrity="sha512-IOebNkvA/HZjMM7MxL0NYeLYEalloZ8ckak+NDtOViP7oiYzG5vn6WVXyrJDiJPhl4yRdmNAG49iuLmhkUdVsQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/js/selectize.min.js"
+    integrity="sha512-IOebNkvA/HZjMM7MxL0NYeLYEalloZ8ckak+NDtOViP7oiYzG5vn6WVXyrJDiJPhl4yRdmNAG49iuLmhkUdVsQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
     // Initialize selectize for permissions
     $('#multiple-select-field').selectize({

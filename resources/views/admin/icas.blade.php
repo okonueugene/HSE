@@ -42,7 +42,7 @@
                                 <td>{{ $ica->observation }}</td>
                                 <td>{{ $ica->date }}</td>
                                 <td>{{ $ica->status == 'open' ? 'Open' : 'Closed' }}</td>
-                                <td>{{ $ica->actionOwner->name }}</td>
+                                <td>{{ $ica->action_owner }}</td>
                                 <td>
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-secondary dropdown-toggle btn-sm"

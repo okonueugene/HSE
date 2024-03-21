@@ -51,8 +51,8 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="basic-default-actionowner">Action Owner</label>
-                                <input type="text" name="action_owner" class="form-control" id="basic-default-actionowner"
-                                    placeholder="Action Owner">
+                            <input type="text" name="action_owner" class="form-control"
+                                id="basic-default-actionowner" placeholder="Action Owner">
                             <div class="error">
                                 @error('action_owner')
                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -79,7 +79,9 @@
                                 @enderror
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button>
+                        @if (auth()->user()->can('add_sor'))
+                            <button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button>
+                        @endif
                     </form>
 
                 </div>

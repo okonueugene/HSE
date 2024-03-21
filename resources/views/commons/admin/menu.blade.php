@@ -21,7 +21,6 @@
             <a href="{{ route('dashboard') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-smart-home"></i>
                 <div data-i18n="Dashboard">Dashboard</div>
-
             </a>
         </li>
         @if (auth()->user()->hasPermissionTo('view_supervisor'))
@@ -54,7 +53,7 @@
         @if (auth()->user()->hasPermissionTo('view_sor'))
             <li
                 class="menu-item {{ request()->routeIs(['sor', 'hazards', 'improvements', 'goodpractises', 'badpractises']) ? 'active open' : '' }}">
-                <a href="javascript:void(0)" class="menu-link menu-toggle">
+                <a href="#" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons ti ti-text-wrap-disabled"></i>
                     <div data-i18n="Safety Observation Records (SOR's)">Safety Observation Records (SOR's)</div>
                 </a>
@@ -100,7 +99,7 @@
 
             <li
                 class="menu-item {{ request()->routeIs(['incidents', 'nearmiss', 'medicaltreatedcase', 'losttimeaccidents', 'firstaidcase', 'sif']) ? 'active open' : '' }}">
-                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <a href="#" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons ti ti-layout-kanban"></i>
                     <div data-i18n="Incident Manager">Incident Manager</div>
                 </a>
@@ -150,7 +149,7 @@
         <!-- Deviations -->
         @if (auth()->user()->hasPermissionTo('view_icas'))
             <li class="menu-item {{ request()->routeIs(['icas', 'icas.create']) ? 'active open' : '' }}">
-                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <a href="#" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
                     <div data-i18n="Immediate Corrective Actions (ICA)">Immediate Corrective Actions (ICA)</div>
                 </a>
@@ -180,10 +179,7 @@
                 <div data-i18n=" Permits Applicable"> Permits Applicable</div>
             </a>
         </li>
-        @if (auth()->user()->hasPermissionTo('add_tasks') &&
-                auth()->user()->hasPermissionTo('edit_tasks') &&
-                auth()->user()->hasPermissionTo('delete_tasks') &&
-                auth()->user()->hasPermissionTo('view_tasks'))
+        @if (auth()->user()->hasPermissionTo('view_tasks'))
             <li class="menu-item {{ request()->routeIs('user-tasks') ? 'active open' : '' }}">
                 <a href="{{ route('user-tasks') }}" class="menu-link">
                     <i class="menu-icon tf-icons ti ti-list"></i>
@@ -231,10 +227,7 @@
 
             </ul>
         </li> --}}
-        @if (auth()->user()->hasPermissionTo('view_roles') &&
-                auth()->user()->hasPermissionTo('view_permissions') &&
-                auth()->user()->hasPermissionTo('edit_roles') &&
-                auth()->user()->hasPermissionTo('edit_permissions'))
+        @if (auth()->user()->hasPermissionTo('view_roles'))
             <li
                 class="menu-item {{ request()->routeIs('roles') || request()->routeIs('permissions') ? 'active open' : '' }}">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">

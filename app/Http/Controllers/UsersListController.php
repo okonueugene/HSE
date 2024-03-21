@@ -14,10 +14,10 @@ class UsersListController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('permission:view_users');
-        $this->middleware('permission:add_users');
-        $this->middleware('permission:edit_users');
-        $this->middleware('permission:delete_users');
+        $this->middleware('permission:view_users')->only(['index']);
+        $this->middleware('permission:add_users')->only(['create', 'store']);
+        $this->middleware('permission:edit_users')->only(['edit', 'update']);
+        $this->middleware('permission:delete_users')->only(['destroy']);
     }
 
     public function index()

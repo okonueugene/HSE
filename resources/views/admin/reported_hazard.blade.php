@@ -55,16 +55,25 @@
                                             data-bs-toggle="dropdown" data-bs-display="static"
                                             aria-expanded="false">Action </button>
                                         <ul class="dropdown-menu">
-                                            <li><a href="javascript:void(0)" class="dropdown-item"
+                                            <li>
+                                                <a href="javascript:void(0)" class="dropdown-item"
                                                     data-bs-toggle="modal" data-bs-target="#showModal"
-                                                    onclick="showDataModal({{ $hazard->id }})">View</a></li>
-                                            <li><a href="javascript:void(0)" class="dropdown-item"
-                                                    data-bs-toggle="modal" data-bs-target="#updateModal"
-                                                    data-hazard-id="{{ $hazard->id }}"
-                                                    onclick="editHazard(this)">Edit</a></li>
-
-                                            <li><a href="javascript:void(0)" class="dropdown-item"
-                                                    onclick="deleteHazard({{ $hazard->id }})">Delete</a></li>
+                                                    onclick="showDataModal({{ $hazard->id }})">View</a>
+                                            </li>
+                                            @if (auth()->user()->can('edit_reported_hazard'))
+                                                <li>
+                                                    <a href="javascript:void(0)" class="dropdown-item"
+                                                        data-bs-toggle="modal" data-bs-target="#updateModal"
+                                                        data-hazard-id="{{ $hazard->id }}"
+                                                        onclick="editHazard(this)">Edit</a>
+                                                </li>
+                                            @endif
+                                            @if (auth()->user()->can('delete_reported_hazard'))
+                                                <li>
+                                                    <a href="javascript:void(0)" class="dropdown-item"
+                                                        onclick="deleteHazard({{ $hazard->id }})">Delete</a>
+                                                </li>
+                                            @endif
                                         </ul>
                                     </div>
 

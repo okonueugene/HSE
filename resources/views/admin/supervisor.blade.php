@@ -4,12 +4,13 @@
     <!-- Content -->
 
     <div class="container-xxl flex-grow-1 container-p-y">
-
-        <div class="add-button">
-            <a href="#" class="btn btn-primary btn-sm float-end" data-bs-toggle="modal"
-                data-bs-target="#addSupervisorModal">Add
-                Supervisor</a>
-        </div>
+        @if (auth()->user()->can('add_supervisor'))
+            <div class="add-button">
+                <a href="#" class="btn btn-primary btn-sm float-end" data-bs-toggle="modal"
+                    data-bs-target="#addSupervisorModal">Add
+                    Supervisor</a>
+            </div>
+        @endif
         <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> </span>Supervisor’s Details</h4>
 
         <!-- DataTable with Buttons -->
@@ -37,11 +38,13 @@
                                             aria-expanded="false">Action
                                         </button>
                                         <ul class="dropdown-menu">
-                                            <li>
-                                                <a href="#" class="dropdown-item" data-bs-toggle="modal"
-                                                    data-supervisor="{{ $supervisor }}"
-                                                    data-bs-target="#viewSupervisorModal">View</a>
-                                            </li>
+                                            @if (auth()->user()->can('view_supervisor'))
+                                                <li>
+                                                    <a href="#" class="dropdown-item" data-bs-toggle="modal"
+                                                        data-supervisor="{{ $supervisor }}"
+                                                        data-bs-target="#viewSupervisorModal">View</a>
+                                                </li>
+                                            @endif
                                         </ul>
                                     </div>
                                 </td>
@@ -119,5 +122,4 @@
         modal.find('.modal-body #name').val(supervisor.name)
         modal.find('.modal-body #date').val(supervisor.date)
     })
-
 </script>

@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Models\Permit;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Controller;
 
 class PermitsController extends Controller
 {
@@ -13,16 +12,16 @@ class PermitsController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('permission:view_permit');
-        $this->middleware('permission:add_permit');
-        $this->middleware('permission:update_permit');
-        $this->middleware('permission:delete_permit');
+        $this->middleware('permission:view_permit')->only(['index']);
+        $this->middleware('permission:add_permit')->only(['store']);
+        $this->middleware('permission:update_permit')->only(['update']);
+        $this->middleware('permission:delete_permit')->only(['destroy']);
     }
 
     public function index()
     {
         $permits = Permit::orderBy('id', 'desc')->paginate(10);
-        
+
         return view('admin/permits')->with('permits', $permits);
     }
 
@@ -106,7 +105,5 @@ class PermitsController extends Controller
 
         return redirect()->back()->with('success', 'Permit deleted successfully');
     }
-
-
 
 }

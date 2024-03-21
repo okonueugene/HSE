@@ -10,10 +10,10 @@ class SupervisorDetailController extends Controller
 
     public function __construct()
     {
-        $this->middleware('permission:view_supervisors');
-        $this->middleware('permission:add_supervisors');
-        $this->middleware('permission:edit_supervisors');
-        $this->middleware('permission:delete_supervisors');
+        $this->middleware('permission:view_supervisor');
+        $this->middleware('permission:add_supervisor');
+        $this->middleware('permission:edit_supervisor');
+        $this->middleware('permission:delete_supervisor');
     }
     
     public function index()
