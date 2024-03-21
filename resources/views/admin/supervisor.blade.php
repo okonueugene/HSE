@@ -1,9 +1,52 @@
 @include('commons.header')
+<style>
+    @@media (min-width:961px){
+        .add-button {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            width: 100%;
+        }
+        .content-wrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+        .card {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: fit-content;
+        }
+
+        .container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: fit-content;
+        }
+        .table {
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: fit-content;
+            position:absolute;
+            top: 50%;
+        }
+
+
+    }
+</style>
 <!-- Content wrapper -->
 <div class="content-wrapper">
     <!-- Content -->
 
-    <div class="container-xxl flex-grow-1 container-p-y">
+    <div class="container-lg flex-grow-1 container-p-y">
         @if (auth()->user()->can('add_supervisor'))
             <div class="add-button">
                 <a href="#" class="btn btn-primary btn-sm float-end" data-bs-toggle="modal"
