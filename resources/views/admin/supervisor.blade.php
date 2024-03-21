@@ -3,7 +3,7 @@
      @media (min-width:320px)
     {
        h4{
-           font-size: 1rem;
+           font-size: 1.25rem;
        }
        .add-button{
            margin-top: 1rem;
