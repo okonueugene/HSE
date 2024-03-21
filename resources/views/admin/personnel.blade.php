@@ -1,5 +1,22 @@
 @include('commons.header')
 <!-- Content wrapper -->
+<style>
+    @media (min-width:320px) {
+        h4 {
+            font-size: 1.25rem;
+        }
+
+        .add-button {
+            margin-top: 1rem;
+        }
+
+        .add-button a {
+            font-size: 0.7rem;
+            margin-top: .7rem;
+        }
+
+    }
+</style>
 <div class="content-wrapper">
     <!-- Content -->
 
