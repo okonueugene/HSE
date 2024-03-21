@@ -1,45 +1,19 @@
 @include('commons.header')
 <style>
-    @@media (min-width:961px){
-        .add-button {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            width: 100%;
-        }
-        .content-wrapper {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            height: 100%;
-        }
-        .card {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            height: fit-content;
-        }
+     @media (min-width:320px)
+    {
+       h4{
+           font-size: 1rem;
+       }
+       .add-button{
+           margin-top: 1rem;
+       }
 
-        .container{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            height: fit-content;
-        }
-        .table {
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            height: fit-content;
-            position:absolute;
-            top: 50%;
-        }
-
-
+       .add-button a{
+           font-size: 0.7rem;
+           margin-top: .75rem;
+       }
+    
     }
 </style>
 <!-- Content wrapper -->
