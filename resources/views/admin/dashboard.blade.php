@@ -91,6 +91,47 @@
             text-align: center;
         }
     }
+    @media (min-width:320px)
+    {
+        .clock {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+        .container-fluid {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+    
+        .row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: fit-content;
+        }
+        .col{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: fit-content;
+        }
+
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: #f8f9fa;
+            text-align: center;
+        }
+    }
 </style>
 <!-- Content wrapper -->
 <div class="content-wrapper">
