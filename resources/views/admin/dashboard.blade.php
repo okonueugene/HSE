@@ -1,5 +1,14 @@
 @include('commons.header')
 <style>
+    .footer {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: #f8f9fa;
+        text-align: center;
+    }
+
     @@media (min-width:961px){
         .clock {
             display: flex;
@@ -29,6 +38,15 @@
             align-items: center;
             width: 100%;
             height: fit-content;
+        }
+
+        .footer {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: #f8f9fa;
+            text-align: center;
         }
 
     }
@@ -62,6 +80,15 @@
             align-items: center;
             width: 100%;
             height: fit-content;
+        }
+
+        .footer {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: #f8f9fa;
+            text-align: center;
         }
     }
 </style>
@@ -220,7 +247,7 @@
     </div>
 </div>
 <!-- / Content -->
-<div class="footer" style="position: fixed; bottom: 0; width: 100%;">
+<div class="footer">
     @include('commons.footer')
 </div>
 
