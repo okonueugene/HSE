@@ -11,7 +11,7 @@
 
        .add-button a{
            font-size: 0.7rem;
-           margin-top: .75rem;
+           margin-top: .7rem;
        }
     
     }
