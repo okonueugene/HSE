@@ -20,7 +20,7 @@ class AuthenticationController extends Controller
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 403);
+            return response()->json($validator->errors(), 422);
         }
 
         $credentials = $request->only(['email', 'password']);
