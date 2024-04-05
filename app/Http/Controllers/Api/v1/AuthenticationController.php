@@ -12,16 +12,19 @@ class AuthenticationController extends Controller
     public function login(LoginRequest $request)
     {
         //validate request
-        $rules = array(
-            'email' => 'required',
-            'password' => 'required | min:8',
-        );
+        $rules = [
+            'email' => 'required|email',
+            'password' => 'required|min:8',
+        ];
 
-        $validator = Validator::make($request->all(), $rules);
+        $messages = [
+            'email.required' => 'Email is required',
+            'email.email' => 'Email is invalid',
+            'password.required' => 'Password is required',
+            'password.min' => 'Password must be at least 8 characters',
+        ];
 
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
-        }
+        $this->validate($request, $rules, $messages);
 
         $credentials = $request->only(['email', 'password']);
 
