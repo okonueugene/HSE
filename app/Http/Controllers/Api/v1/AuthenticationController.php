@@ -11,6 +11,18 @@ class AuthenticationController extends Controller
 {
     public function login(LoginRequest $request)
     {
+        //validate request
+        $rules = array(
+            'email' => 'required',
+            'password' => 'required | min:8',
+        );
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 403);
+        }
+
         $credentials = $request->only(['email', 'password']);
 
         if (!Auth::attempt($credentials)) {
