@@ -1,39 +1,20 @@
 @include('commons.header')
 <!-- Content wrapper -->
-<style>
-    @media (min-width:320px) {
-        h4 {
-            font-size: 1.25rem;
-        }
-
-        .add-button {
-            margin-top: 1rem;
-        }
-
-        .add-button a {
-            font-size: 0.7rem;
-            margin-top: .7rem;
-        }
-
-    }
-</style>
 <div class="content-wrapper">
     <!-- Content -->
 
     <div class="container-xxl flex-grow-1 container-p-y">
-        @if (auth()->user()->can('add_personnel_present'))
-            <div class="add-button">
-                <a href="#" class="btn btn-primary btn-sm  float-end mx-2" data-bs-toggle="modal"
-                    data-bs-target="#addPersonellModal">Add
-                    Personnel</a>
-            </div>
-        @endif
+        <div class="add-button">
+            <a href="#" class="btn btn-primary btn-sm  float-end mx-2" data-bs-toggle="modal"
+                data-bs-target="#addPersonellModal">Add
+                Personnel</a>
+        </div>
         <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> </span>Personnel Detail</h4>
         <!-- DataTable with Buttons -->
 
-        <div class="card">
-            <div class="table">
-                <table class="table table-hover table-bordered">
+        <div class="card bg-white">
+            <div class="table bg-white">
+                <table class="table table-hover table-bordered bg-white">
                     <thead>
                         <tr>
                             <th>Id</th>
@@ -126,7 +107,8 @@
                     @csrf
                     <div class="mb-3">
                         <label class="form-label" for="basic-default-headcount">Head Count</label>
-                        <input type="number" class="form-control" id="basic-default-headcount" name="number" required>
+                        <input type="number" class="form-control" id="basic-default-headcount" name="number"
+                            required>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">Close</button>

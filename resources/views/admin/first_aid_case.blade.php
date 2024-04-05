@@ -56,12 +56,12 @@
                                                 </li>
                                             @endif
                                             @if (auth()->user()->can('delete_first_aid_case'))
-                                            <li>
-                                                <a href="javascript:void(0)" class="dropdown-item"
-                                                    onclick="deleteData({{ $case->id }})">
-                                                    Delete
-                                                </a>
-                                            </li>
+                                                <li>
+                                                    <a href="javascript:void(0)" class="dropdown-item"
+                                                        onclick="deleteData({{ $case->id }})">
+                                                        Delete
+                                                    </a>
+                                                </li>
                                             @endif
                                         </ul>
                                     </div>

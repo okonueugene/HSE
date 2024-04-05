@@ -1,133 +1,5 @@
 @include('commons.header')
-<style>
-    .footer {
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        background-color: #f8f9fa;
-        text-align: center;
-    }
 
-    @@media (min-width:961px){
-        .clock {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-        }
-        .container-fluid {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            height: 100%;
-        }
-    
-        .row {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            height: fit-content;
-        }
-        .col{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            height: fit-content;
-        }
-
-        .footer {
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            background-color: #f8f9fa;
-            text-align: center;
-        }
-
-    }
-    @media (min-width:480px)
-    {
-        .clock {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-        }
-        .container-fluid {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            height: 100%;
-        }
-    
-        .row {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            height: fit-content;
-        }
-        .col{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            height: fit-content;
-        }
-
-        .footer {
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            background-color: #f8f9fa;
-            text-align: center;
-        }
-    }
-    @media (min-width:320px)
-    {
-        .clock {
-            display: none;
-        }
-        .container-fluid {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            height: 100%;
-        }
-    
-        .row {
-          
-            width: 100%;
-            height: fit-content;
-        }
-        .col{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            height: fit-content;
-        }
-
-        .footer {
-            position: fixed;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            background-color: #f8f9fa;
-            text-align: center;
-        }
-    }
-</style>
 <!-- Content wrapper -->
 <div class="content-wrapper">
     <!-- Content -->
@@ -166,7 +38,7 @@
             </div>
             <div class="col-md-3 ">
                 <div class="card mb-4 h-50 shadow-lg">
-                    <div class="card-header"> Fire Martial’s Detail</div>
+                    <div class="card-header"> Fire Marshal Detail</div>
                     <div class="card-body">
                         <div class="content">
 
@@ -283,7 +155,7 @@
     </div>
 </div>
 <!-- / Content -->
-<div class="footer">
+<div class="footer" style="position: fixed; bottom: 0; width: 100%;">
     @include('commons.footer')
 </div>
 
