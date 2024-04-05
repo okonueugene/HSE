@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\Api\v1\AuthenticationController;
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\Api\v1\TasksController;
+use App\Http\Controllers\Api\v1\AuthenticationController;
 
 
 
@@ -24,6 +25,9 @@ Route::prefix('/v1')->group(
 
         Route::group(['middleware' => ['auth:sanctum', 'ensure.json.header']], function () {
             Route::post('/logout', [AuthenticationController::class, 'logout']);
+
+            //tasks
+            Route::ApiResource('/tasks', TasksController::class);
         });
     }
 );
