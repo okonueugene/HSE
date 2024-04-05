@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\v1;
+namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
@@ -11,21 +11,6 @@ class AuthenticationController extends Controller
 {
     public function login(LoginRequest $request)
     {
-        //validate request
-        $rules = [
-            'email' => 'required|email',
-            'password' => 'required|min:8',
-        ];
-
-        $messages = [
-            'email.required' => 'Email is required',
-            'email.email' => 'Email is invalid',
-            'password.required' => 'Password is required',
-            'password.min' => 'Password must be at least 8 characters',
-        ];
-
-        $this->validate($request, $rules, $messages);
-
         $credentials = $request->only(['email', 'password']);
 
         if (!Auth::attempt($credentials)) {
