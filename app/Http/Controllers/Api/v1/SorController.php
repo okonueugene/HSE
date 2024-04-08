@@ -11,27 +11,27 @@ class SorController extends Controller
 {
     public function store(Request $request)
     {
-        $rules = [
-            'action_owner' => 'required',
-            'observation' => 'required',
-            'status' => 'required',
-            'steps_taken' => 'required',
-            'type_id' => 'required',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ];
+        // $rules = [
+        //     'action_owner' => 'required',
+        //     'observation' => 'required',
+        //     'status' => 'required',
+        //     'steps_taken' => 'required',
+        //     'type_id' => 'required',
+        //     'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        // ];
 
-        $messages = [
-            'action_owner.required' => 'Action owner is required',
-            'observation.required' => 'Observation is required',
-            'status.required' => 'Status is required',
-            'steps_taken.required' => 'Steps taken is required',
-            'type_id.required' => 'Type is required',
-            'images.*.image' => 'The file must be an image',
-            'images.*.mimes' => 'The file must be a file of type: jpeg, png, jpg, gif, svg',
-            'images.*.max' => 'The file must not be greater than 2048 kilobytes',
-        ];
+        // $messages = [
+        //     'action_owner.required' => 'Action owner is required',
+        //     'observation.required' => 'Observation is required',
+        //     'status.required' => 'Status is required',
+        //     'steps_taken.required' => 'Steps taken is required',
+        //     'type_id.required' => 'Type is required',
+        //     'images.*.image' => 'The file must be an image',
+        //     'images.*.mimes' => 'The file must be a file of type: jpeg, png, jpg, gif, svg',
+        //     'images.*.max' => 'The file must not be greater than 2048 kilobytes',
+        // ];
 
-        $this->validate($request, $rules, $messages);
+        // $this->validate($request, $rules, $messages);
 
         try {
             // Create a new SOR record
