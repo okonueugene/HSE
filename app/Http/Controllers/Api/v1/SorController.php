@@ -11,7 +11,7 @@ class SorController extends Controller
 {
     public function store(Request $request)
     {
-        dd($request->all());
+        return response()->json($request->all());
         $rules = [
             'action_owner' => 'required',
             'observation' => 'required',
