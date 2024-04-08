@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Api\v1\SorController;
 use App\Http\Controllers\Api\v1\TasksController;
 use App\Http\Controllers\Api\v1\DashboardController;
 use App\Http\Controllers\Api\v1\AuthenticationController;
@@ -31,6 +32,8 @@ Route::prefix('/v1')->group(
             Route::ApiResource('/tasks', TasksController::class);
             //dashboard
             Route::get('/dashboard-stats', [DashboardController::class, 'index']);
+            //sor types
+            Route::get('/sor-types', [SorController::class, 'sorTypes']);
         });
     }
 );
