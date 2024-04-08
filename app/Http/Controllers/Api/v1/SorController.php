@@ -11,7 +11,6 @@ class SorController extends Controller
 {
     public function store(Request $request)
     {
-        return response()->json($request->all());
         $rules = [
             'action_owner' => 'required',
             'observation' => 'required',
@@ -58,6 +57,7 @@ class SorController extends Controller
             // Handle any exceptions
             return response()->json(['error' => $e->getMessage()], 500);
         }
+        
     }
 
     public function sorTypes()
