@@ -11,6 +11,7 @@ class SorController extends Controller
 {
     public function store(Request $request)
     {
+        dd($request->all());
         $rules = [
             'action_owner' => 'required',
             'observation' => 'required',
@@ -36,7 +37,7 @@ class SorController extends Controller
         try {
             // Create a new SOR record
             $sor = SOR::create([
-                'assignor_id' => $request->input('assignor_id'), // Assignor ID from the request
+                'assignor_id' => $request->input('assignor_id'),
                 'action_owner' => $request->input('action_owner'),
                 'observation' => $request->input('observation'),
                 'status' => $request->input('status'),
@@ -48,7 +49,7 @@ class SorController extends Controller
             // Handle file uploads
             if ($request->hasFile('images')) {
                 foreach ($request->file('images') as $image) {
-                    $sor->addMedia($image)->toMediaCollection('sor_images'); // Specify the media collection
+                    $sor->addMedia($image)->toMediaCollection('sor_images');
                 }
             }
 
