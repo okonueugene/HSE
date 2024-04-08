@@ -22,8 +22,7 @@ class SORController extends Controller
     public function index()
     {
         //fetch all sor types
-        $sor_types = SorTypes::orderBy('id', 'desc')->get()->pluck('name', 'id')->toArray();
-        dd($sor_types);
+        $sor_types = SorTypes::orderBy('id', 'desc')->get();
         //fetch all users
         $users = User::all();
 

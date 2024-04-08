@@ -34,6 +34,8 @@ Route::prefix('/v1')->group(
             Route::get('/dashboard-stats', [DashboardController::class, 'index']);
             //sor types
             Route::get('/sor-types', [SorController::class, 'sorTypes']);
+            //add sor
+            Route::post('/add-sor', [SorController::class, 'store']);
         });
     }
 );
