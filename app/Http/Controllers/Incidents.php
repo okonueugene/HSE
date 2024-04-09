@@ -45,6 +45,8 @@ class Incidents extends Controller
 
         $this->validate($request, $rules, $messages);
 
+        dd($request->all());
+
         $incident = new Incident();
         $incident->user_id = auth()->user()->id;
         $incident->incident_type_id = $request->input('incident_type_id');
