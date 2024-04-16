@@ -14,8 +14,8 @@ class SorController extends Controller
 
         try {
             // Initialize the data array
-            $data = $request->input('_parts');
-            
+            $data = $request->all();
+
             // Extract data from the array (alternative approach)
             $sorData = array_reduce($data, function ($carry, $item) {
                 $carry[$item[0]] = $item[1];
