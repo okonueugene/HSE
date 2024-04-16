@@ -15,26 +15,55 @@ class SorController extends Controller
         try {
             // Initialize the data array
             $data = $request->input('_parts');
-            dd($data);
-            
-            // Extract data from the array (alternative approach)
-            $sorData = array_reduce($data, function ($carry, $item) {
-                $carry[$item[0]] = $item[1];
-                return $carry;
-            }, []);
 
-            // Create a new SOR record
-            $sor = SOR::create($sorData);
+            // [
+            //     [
+            //         "observation",
+            //         "This"
+            //     ],
+            //     [
+            //         "status",
+            //         "0"
+            //     ],
+            //     [
+            //         "steps_taken",
+            //         "That"
+            //     ],
+            //     [
+            //         "action_owner",
+            //         "Me"
+            //     ],
+            //     [
+            //         "assignor_id",
+            //         1
+            //     ],
+            //     [
+            //         "type_id",
+            //         "2"
+            //     ]
+            // ]
 
-            // Handle file uploads (assuming $request is available)
+            // Create a new SOR
+            $sor = SOR::create([
+                'observation' => $data[0][1],
+                'status' => $data[1][1],
+                'steps_taken' => $data[2][1],
+                'action_owner' => $data[3][1],
+                'assignor_id' => $data[4][1],
+                'type_id' => $data[5][1],
+            ]);
+
+            //If there are images
             if ($request->hasFile('images')) {
+                // Loop through the images
                 foreach ($request->file('images') as $image) {
+                    // Store the image
                     $sor->addMedia($image)->toMediaCollection('sor_images');
                 }
             }
 
-            return response()->json(['message' => 'SOR created successfully']);
-
+            // Return a success response
+            return response()->json(['message' => 'SOR created successfully'], 201);
         } catch (\Exception $e) {
             // Handle any exceptions
             return response()->json(['error' => $e->getMessage()], 500);
