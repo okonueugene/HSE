@@ -19,10 +19,11 @@ jobs:
         run: chmod -R 777 storage bootstrap/cache
       - name: Deploy to FTP
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
+        # below credentials,M_ represents staging while FTP_ represents production
         with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
+          server: ${{ secrets.M_SERVER }}
+          username: ${{ secrets.M_USERNAME }}
+          password: ${{ secrets.M_PASSWORD }}
 
       - name: Update Dependencies
         run: composer update
