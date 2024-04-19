@@ -43,10 +43,10 @@ class IncidentsController extends Controller
         $incident->incident_description = $request->input('incident_description');
         $incident->incident_status = $request->input('incident_status');
 
-        // Upload media
+        // Handle file uploads
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
-                $incident->addMediaFromRequest('images')->toMediaCollection('incident_images');
+                $incident->addMedia($image)->toMediaCollection('incident_images');
             }
         }
 
