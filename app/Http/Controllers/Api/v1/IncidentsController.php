@@ -12,11 +12,11 @@ class IncidentsController extends Controller
 
     public function index()
     {
-        $incident_types = DB::table('incident_type')->orderBy('id', 'desc')->get()->pluck('incident_type', 'id')->toArray();
+        $incident_types = DB::table('incident_type')->orderBy('id', 'asc')->get()->pluck('incident_type', 'id')->toArray();
 
-        return response()->json($types);
+        return response()->json($incident_types);
     }
-    
+
     public function store(Request $request)
     {
         $rules = [
