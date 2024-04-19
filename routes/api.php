@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\Api\v1\SorController;
 use App\Http\Controllers\Api\v1\TasksController;
 use App\Http\Controllers\Api\v1\DashboardController;
+use App\Http\Controllers\Api\v1\IncidentsController;
 use App\Http\Controllers\Api\v1\AuthenticationController;
 
 
@@ -46,6 +47,29 @@ Route::prefix('/v1')->group(
             Route::get('/reported-hazards', [SorController::class, 'reportedHazards']);
             //improvement suggestions
             Route::get('/improvements', [SorController::class, 'improvements']);
+
+            //incident types
+            Route::get('/incident-types', [IncidentsController::class, 'index']);
+
+            //add incident
+            Route::post('/add-incident', [IncidentsController::class, 'store']);
+
+            //open incidents
+            Route::get('/open-incidents', [IncidentsController::class, 'openIncidents']);
+
+            //near miss
+            Route::get('/near-miss', [IncidentsController::class, 'nearMiss']);
+            //first aid case
+            Route::get('/first-aid-case', [IncidentsController::class, 'firstAidCase']);
+            //medical treatment case
+            Route::get('/medical-treatment-case', [IncidentsController::class, 'medicalTreatmentCase']);
+            //lost time accident
+            Route::get('/lost-time-accident', [IncidentsController::class, 'lostTimeAccident']);
+            //sif
+            Route::get('/sif', [IncidentsController::class, 'sif']);
+
+
+
         });
     }
 );
