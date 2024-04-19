@@ -36,6 +36,16 @@ Route::prefix('/v1')->group(
             Route::get('/sor-types', [SorController::class, 'sorTypes']);
             //add sor
             Route::post('/add-sor', [SorController::class, 'store']);
+            //open sor
+            Route::get('/open-sor', [SorController::class, 'openSor']);
+            //bad practice
+            Route::get('/bad-practices', [SorController::class, 'badPractices']);
+            //good practices
+            Route::get('/good-practices', [SorController::class, 'goodPractices']);
+            //reported hazards
+            Route::get('/reported-hazards', [SorController::class, 'reportedHazards']);
+            //improvement suggestions
+            Route::get('/improvements', [SorController::class, 'improvements']);
         });
     }
 );

@@ -9,6 +9,20 @@ use Illuminate\Http\Request;
 
 class SorController extends Controller
 {
+
+    public function index()
+    {
+        //fetch all sor types
+        $sor_types = SorTypes::orderBy('id', 'desc')->get();
+        //fetch all users
+        $users = User::all();
+
+        return view('admin/sor')->with([
+            'sor_types' => $sor_types,
+            'users' => $users,
+        ]);
+    }
+
     public function store(Request $request)
     {
         $rules = [
@@ -63,5 +77,40 @@ class SorController extends Controller
         $types = SorTypes::orderBy('id', 'desc')->get()->pluck('name', 'id')->toArray();
 
         return response()->json($types);
+    }
+
+    public function openSor()
+    {
+        $sors = SOR::where('status', 0)->orderBy('id', 'desc')->get();
+        $sors->load('media');
+        return response()->json(['data' => $sors], 200);
+    }
+
+    public function badPractices()
+    {
+        $sors = SOR::where('type_id', 1)->orderBy('id', 'desc')->get();
+        $sors->load('media');
+        return response()->json(['data' => $sors], 200);
+    }
+
+    public function goodPractices()
+    {
+        $sors = SOR::where('type_id', 2)->orderBy('id', 'desc')->get();
+        $sors->load('media');
+        return response()->json(['data' => $sors], 200);
+    }
+
+    public function reportedHazards()
+    {
+        $sors = SOR::where('type_id', 3)->orderBy('id', 'desc')->get();
+        $sors->load('media');
+        return response()->json(['data' => $sors], 200);
+    }
+
+    public function improvements()
+    {
+        $sors = SOR::where('type_id', 4)->orderBy('id', 'desc')->get();
+        $sors->load('media');
+        return response()->json(['data' => $sors], 200);
     }
 }
