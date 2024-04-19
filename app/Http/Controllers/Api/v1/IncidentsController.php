@@ -12,11 +12,11 @@ class IncidentsController extends Controller
 
     public function index()
     {
-        $incident_types = DB::table('incident_type')->get();
+        $incident_types = DB::table('incident_type')->orderBy('id', 'desc')->get()->pluck('incident_type', 'id')->toArray();
 
-        return response()->json(['data' => $incident_types]);
-
+        return response()->json($types);
     }
+    
     public function store(Request $request)
     {
         $rules = [
@@ -90,7 +90,7 @@ class IncidentsController extends Controller
 
         return response()->json(['data' => $incidents]);
     }
-    
+
     public function lostTimeAccident()
     {
         $incidents = Incident::where('incident_type_id', 4)->orderBy('created_at', 'desc')->get();
@@ -108,5 +108,5 @@ class IncidentsController extends Controller
 
         return response()->json(['data' => $incidents]);
     }
-    
+
 }
