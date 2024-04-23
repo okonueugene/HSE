@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\SOR;
-use App\Models\User;
-use App\Models\SorTypes;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\SOR;
+use App\Models\SorTypes;
+use App\Models\User;
+use Illuminate\Http\Request;
 
 class SORController extends Controller
 {
@@ -26,7 +26,6 @@ class SORController extends Controller
         //fetch all users
         $users = User::all();
 
-
         return view('admin/sor')->with([
             'sor_types' => $sor_types,
             'users' => $users,
@@ -39,12 +38,15 @@ class SORController extends Controller
             'action_owner' => 'required',
             'observation' => 'required',
             'status' => 'required',
-            'steps_taken' => 'required',
+            'steps_taken_json' => 'required',
             'type_id' => 'required',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
 
         $this->validate($request, $rules);
+
+        // Decode the JSON string into an array of steps
+        $steps_taken = json_decode($request->input('steps_taken_json'), true);
 
         $sor = SOR::create([
             'assignor_id' => auth()->user()->id,
@@ -52,13 +54,13 @@ class SORController extends Controller
             'observation' => $request->observation,
             'status' => $request->status,
             'date' => date('Y-m-d'),
-            'steps_taken' => $request->steps_taken,
+            'steps_taken' => $steps_taken,
             'type_id' => $request->type_id,
         ]);
 
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
-                $sor->addMedia($image)->toMediaCollection('sor_images'); // Specify the media collection
+                $sor->addMedia($image)->toMediaCollection('sor_images');
             }
         }
 

@@ -19,7 +19,7 @@ return new class () extends Migration {
             $table->foreignId('type_id')->constrained('sor_types')->onDelete('cascade');
             $table->text('observation')->nullable();
             $table->string('status')->default('open');
-            $table->text('steps_taken')->nullable();
+            $table->json('steps_taken')->nullable();
             $table->date('date')->nullable();
             $table->timestamps();
         });

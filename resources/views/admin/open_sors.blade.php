@@ -24,7 +24,11 @@
                             <tr>
                                 <td>{{ $sor->id }}</td>
                                 <td>{{ $sor->observation }}</td>
-                                <td>{{ $sor->steps_taken }}</td>
+                                <td>
+                                    @foreach ($sor->steps_taken as $step)
+                                        <li>{{ $step }}</li>
+                                    @endforeach
+                                </td>
                                 <td>{{ $sor->date }}</td>
                                 <td>
                                     @if ($sor->status == 0)

@@ -40,9 +40,12 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="basic-default-stepstaken">Steps Taken</label>
-                            <textarea class="form-control" name="steps_taken" id="basic-default-stepstaken" placeholder="Steps taken"
-                                rows="4"></textarea>
-
+                            <div class="sortable-steps-container">
+                                <ul id="steps_taken_list" class="list-group">
+                                </ul>
+                            </div>
+                            <input type="hidden" name="steps_taken_json" id="steps_taken_json">
+                            <button type="button" class="btn btn-primary" onclick="addStep()">Add Step</button>
                             <div class="error">
                                 @error('steps_taken')
                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -93,3 +96,56 @@
 <!-- / Content -->
 
 @include('commons.footer')
+
+<script>
+    function addStep() {
+        // Create a new list item element for the step
+        const newStep = document.createElement('li');
+        newStep.classList.add('list-group-item');
+
+        // Input field for step description
+        const stepInput = document.createElement('input');
+        stepInput.type = 'text';
+        stepInput.classList.add('form-control');
+        stepInput.placeholder = 'Enter Step Description';
+        newStep.appendChild(stepInput);
+
+        // Button to remove the step
+        const removeButton = document.createElement('button');
+        removeButton.classList.add('btn', 'btn-sm', 'btn-danger');
+        removeButton.textContent = 'Remove';
+        removeButton.onclick = function() {
+            this.parentNode.remove();
+            updateStepsJson(); // Update JSON after removing a step
+        };
+        newStep.appendChild(removeButton);
+
+        // Make the list sortable (optional)
+        // You can use a library like Sortable.js for drag-and-drop sorting
+
+        // Append the new step to the list
+        const stepsList = document.getElementById('steps_taken_list');
+        stepsList.appendChild(newStep);
+
+        // Update JSON after adding a step (optional)
+        updateStepsJson();
+    }
+
+    function updateStepsJson() {
+        // Get all step descriptions from list items
+        const steps = [];
+        const stepElements = document.querySelectorAll('#steps_taken_list li input');
+        console.log("Number of step elements:", stepElements.length);
+        stepElements.forEach(element => {
+            console.log("Step description:", element.value);
+            steps.push(element.value.trim()); // Trim whitespace from step description
+        });
+
+        // Convert steps array to JSON string
+        const stepsJson = JSON.stringify(steps);
+
+        // Update the hidden field with the JSON string
+        console.log("Steps JSON:", stepsJson);
+        document.getElementById('steps_taken_json').value = stepsJson;
+    }
+</script>

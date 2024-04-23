@@ -24,6 +24,10 @@ class SOR extends Model implements HasMedia
         'type_id',
     ];
 
+    protected $casts = [
+        'steps_taken' => 'array', // Cast the 'steps_taken' attribute to an array
+    ];
+
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('sor_images'); // Specify the media collection name

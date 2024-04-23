@@ -33,7 +33,14 @@ class SORFactory extends Factory
         'action_owner' => fake()->name(),
         'observation' => fake()->text(),
         'status' => fake()->randomElement([0, 1]),
-        'steps_taken' => fake()->text(),
+        //steps_taken is a json field
+        'steps_taken' => json_encode([
+            'step1' => fake()->sentence(),
+            'step2' => fake()->sentence(),
+            'step3' => fake()->sentence(),
+            'step4' => fake()->sentence(),
+            'step5' => fake()->sentence(),
+        ]),
         'date' => fake()->date(),
         'type_id' => fake()->randomElement(SorTypes::pluck('id')->toArray()),
 

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Api\v1\IcaController;
 use App\Http\Controllers\Api\v1\SorController;
 use App\Http\Controllers\Api\v1\TasksController;
 use App\Http\Controllers\Api\v1\DashboardController;
@@ -67,6 +68,9 @@ Route::prefix('/v1')->group(
             Route::get('/lost-time-accident', [IncidentsController::class, 'lostTimeAccident']);
             //sif
             Route::get('/sif', [IncidentsController::class, 'sif']);
+
+            //ica routes
+            Route::get('/icas', [IcaController::class, 'index']);
 
 
 
