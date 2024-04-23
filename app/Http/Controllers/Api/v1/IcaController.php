@@ -10,7 +10,7 @@ class IcaController extends Controller
 {
     public function index()
     {
-        $icas = Icas::all();
+        $icas = Icas::orderBy('id', 'desc')->where('user_id', auth()->user()->id)->get();
 
         return response()->json([
             'data' => $icas
