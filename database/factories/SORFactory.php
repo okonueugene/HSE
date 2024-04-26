@@ -21,30 +21,26 @@ class SORFactory extends Factory
 
     public function definition()
     {
+        $faker = \Faker\Factory::create();
+
+        // Generate a random number of steps between 1 and 5
+        $numSteps = $faker->numberBetween(1, 5);
+
+        // Create an array to hold the steps
+        $steps = [];
+        for ($i = 0; $i < $numSteps; $i++) {
+            // Add a random step to the array
+            $steps[] = $faker->sentence();
+        }
+
         return [
-            //'assignor_id',
-        // 'assignee_id',
-        // 'observation',
-        // 'status',
-        // 'steps_taken',
-        // 'date',
-        // 'type_id',
-        'assignor_id' => fake()->randomElement(User::pluck('id')->toArray()),
-        'action_owner' => fake()->name(),
-        'observation' => fake()->text(),
-        'status' => fake()->randomElement([0, 1]),
-        //steps_taken is a json field
-        'steps_taken' => json_encode([
-            'step1' => fake()->sentence(),
-            'step2' => fake()->sentence(),
-            'step3' => fake()->sentence(),
-            'step4' => fake()->sentence(),
-            'step5' => fake()->sentence(),
-        ]),
-        'date' => fake()->date(),
-        'type_id' => fake()->randomElement(SorTypes::pluck('id')->toArray()),
-
-
+            'assignor_id' => $this->faker->randomElement(User::pluck('id')->toArray()),
+            'action_owner' => $this->faker->name(),
+            'observation' => $this->faker->text(),
+            'status' => $this->faker->randomElement([0, 1]),
+            'steps_taken' => $steps, // Convert steps array to JSON
+            'date' => $this->faker->date(),
+            'type_id' => $this->faker->randomElement(SorTypes::pluck('id')->toArray()),
         ];
     }
 }
