@@ -12,6 +12,9 @@ class IcaController extends Controller
     {
         $icas = Icas::orderBy('id', 'desc')->where('user_id', auth()->user()->id)->get();
 
+        //load media
+        $icas->load('media');
+
         return response()->json([
             'data' => $icas
         ]);

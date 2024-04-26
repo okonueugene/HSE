@@ -39,7 +39,11 @@
                             <tr>
                                 <td>{{ $hazard->id }}</td>
                                 <td>{{ $hazard->observation }}</td>
-                                <td>{{ $hazard->steps_taken }}</td>
+                                <td>
+                                    @foreach ($hazard->steps_taken as $step)
+                                        <li>{{ $step }}</li>
+                                    @endforeach
+                                </td>
                                 <td>{{ $hazard->date }}</td>
                                 <td>
                                     @if ($hazard->status == 0)
@@ -197,12 +201,19 @@
                 // Display badpractises details
                 $('#hazardsDetails').html(
                     '<p><strong>Observation:</strong> ' + response.observation + '</p>' +
-                    '<p><strong>Status:</strong> ' + response.status + '</p>' +
-                    '<p><strong>Steps Taken:</strong> ' + response.steps_taken + '</p>' +
+                    '<p><strong>Steps Taken:</strong></p>' +
+                    '<ul>' +
+                    getStepsList(response.steps_taken) +
+                    '</ul>' +
                     '<p><strong>Date:</strong> ' + response.date + '</p>'
                 );
 
-                // Display images if they exist
+                if (response.status == 0) {
+                    $('#hazardsDetails').append('<p><strong>Status:</strong> Open</p>');
+                } else {
+                    $('#hazardsDetails').append('<p><strong>Status:</strong> Closed</p>');
+                }
+
                 // Display images if they exist
                 if (response.media.length > 0) {
                     var imagesHtml = '<h4>Images:</h4><div class="image-container">';
@@ -227,6 +238,22 @@
 
             }
         });
+    }
+
+    function getStepsList(steps) {
+        var stepsHtml = '';
+        if (Array.isArray(steps)) {
+            steps.forEach(function(step) {
+                stepsHtml += '<li>' + step + '</li>';
+            });
+        } else {
+            for (var key in steps) {
+                if (Object.prototype.hasOwnProperty.call(steps, key)) {
+                    stepsHtml += '<li>' + steps[key] + '</li>';
+                }
+            }
+        }
+        return stepsHtml;
     }
 
     function deleteHazard(id) {

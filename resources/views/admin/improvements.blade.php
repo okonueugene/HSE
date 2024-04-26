@@ -40,7 +40,11 @@
                                 <tr>
                                     <td>{{ $improvement->id }}</td>
                                     <td>{{ $improvement->observation }}</td>
-                                    <td>{{ $improvement->steps_taken }}</td>
+                                    <td>
+                                        @foreach ($improvement->steps_taken as $step)
+                                            <li>{{ $step }}</li>
+                                        @endforeach
+                                    </td>
                                     <td>{{ $improvement->date }}</td>
                                     <td>
                                         @if ($improvement->status == 0)
@@ -197,9 +201,10 @@
                 // Display badpractises details
                 $('#improvementsDetails').html(
                     '<p><strong>Observation:</strong> ' + response.observation + '</p>' +
-                    '<p><strong>Status:</strong> ' + response.status + '</p>' +
-                    '<p><strong>Steps Taken:</strong> ' + response.steps_taken + '</p>' +
-                    '<p><strong>Date:</strong> ' + response.date + '</p>'
+                    '<p><strong>Steps Taken:</strong></p>' +
+                    '<ul>' +
+                    getStepsList(response.steps_taken) +
+                    '</ul>' + '<p><strong>Date:</strong> ' + response.date + '</p>'
                 );
 
                 // Display images if they exist
@@ -227,6 +232,22 @@
 
             }
         });
+    }
+
+    function getStepsList(steps) {
+        var stepsHtml = '';
+        if (Array.isArray(steps)) {
+            steps.forEach(function(step) {
+                stepsHtml += '<li>' + step + '</li>';
+            });
+        } else {
+            for (var key in steps) {
+                if (Object.prototype.hasOwnProperty.call(steps, key)) {
+                    stepsHtml += '<li>' + steps[key] + '</li>';
+                }
+            }
+        }
+        return stepsHtml;
     }
 
     // Delete improvement

@@ -40,7 +40,11 @@
                                 <tr>
                                     <td>{{ $goodpractise->id }}</td>
                                     <td>{{ $goodpractise->observation }}</td>
-                                    <td>{{ $goodpractise->steps_taken }}</td>
+                                    <td>
+                                        @foreach ($goodpractise->steps_taken as $step)
+                                            <li>{{ $step }}</li>
+                                        @endforeach
+                                    </td>
                                     <td>{{ $goodpractise->date }}</td>
                                     <td>
                                         @if ($goodpractise->status == 0)
@@ -200,8 +204,8 @@
                 // Display badpractises details
                 $('#goodpractisesDetails').html(
                     '<p><strong>Observation:</strong> ' + response.observation + '</p>' +
-                    '<p><strong>Status:</strong> ' + response.status + '</p>' +
-                    '<p><strong>Steps Taken:</strong> ' + response.steps_taken + '</p>' +
+                    '<p><strong>Status:</strong> ' + (response.status == 0 ? 'Open' : 'Closed') + '</p>' +
+                    '<p><strong>Steps Taken:</strong> <ul>' + getStepsList(response.steps_taken) + '</ul></p>' +
                     '<p><strong>Date:</strong> ' + response.date + '</p>'
                 );
 
@@ -230,6 +234,21 @@
 
             }
         });
+    }
+    function getStepsList(steps) {
+        var stepsHtml = '';
+        if (Array.isArray(steps)) {
+            steps.forEach(function(step) {
+                stepsHtml += '<li>' + step + '</li>';
+            });
+        } else {
+            for (var key in steps) {
+                if (Object.prototype.hasOwnProperty.call(steps, key)) {
+                    stepsHtml += '<li>' + steps[key] + '</li>';
+                }
+            }
+        }
+        return stepsHtml;
     }
 
     // Delete goodpractise

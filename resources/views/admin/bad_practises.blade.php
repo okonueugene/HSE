@@ -38,7 +38,11 @@
                                 <tr>
                                     <td>{{ $badpractise->id }}</td>
                                     <td>{{ $badpractise->observation }}</td>
-                                    <td>{{ $badpractise->steps_taken }}</td>
+                                    <td>
+                                        @foreach ($badpractise->steps_taken as $step)
+                                            <li>{{ $step }}</li>
+                                        @endforeach
+                                    </td>
                                     <td>{{ $badpractise->date }}</td>
 
                                     <td>
@@ -139,7 +143,7 @@
                     <!-- Steps Taken field -->
                     <div class="form-group">
                         <label for="steps_taken">Steps Taken</label>
-                        <input type="text" class="form-control" id="steps_taken" name="steps_taken">
+                        <div id="steps_taken"></div>
                     </div>
                     <!-- Date field -->
                     <div class="form-group">
@@ -193,8 +197,8 @@
                 // Display badpractises details
                 $('#badpractisesDetails').html(
                     '<p><strong>Observation:</strong> ' + response.observation + '</p>' +
-                    '<p><strong>Status:</strong> ' + response.status + '</p>' +
-                    '<p><strong>Steps Taken:</strong> ' + response.steps_taken + '</p>' +
+                    '<p><strong>Status:</strong> ' + (response.status == 0 ? 'Open' : 'Closed') + '</p>' +
+                    '<p><strong>Steps Taken:</strong> <ul>' + getStepsList(response.steps_taken) + '</ul></p>' +
                     '<p><strong>Date:</strong> ' + response.date + '</p>'
                 );
 
@@ -223,6 +227,21 @@
 
             }
         });
+    }
+    function getStepsList(steps) {
+        var stepsHtml = '';
+        if (Array.isArray(steps)) {
+            steps.forEach(function(step) {
+                stepsHtml += '<li>' + step + '</li>';
+            });
+        } else {
+            for (var key in steps) {
+                if (Object.prototype.hasOwnProperty.call(steps, key)) {
+                    stepsHtml += '<li>' + steps[key] + '</li>';
+                }
+            }
+        }
+        return stepsHtml;
     }
     // Delete badpractises
     function deleteData($id) {

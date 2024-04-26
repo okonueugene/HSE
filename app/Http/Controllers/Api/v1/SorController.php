@@ -9,18 +9,11 @@ use Illuminate\Http\Request;
 
 class SorController extends Controller
 {
-
     public function index()
     {
-        //fetch all sor types
-        $sor_types = SorTypes::orderBy('id', 'desc')->get();
-        //fetch all users
-        $users = User::all();
-
-        return view('admin/sor')->with([
-            'sor_types' => $sor_types,
-            'users' => $users,
-        ]);
+        $sors = SOR::orderBy('id', 'desc')->get();
+        $sors->load('media');
+        return response()->json(['data' => $sors], 200);
     }
 
     public function store(Request $request)

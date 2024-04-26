@@ -75,8 +75,7 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="basic-default-steps-taken">Steps Taken</label>
-                        <input type="text" class="form-control" id="basic-default-steps-taken" name="steps_taken"
-                            readonly>
+                        <div id="basic-default-steps-taken"></div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="basic-default-date">Date</label>
@@ -101,41 +100,48 @@
 @include('commons.footer')
 <script>
     $('#viewSorModal').on('show.bs.modal', function(event) {
-        var button = $(event.relatedTarget) // Button that triggered the modal
-        var sor = button.data('sor') // Extract info from data-* attributes
-        var modal = $(this)
-        modal.find('.modal-body #basic-default-observation').val(sor.observation)
-        modal.find('.modal-body #basic-default-steps-taken').val(sor.steps_taken)
-        modal.find('.modal-body #basic-default-date').val(sor.date)
-        if (sor.status == 0) {
-            modal.find('.modal-body #basic-default-status').val('Open')
-        } else {
-            modal.find('.modal-body #basic-default-status').val('Closed')
-        }
-        // if (incident.media.length > 0) {
-        //     var mediaHtml = '';
-        //     for (var i = 0; i < incident.media.length; i++) {
-        //         const regex = /http:\/\/localhost\/storage\//;
-        //         let media = incident.media[i].original_url.replace(regex, '');
-        //         // Pass the media through the asset helper
-        //         media = "{{ asset('storage') }}/" + media;
+        var button = $(event.relatedTarget); // Button that triggered the modal
+        var sor = button.data('sor'); // Extract info from data-* attributes
+        var modal = $(this);
 
-        //         // Create a container for each media and its title
-        //         mediaHtml += '<div class="media-item">';
-        //         mediaHtml += '<img src="' + media + '" class="img-fluid" alt="img">';
-        //         mediaHtml += '<div class="media-title">Media ' + (incident.media[i].file_name) +
-        //             '</div>';
-        //         mediaHtml += '</div>';
-        //     }
-        //     $('#mediaContainer').html(mediaHtml);
-        // } else {
-        //     $('#mediaContainer').html('No media available.');
-        // }
+        modal.find('.modal-body #basic-default-observation').val(sor.observation);
+
+        // Check if steps_taken is an array or an object
+        if (Array.isArray(sor.steps_taken)) {
+            // If it's an array, display as a list
+            var stepsList = '<ul>';
+            sor.steps_taken.forEach(function(step) {
+                if (step.trim() !== '') {
+                    stepsList += '<li>' + step + '</li>';
+                }
+            });
+            stepsList += '</ul>';
+            modal.find('.modal-body #basic-default-steps-taken').html(stepsList);
+            console.log(stepsList)
+        } else {
+            // If it's an object, assume it's already formatted as steps and display as is
+            var stepsObj = sor.steps_taken;
+            var stepsHtml = '<ul>';
+            for (var key in stepsObj) {
+                if (Object.prototype.hasOwnProperty.call(stepsObj, key)) {
+                    stepsHtml += '<li>' + stepsObj[key] + '</li>';
+                }
+            }
+            stepsHtml += '</ul>';
+            modal.find('.modal-body #basic-default-steps-taken').html(stepsHtml);
+            console.log(stepsHtml)
+        }
+
+        modal.find('.modal-body #basic-default-date').val(sor.date);
+        if (sor.status == 0) {
+            modal.find('.modal-body #basic-default-status').val('Open');
+        } else {
+            modal.find('.modal-body #basic-default-status').val('Closed');
+        }
 
         // Display media if available
         if (sor.media.length > 0) {
             var mediaHtml = '';
-
             for (var i = 0; i < sor.media.length; i++) {
                 const regex = /http:\/\/localhost\/storage\//;
                 let media = sor.media[i].original_url.replace(regex, '');
@@ -145,13 +151,12 @@
                 // Create a container for each media and its title
                 mediaHtml += '<div class="media-item">';
                 mediaHtml += '<img src="' + media + '" class="img-fluid" alt="img">';
-                mediaHtml += '<div class="media-title">Media ' + (sor.media[i].file_name) +
-                    '</div>';
+                mediaHtml += '<div class="media-title">Media ' + sor.media[i].file_name + '</div>';
                 mediaHtml += '</div>';
             }
             $('#mediaContainer').html(mediaHtml);
         } else {
             $('#mediaContainer').html('No media available.');
         }
-    })
+    });
 </script>
