@@ -5,11 +5,10 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\Api\v1\IcaController;
 use App\Http\Controllers\Api\v1\SorController;
 use App\Http\Controllers\Api\v1\TasksController;
+use App\Http\Controllers\Api\v1\PermitsController;
 use App\Http\Controllers\Api\v1\DashboardController;
 use App\Http\Controllers\Api\v1\IncidentsController;
 use App\Http\Controllers\Api\v1\AuthenticationController;
-
-
 
 /*
 |--------------------------------------------------------------------------
@@ -72,7 +71,8 @@ Route::prefix('/v1')->group(
             //ica routes
             Route::get('/icas', [IcaController::class, 'index']);
 
-
+            //permits routes
+            Route::get('/permits', [PermitsController::class, 'index']);
 
         });
     }
