@@ -36,6 +36,7 @@ class SorController extends Controller
         ];
 
         $this->validate($request, $rules, $messages);
+        $steps_taken = json_decode($request->input('steps_taken'), true);
 
         try {
             // Create a new SOR record
@@ -45,7 +46,7 @@ class SorController extends Controller
                 'observation' => $request->input('observation'),
                 'status' => $request->input('status'),
                 'date' => date('Y-m-d'),
-                'steps_taken' => $request->input('steps_taken'),
+                'steps_taken' => $steps_taken,
                 'type_id' => $request->input('type_id'),
             ]);
 
