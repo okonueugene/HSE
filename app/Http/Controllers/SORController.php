@@ -70,7 +70,7 @@ class SORController extends Controller
     //open sor
     public function openSor()
     {
-        $sors = SOR::where('status', 0)->orderBy('id', 'desc')->paginate(10);
+        $sors = SOR::where('status', 0)->orderBy('id', 'desc')->get();
         $sors->load('media');
         return view('admin/open_sors')->with('sors', $sors);
     }

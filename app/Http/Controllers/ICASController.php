@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Models\Icas;
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class ICASController extends Controller
 {
@@ -27,7 +27,6 @@ class ICASController extends Controller
         $search = $request->input('search');
 
         $query = Icas::with('media')->orderBy('id', 'desc');
-
 
         // Apply search filter if a query is provided
 
@@ -59,26 +58,27 @@ class ICASController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
         $rules = [
 
-            'action_owner_id' => 'required',
+            'action_owner' => 'required',
             'observation' => 'required',
             'status' => 'required',
-            'steps_taken' => 'required',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
 
         ];
 
         $this->validate($request, $rules);
 
+        $steps_taken = json_decode($request->input('steps_taken_json'), true);
 
         $icas = Icas::create([
             'user_id' => auth()->user()->id,
-            'action_owner_id' => $request->action_owner_id,
+            'action_owner' => $request->action_owner,
             'observation' => $request->observation,
             'status' => $request->status,
             'date' => date('Y-m-d'),
-            'steps_taken' => $request->steps_taken,
+            'steps_taken' => $steps_taken,
         ]);
 
         if ($request->hasFile('images')) {

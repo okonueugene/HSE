@@ -131,7 +131,14 @@
                     <!-- Steps Taken field -->
                     <div class="form-group">
                         <label for="steps_taken">Steps Taken</label>
-                        <input type="text" class="form-control" id="steps_taken" name="steps_taken">
+                        <div class="sortable-steps-container">
+                            <ul id="steps_taken_list"
+                                class="list-group
+                                list-group-flush">
+                                <!-- Steps will be dynamically added here -->
+                            </ul>
+
+                        </div>
                     </div>
                     <!-- Date field -->
                     <div class="form-group">
@@ -173,6 +180,60 @@
 @include('commons.footer')
 
 <script>
+    function addStep() {
+        // Create a new list item element for the step
+        const newStep = document.createElement('li');
+        newStep.classList.add('list-group-item');
+
+        // Input field for step description
+        const stepInput = document.createElement('input');
+        stepInput.type = 'text';
+        stepInput.classList.add('form-control');
+        stepInput.placeholder = 'Enter Step Description';
+        stepInput.addEventListener('input', () => updateStepsJson());
+
+        newStep.appendChild(stepInput);
+
+        // Button to remove the step
+        const removeButton = document.createElement('button');
+        removeButton.classList.add('btn', 'btn-sm', 'btn-danger');
+        removeButton.textContent = 'Remove';
+        removeButton.onclick = function() {
+            this.parentNode.remove();
+            updateStepsJson();
+        };
+        newStep.appendChild(removeButton);
+
+        // Append the new step to the list
+        const stepsList = document.getElementById('steps_taken_list');
+        stepsList.appendChild(newStep);
+    }
+
+    function updateStepsJson() {
+        // Initialize steps with an empty string
+        let steps = "";
+
+        // Get all step descriptions from list items
+        const stepElements = document.querySelectorAll('#steps_taken_list li input');
+
+        stepElements.forEach(element => {
+            // Trim whitespace from step description
+            const trimmedStep = element.value.trim();
+
+            // Append trimmed step to the string
+            steps += trimmedStep + ",";
+        });
+
+        // Remove trailing comma (if present)
+        steps = steps.slice(0, -1);
+
+        // Convert steps string to JSON string
+        const stepsJson = `[${steps}]`;
+
+        // Update the hidden field with the JSON string
+        document.getElementById('steps_taken_json').value = stepsJson;
+    }
+
     function showDataModal(id) {
         $.ajax({
             url: "/icas/" + id,
@@ -190,9 +251,20 @@
                     '<p><strong>Observation:</strong> ' + response.icas.observation + '</p>' +
                     '<p><strong>Date:</strong> ' + response.icas.date + '</p>' +
                     '<p><strong>Status:</strong> ' + response.icas.status + '</p>' +
-                    '<p><strong>Assigned To:</strong> ' + actionOwner + '</p>' +
+                    '<p><strong>Assigned To:</strong> ' + response.icas.action_owner + '</p>' +
                     '<p><strong>Assigned By:</strong> ' + user + '</p>'
                 );
+
+                //Display steps taken an object e.g. {"1":"Quidem blanditiis au","2":"Facere sint vitae ne"} as a list
+                var stepsTaken = '<p><strong>Steps Taken:</strong></p><ul>';
+                for (var key in response.icas.steps_taken) {
+                    stepsTaken += '<li>' + response.icas.steps_taken[key] + '</li>';
+                }
+                stepsTaken += '</ul>';
+                $('#icasDetails').append(stepsTaken);
+
+
+
 
                 // Display images if any
                 if (response.icas.media.length > 0) {
@@ -277,7 +349,7 @@
                             '</div>';
                         imagesHtml += '</div>';
                     }
-                    imagesHtml += '</div><br><br>'; // Add a line break between image groups
+                    imagesHtml += '</div><br><br>';
                     $('#mediaList').html(imagesHtml);
                 } else {
                     $('#mediaList').html('No images available.');
@@ -298,7 +370,6 @@
                 steps_taken: $('#updateModal #steps_taken').val(),
                 date: $('#updateModal #date').val(),
                 status: $('#updateModal #status').val(),
-                // Add more fields as needed
             };
 
             // Send the PUT request

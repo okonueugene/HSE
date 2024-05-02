@@ -42,7 +42,15 @@
                                     <td>{{ $goodpractise->observation }}</td>
                                     <td>
                                         @foreach ($goodpractise->steps_taken as $step)
-                                            <li>{{ $step }}</li>
+                                            @if (is_array($step))
+                                                <ul>
+                                                    @foreach ($step as $subStep)
+                                                        <li>{{ $subStep }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            @else
+                                                <li>{{ $step }}</li>
+                                            @endif
                                         @endforeach
                                     </td>
                                     <td>{{ $goodpractise->date }}</td>
@@ -204,8 +212,10 @@
                 // Display badpractises details
                 $('#goodpractisesDetails').html(
                     '<p><strong>Observation:</strong> ' + response.observation + '</p>' +
-                    '<p><strong>Status:</strong> ' + (response.status == 0 ? 'Open' : 'Closed') + '</p>' +
-                    '<p><strong>Steps Taken:</strong> <ul>' + getStepsList(response.steps_taken) + '</ul></p>' +
+                    '<p><strong>Status:</strong> ' + (response.status == 0 ? 'Open' : 'Closed') +
+                    '</p>' +
+                    '<p><strong>Steps Taken:</strong> <ul>' + getStepsList(response.steps_taken) +
+                    '</ul></p>' +
                     '<p><strong>Date:</strong> ' + response.date + '</p>'
                 );
 
@@ -235,6 +245,7 @@
             }
         });
     }
+
     function getStepsList(steps) {
         var stepsHtml = '';
         if (Array.isArray(steps)) {

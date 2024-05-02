@@ -40,7 +40,13 @@
                                     <td>{{ $badpractise->observation }}</td>
                                     <td>
                                         @foreach ($badpractise->steps_taken as $step)
-                                            <li>{{ $step }}</li>
+                                            @if (is_array($step))
+                                                @foreach ($step as $subStep)
+                                                    <li>{{ $subStep }}</li>
+                                                @endforeach
+                                            @else
+                                                <li>{{ $step }}</li>
+                                            @endif
                                         @endforeach
                                     </td>
                                     <td>{{ $badpractise->date }}</td>
@@ -197,8 +203,10 @@
                 // Display badpractises details
                 $('#badpractisesDetails').html(
                     '<p><strong>Observation:</strong> ' + response.observation + '</p>' +
-                    '<p><strong>Status:</strong> ' + (response.status == 0 ? 'Open' : 'Closed') + '</p>' +
-                    '<p><strong>Steps Taken:</strong> <ul>' + getStepsList(response.steps_taken) + '</ul></p>' +
+                    '<p><strong>Status:</strong> ' + (response.status == 0 ? 'Open' : 'Closed') +
+                    '</p>' +
+                    '<p><strong>Steps Taken:</strong> <ul>' + getStepsList(response.steps_taken) +
+                    '</ul></p>' +
                     '<p><strong>Date:</strong> ' + response.date + '</p>'
                 );
 
@@ -228,6 +236,7 @@
             }
         });
     }
+
     function getStepsList(steps) {
         var stepsHtml = '';
         if (Array.isArray(steps)) {

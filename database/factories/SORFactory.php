@@ -26,19 +26,20 @@ class SORFactory extends Factory
         // Generate a random number of steps between 1 and 5
         $numSteps = $faker->numberBetween(1, 5);
 
-        // Create an array to hold the steps
+        // Create an object to hold the steps example: {"1":"Quia eaque harum ut","2":"Et eaque ea dolores"}
         $steps = [];
         for ($i = 0; $i < $numSteps; $i++) {
             // Add a random step to the array
             $steps[] = $faker->sentence();
         }
+        
 
         return [
             'assignor_id' => $this->faker->randomElement(User::pluck('id')->toArray()),
             'action_owner' => $this->faker->name(),
             'observation' => $this->faker->text(),
             'status' => $this->faker->randomElement([0, 1]),
-            'steps_taken' => $steps, // Convert steps array to JSON
+            'steps_taken' => $steps, 
             'date' => $this->faker->date(),
             'type_id' => $this->faker->randomElement(SorTypes::pluck('id')->toArray()),
         ];

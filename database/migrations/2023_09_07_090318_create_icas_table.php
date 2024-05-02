@@ -18,7 +18,7 @@ return new class () extends Migration {
             $table->string('action_owner');
             $table->text('observation');
             $table->enum('status', ['open', 'closed', 'pending'])->default('open');
-            $table->text('steps_taken');
+            $table->json('steps_taken')->nullable();
             $table->date('date');
             $table->timestamps();
         });

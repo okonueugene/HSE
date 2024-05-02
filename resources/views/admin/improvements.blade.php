@@ -42,7 +42,13 @@
                                     <td>{{ $improvement->observation }}</td>
                                     <td>
                                         @foreach ($improvement->steps_taken as $step)
-                                            <li>{{ $step }}</li>
+                                            @if (is_array($step))
+                                                @foreach ($step as $subStep)
+                                                    <li>{{ $subStep }}</li>
+                                                @endforeach
+                                            @else
+                                                <li>{{ $step }}</li>
+                                            @endif
                                         @endforeach
                                     </td>
                                     <td>{{ $improvement->date }}</td>

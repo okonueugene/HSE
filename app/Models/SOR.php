@@ -25,7 +25,7 @@ class SOR extends Model implements HasMedia
     ];
 
     protected $casts = [
-        'steps_taken' => 'array', // Cast the 'steps_taken' attribute to an array
+        'steps_taken' => 'array',
     ];
 
     public function registerMediaCollections(): void

@@ -16,11 +16,16 @@ class Icas extends Model implements HasMedia
 
     protected $fillable = [
         'user_id',
-        'action_owner_id',
+        'action_owner',
         'observation',
         'status',
         'steps_taken',
         'date',
+    ];
+
+
+    protected $casts = [
+        'steps_taken' => 'array',
     ];
 
     public function registerMediaCollections(): void

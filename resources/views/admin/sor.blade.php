@@ -97,61 +97,55 @@
 
 @include('commons.footer')
 <script>
-function addStep() {
-  // Create a new list item element for the step
-  const newStep = document.createElement('li');
-  newStep.classList.add('list-group-item');
+    function addStep() {
+        // Create a new list item element for the step
+        const newStep = document.createElement('li');
+        newStep.classList.add('list-group-item');
 
-  // Input field for step description
-  const stepInput = document.createElement('input');
-  stepInput.type = 'text';
-  stepInput.classList.add('form-control');
-  stepInput.placeholder = 'Enter Step Description';
-  stepInput.addEventListener('input', () => updateStepsJson()); // Update JSON on input change
+        // Input field for step description
+        const stepInput = document.createElement('input');
+        stepInput.type = 'text';
+        stepInput.classList.add('form-control');
+        stepInput.placeholder = 'Enter Step Description';
+        stepInput.addEventListener('input', () => updateStepsJson()); // Update JSON on input change
 
-  newStep.appendChild(stepInput);
+        newStep.appendChild(stepInput);
 
-  // Button to remove the step
-  const removeButton = document.createElement('button');
-  removeButton.classList.add('btn', 'btn-sm', 'btn-danger');
-  removeButton.textContent = 'Remove';
-  removeButton.onclick = function() {
-    this.parentNode.remove();
-    updateStepsJson(); // Update JSON after removing a step
-  };
-  newStep.appendChild(removeButton);
+        // Button to remove the step
+        const removeButton = document.createElement('button');
+        removeButton.classList.add('btn', 'btn-sm', 'btn-danger');
+        removeButton.textContent = 'Remove';
+        removeButton.onclick = function() {
+            this.parentNode.remove();
+            updateStepsJson(); // Update JSON after removing a step
+        };
+        newStep.appendChild(removeButton);
 
-  // Make the list sortable (optional)
-  // You can use a library like Sortable.js for drag-and-drop sorting
+        // Make the list sortable (optional)
+        // You can use a library like Sortable.js for drag-and-drop sorting
 
-  // Append the new step to the list
-  const stepsList = document.getElementById('steps_taken_list');
-  stepsList.appendChild(newStep);
-}
+        // Append the new step to the list
+        const stepsList = document.getElementById('steps_taken_list');
+        stepsList.appendChild(newStep);
+    }
 
-function updateStepsJson() {
-  // Initialize steps with an empty string
-  let steps = "";
+    function updateStepsJson() {
+        let steps = {}; // Initialize steps as an object
 
-  // Get all step descriptions from list items
-  const stepElements = document.querySelectorAll('#steps_taken_list li input');
+        const stepElements = document.querySelectorAll('#steps_taken_list li input');
 
-  stepElements.forEach(element => {
-    // Trim whitespace from step description
-    const trimmedStep = element.value.trim();
+        let index = 1; // Start index from 1
 
-    // Append trimmed step to the string
-    steps += trimmedStep + ","; // Add comma separator between steps
-  });
+        stepElements.forEach((element) => {
+            const trimmedStep = element.value.trim();
+            if (trimmedStep) {
+                steps[index] = trimmedStep; // Use index as key and step description as value
+                index++;
+            }
+        });
 
-  // Remove trailing comma (if present)
-  steps = steps.slice(0, -1); // Remove last character
+        const stepsJson = JSON.stringify(steps); // Convert object to JSON string
 
-  // Convert steps string to JSON string
-  const stepsJson = `[${steps}]`; // Wrap in square brackets for JSON array
-
-  // Update the hidden field with the JSON string
-  document.getElementById('steps_taken_json').value = stepsJson;
-}
-
+        document.getElementById('steps_taken_json').value = stepsJson;
+    }
 </script>

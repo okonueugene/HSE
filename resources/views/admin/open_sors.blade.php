@@ -26,7 +26,15 @@
                                 <td>{{ $sor->observation }}</td>
                                 <td>
                                     @foreach ($sor->steps_taken as $step)
-                                        <li>{{ $step }}</li>
+                                        @if (is_array($step))
+                                            <ul>
+                                                @foreach ($step as $subStep)
+                                                    <li>{{ $subStep }}</li>
+                                                @endforeach
+                                            </ul>
+                                        @else
+                                            <li>{{ $step }}</li>
+                                        @endif
                                     @endforeach
                                 </td>
                                 <td>{{ $sor->date }}</td>

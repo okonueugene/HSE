@@ -18,6 +18,7 @@ class SorController extends Controller
 
     public function store(Request $request)
     {
+
         $rules = [
             'action_owner' => 'required',
             'observation' => 'required',
@@ -32,10 +33,11 @@ class SorController extends Controller
             'status.required' => 'Status is required',
             'steps_taken.required' => 'Steps taken is required',
             'type_id.required' => 'Type is required',
-       
         ];
 
         $this->validate($request, $rules, $messages);
+
+        //convert steps taken to json
         $steps_taken = json_decode($request->input('steps_taken'), true);
 
         try {
