@@ -16,7 +16,41 @@ class IcaController extends Controller
         $icas->load('media');
 
         return response()->json([
-            'data' => $icas
+            'data' => $icas,
         ]);
     }
+
+    public function store(Request $request)
+    {
+        $rules = [
+
+            'action_owner' => 'required',
+            'observation' => 'required',
+            'status' => 'required',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+
+        ];
+
+        $this->validate($request, $rules);
+
+        $steps_taken = json_decode($request->input('steps_taken_json'), true);
+
+        $icas = Icas::create([
+            'user_id' => auth()->user()->id,
+            'action_owner' => $request->action_owner,
+            'observation' => $request->observation,
+            'status' => $request->status,
+            'date' => date('Y-m-d'),
+            'steps_taken' => $steps_taken,
+        ]);
+
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                $icas->addMedia($image)->toMediaCollection('icas_images');
+            }
+        }
+
+        return redirect()->back()->with('success', 'ICA created successfully.');
+    }
+
 }
