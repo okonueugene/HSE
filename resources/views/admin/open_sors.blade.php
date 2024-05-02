@@ -66,6 +66,15 @@
                 </table>
             </div>
         </div>
+        <br>
+        <div class="card card-bordered w-50 mx-auto">
+            <div class="card-inner">
+                <ul class="pagination
+                    justify-content-center" style="margin:10px 10px">
+                    {{ $sors->links() }}
+                </ul>
+            </div>
+        </div>
     </div>
     {{-- viewSorModal --}}
     <div class="modal fade" id="viewSorModal" tabindex="-1" aria-labelledby="viewSorModalLabel" aria-hidden="true">
