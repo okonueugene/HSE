@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\v1\PermitsController;
 use App\Http\Controllers\Api\v1\DashboardController;
 use App\Http\Controllers\Api\v1\IncidentsController;
 use App\Http\Controllers\Api\v1\AuthenticationController;
+use App\Http\Controllers\Api\v1\PermitsApplicableController;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,7 +74,7 @@ Route::prefix('/v1')->group(
             Route::post('/add-ica', [IcaController::class, 'store']);
 
             //permits routes
-            Route::get('/permits', [PermitsController::class, 'index']);
+            Route::get('/permits', [PermitsApplicableController::class, 'index']);
 
         });
     }

@@ -9,6 +9,8 @@ class Permit extends Model
 {
     use HasFactory;
 
+    protected $table = 'permits';
+    
     protected $fillable = [
         'user_id',
         'type',
@@ -17,4 +19,6 @@ class Permit extends Model
         'area_owner',
         'competent_person',
     ];
+
+
 }

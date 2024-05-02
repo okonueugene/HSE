@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Incident::factory(200)->create();
         \App\Models\Icas::factory(80)->create();
         \App\Models\Task::factory(80)->create();
+        \App\Models\Permit::factory(50)->create();
 
     }
 }
