@@ -70,6 +70,7 @@ Route::prefix('/v1')->group(
 
             //ica routes
             Route::get('/icas', [IcaController::class, 'index']);
+            Route::post('/add-ica', [IcaController::class, 'store']);
 
             //permits routes
             Route::get('/permits', [PermitsController::class, 'index']);

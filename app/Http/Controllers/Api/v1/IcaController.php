@@ -33,7 +33,7 @@ class IcaController extends Controller
 
         $this->validate($request, $rules);
 
-        $steps_taken = json_decode($request->input('steps_taken_json'), true);
+        $steps_taken = json_decode($request->input('steps_taken'), true);
 
         $icas = Icas::create([
             'user_id' => auth()->user()->id,
@@ -50,7 +50,7 @@ class IcaController extends Controller
             }
         }
 
-        return redirect()->back()->with('success', 'ICA created successfully.');
+        return response()->json(['message' => 'ICA created successfully', 'data' => $icas], 200);
     }
 
 }
