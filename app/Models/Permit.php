@@ -10,7 +10,7 @@ class Permit extends Model
     use HasFactory;
 
     protected $table = 'permits';
-    
+
     protected $fillable = [
         'user_id',
         'type',
@@ -20,5 +20,9 @@ class Permit extends Model
         'competent_person',
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
 }
