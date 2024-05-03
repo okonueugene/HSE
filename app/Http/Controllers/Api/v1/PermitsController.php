@@ -12,6 +12,8 @@ class PermitsController extends Controller
     {
       $permits = Permit::orderBy('id', 'desc')->where('user_id', auth()->user()->id)->get();
 
+      $permits->load('user');
+
         return response()->json([
             'data' => $permits
         ]);
