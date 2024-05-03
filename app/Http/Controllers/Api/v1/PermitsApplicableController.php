@@ -10,6 +10,7 @@ class PermitsApplicableController extends Controller
     public function index()
     {
         $permits = Permit::orderBy('id', 'desc')->get();
+        $permits->load('user');
 
         return response()->json([
             'data' => $permits
