@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->date('date');
             $table->string('number');
+            $table->string('designation')->nullable();
             $table->timestamps();
         });
     }

@@ -75,6 +75,7 @@ Route::prefix('/v1')->group(
 
             //permits routes
             Route::get('/permits', [PermitsApplicableController::class, 'index']);
+            Route::post('/add-permit', [PermitsApplicableController::class, 'store']);
 
         });
     }
