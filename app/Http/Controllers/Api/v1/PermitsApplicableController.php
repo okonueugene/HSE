@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Api\v1;
 
-use App\Http\Controllers\Controller;
 use App\Models\Permit;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class PermitsApplicableController extends Controller
 {
