@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\v1\TasksController;
 use App\Http\Controllers\Api\v1\PermitsController;
 use App\Http\Controllers\Api\v1\DashboardController;
 use App\Http\Controllers\Api\v1\IncidentsController;
+use App\Http\Controllers\Api\v1\SupervisorsController;
 use App\Http\Controllers\Api\v1\AuthenticationController;
 use App\Http\Controllers\Api\v1\PermitsApplicableController;
 
@@ -76,6 +77,10 @@ Route::prefix('/v1')->group(
             //permits routes
             Route::get('/permits', [PermitsApplicableController::class, 'index']);
             Route::post('/add-permit', [PermitsApplicableController::class, 'store']);
+
+            //supervisors
+            Route::get('/supervisors', [SupervisorsController::class, 'index']);
+            
 
         });
     }

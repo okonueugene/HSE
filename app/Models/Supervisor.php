@@ -14,6 +14,7 @@ class Supervisor extends Model
         'user_id',
         'name',
         'date',
+        'designation',
     ];
 
     public function user()
