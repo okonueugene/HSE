@@ -80,6 +80,7 @@ Route::prefix('/v1')->group(
 
             //supervisors
             Route::get('/supervisors', [SupervisorsController::class, 'index']);
+            Route::post('/add-supervisor', [SupervisorsController::class, 'store']);
             
 
         });
