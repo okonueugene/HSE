@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\v1\IncidentsController;
 use App\Http\Controllers\Api\v1\PersonellController;
 use App\Http\Controllers\Api\v1\SupervisorsController;
 use App\Http\Controllers\Api\v1\AuthenticationController;
+use App\Http\Controllers\Api\v1\FirstResponderController;
 use App\Http\Controllers\Api\v1\PermitsApplicableController;
 
 /*
@@ -86,6 +87,11 @@ Route::prefix('/v1')->group(
             //personell routes
             Route::get('/personell', [PersonellController::class, 'index']);
             Route::post('/add-personell', [PersonellController::class, 'store']);
+
+            //first responders
+            Route::get('/first-responders', [FirstResponderController::class, 'index']);
+            Route::post('/add-first-responder', [FirstResponderController::class, 'store']);
+
             
 
         });

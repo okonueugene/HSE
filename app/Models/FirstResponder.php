@@ -9,6 +9,8 @@ class FirstResponder extends Model
 {
     use HasFactory;
 
+    protected $table = 'first_responders';
+
     protected $fillable = [
         'user_id',
         'name',
