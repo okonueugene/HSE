@@ -13,6 +13,7 @@ class PersonelPresent extends Model
         'user_id',
         'date',
         'number',
+        'designation',
     ];
 
     public function user()

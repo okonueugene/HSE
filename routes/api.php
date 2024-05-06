@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\v1\TasksController;
 use App\Http\Controllers\Api\v1\PermitsController;
 use App\Http\Controllers\Api\v1\DashboardController;
 use App\Http\Controllers\Api\v1\IncidentsController;
+use App\Http\Controllers\Api\v1\PersonellController;
 use App\Http\Controllers\Api\v1\SupervisorsController;
 use App\Http\Controllers\Api\v1\AuthenticationController;
 use App\Http\Controllers\Api\v1\PermitsApplicableController;
@@ -81,6 +82,10 @@ Route::prefix('/v1')->group(
             //supervisors
             Route::get('/supervisors', [SupervisorsController::class, 'index']);
             Route::post('/add-supervisor', [SupervisorsController::class, 'store']);
+
+            //personell routes
+            Route::get('/personell', [PersonellController::class, 'index']);
+            Route::post('/add-personell', [PersonellController::class, 'store']);
             
 
         });
