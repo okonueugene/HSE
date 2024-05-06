@@ -18,7 +18,7 @@
                     <thead>
                         <tr>
                             <th>Id</th>
-                            <th>Name</th>
+                            <th>Designation</th>
                             <th>Date</th>
                             <th>Head Count</th>
                             <th>Actions</th>
@@ -28,7 +28,7 @@
                         @foreach ($personells as $personnel)
                             <tr>
                                 <td>{{ $personnel->id }}</td>
-                                <td>{{ $personnel->user->name }}</td>
+                                <td>{{ $personnel->designation }}</td>
                                 <td>{{ $personnel->date }}</td>
                                 <td>{{ $personnel->number }}</td>
                                 <td>
@@ -67,7 +67,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label class="form-label" for="basic-default-name">Name</label>
+                                <label class="form-label" for="basic-default-name">Designation</label>
                                 <input type="text" class="form-control" id="basic-default-name" name="name"
                                     readonly>
                             </div>
@@ -88,6 +88,13 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">Added By</label>
+                            <input type="text" class="form-control" id="basic-default-addedby" name="added_by"
+                                readonly>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -105,6 +112,10 @@
             <div class="modal-body" id="personellDetail">
                 <form action="{{ route('personnel.store') }}" method="POST">
                     @csrf
+                    <div class="mb-3">
+                        <label class="form-label" for="basic-default-name">Designation</label>
+                        <input type="text" class="form-control" id="basic-default-name" name="designation" required>
+                    </div>
                     <div class="mb-3">
                         <label class="form-label" for="basic-default-headcount">Head Count</label>
                         <input type="number" class="form-control" id="basic-default-headcount" name="number"

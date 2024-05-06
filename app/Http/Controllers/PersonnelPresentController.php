@@ -30,17 +30,20 @@ class PersonnelPresentController extends Controller
         $rules = [
 
             'number' => 'required',
+            'designation' => 'required',
         ];
 
         $messages = [
 
             'number.required' => 'Number is required',
+            'designation.required' => 'Designation is required',
         ];
 
         $this->validate($request, $rules, $messages);
 
         $personnel = new PersonelPresent();
         $personnel->user_id = auth()->user()->id;
+        $personnel->designation = $request->input('designation');
         $personnel->date = date('Y-m-d');
         $personnel->number = $request->input('number');
 
