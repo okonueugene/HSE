@@ -30,10 +30,12 @@ class SupervisorDetailController extends Controller
     {
         $rules = [
             'name' => 'required',
+            'designation' => 'required'
         ];
 
         $messages = [
             'name.required' => 'Name is required',
+            'designation.required' => 'Designation is required'
         ];
 
         $this->validate($request, $rules, $messages);
@@ -41,6 +43,7 @@ class SupervisorDetailController extends Controller
         $supervisor = new Supervisor();
         $supervisor->user_id = auth()->user()->id;
         $supervisor->name = $request->input('name');
+        $supervisor->designation = $request->input('designation');
         $supervisor->date = date('Y-m-d');
 
         $supervisor->save();
@@ -52,10 +55,12 @@ class SupervisorDetailController extends Controller
     {
         $rules = [
             'name' => 'required',
+            'designation' => 'required'
         ];
 
         $messages = [
             'name.required' => 'Name is required',
+            'designation.required' => 'Designation is required'
         ];
 
         $this->validate($request, $rules, $messages);

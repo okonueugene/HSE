@@ -24,6 +24,7 @@
                         <tr>
                             <th>Id</th>
                             <th>Name</th>
+                            <th>Designation</th>
                             <th>Date</th>
                             <th>Actions</th>
                         </tr>
@@ -33,6 +34,7 @@
                             <tr>
                                 <td>{{ $supervisor->id }}</td>
                                 <td>{{ $supervisor->name }}</td>
+                                <td>{{ $supervisor->designation }}</td>
                                 <td>{{ $supervisor->date }}</td>
                                 <td>
                                     <div class="btn-group">
@@ -78,6 +80,12 @@
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
+                                <label class="form-label">Designation</label>
+                                <input type="text" class="form-control" id="designation" name="designation" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
                                 <label class="form-label">Date</label>
                                 <input type="text" class="form-control" id="date" name="date" readonly>
                             </div>
@@ -107,6 +115,10 @@
                         <input type="text" class="form-control" id="name" name="name" required>
                     </div>
                     <div class="mb-3">
+                        <label class="form-label" for="designation">Designation</label>
+                        <input type="text" class="form-control" id="designation" name="designation" required>
+                    </div>
+                    <div class="mb-3">
                         <button type="submit" class="btn btn-primary">Add</button>
                     </div>
                 </form>
@@ -124,5 +136,6 @@
         var modal = $(this)
         modal.find('.modal-body #name').val(supervisor.name)
         modal.find('.modal-body #date').val(supervisor.date)
+        modal.find('.modal-body #designation').val(supervisor.designation)
     })
 </script>
