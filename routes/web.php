@@ -174,6 +174,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     //enviromental routes
     Route::get('environment', [EnvironmentController::class, 'index'])->name('environment');
+    Route::post('environment-checklist', [EnvironmentController::class, 'storeCheckList'])->name('environment-store-checklist');
+    Route::post('environment-form', [EnvironmentController::class, 'storeFreeForm'])->name('environment-store-form');
 
     //return view environmental_policy_checklist
     Route::get('environmental-policy-checklist', [EnvironmentController::class, 'environmentalPolicyChecklist'])->name('environmental-policy-checklist');

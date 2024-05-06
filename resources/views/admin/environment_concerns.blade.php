@@ -34,7 +34,7 @@
                         @foreach ($concerns as $concern)
                             <tr>
                                 <td>{{ $concern->type }}</td>
-                                <td>{{ $concern->comment }}</td>
+                                <td>{{ $concern->comments }}</td>
                                 <td>{{ $concern->corrective_action }}</td>
                                 <td>{{ $concern->status }}</td>
                                 <td>{{ $concern->project_manager }}</td>
@@ -46,10 +46,10 @@
                                             aria-expanded="false">Action
                                         </button>
                                         <ul class="dropdown-menu">
-                                            <li>
+                                            {{-- <li>
                                                 <a href="{{ route('user-concerns.show', $permit->id) }}"
                                                     class="dropdown-item">View</a>
-                                            </li>
+                                            </li> --}}
                                             </li>
                                             @if (auth()->user()->can('update_environment'))
                                                 <li>
@@ -59,13 +59,13 @@
                                             @endif
                                             @if (auth()->user()->can('delete_environment'))
                                             <li>
-                                                <form action="{{ route('user-concerns.destroy', $permit->id) }}"
+                                                {{-- <form action="{{ route('user-concerns.destroy', $permit->id) }}"
                                                     method="POST"
                                                     onsubmit="return confirm('Are you sure you want to delete this permit?');">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="dropdown-item">Delete</button>
-                                                </form>
+                                                </form> --}}
                                             </li>
                                         @endif
                                         </ul>
@@ -88,7 +88,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
+                <form action="{{ route('environment-store-form') }}" method="POST">
                     @csrf
                     <div class="mb-3">
                         <label for="name" class="form-label">Type</label>
@@ -103,6 +103,7 @@
                             <option value="Energy Management">Energy Management</option>
                             <option value="Chemical Management">Chemical Management</option>
                             <option value="Other">Other</option>
+                        </select>
                     </div>
                     <div class="mb-3">
                         <label for="comment" class="form-label">Comment</label>
@@ -115,9 +116,9 @@
                     <div class="mb-3">
                         <label for="status" class="form-label">Status</label>
                         <select class="form-select" id="status" name="status" required>
-                            <option value="Pending">Pending</option>
-                            <option value="Approved">Approved</option>
-                            <option value="Rejected">Rejected</option>
+                            <option value="pending">Pending</option>
+                            <option value="approved">Approved</option>
+                            <option value="rejected">Rejected</option>
                         </select>
                     </div>
                     <div class="mb-3">

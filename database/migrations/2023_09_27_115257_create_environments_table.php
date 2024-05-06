@@ -15,6 +15,14 @@ return new class extends Migration
     {
         Schema::create('environments', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->json('checklist')->nullable();
+            $table->string('type')->nullable();
+            $table->string('comments')->nullable();
+            $table->json('corrective_actions')->nullable();
+            $table->string('project_manager')->nullable();
+            $table->string('auditor')->nullable();
+            $table->string('status')->default('pending');
             $table->timestamps();
         });
     }
