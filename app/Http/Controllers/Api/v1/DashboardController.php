@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers\Api\v1;
 
-use App\Http\Controllers\Controller;
-use App\Models\FirstResponder;
-use App\Models\Icas;
-use App\Models\Incident;
-use App\Models\PersonelPresent;
+use Carbon\Carbon;
 use App\Models\SOR;
-use App\Models\Supervisor;
+use App\Models\Icas;
 use App\Models\Task;
 use App\Models\User;
-use Carbon\Carbon;
+use App\Models\Permit;
+use App\Models\Incident;
+use App\Models\Supervisor;
+use App\Models\FirstResponder;
+use App\Models\PersonelPresent;
+use App\Http\Controllers\Controller;
 
 class DashboardController extends Controller
 {
