@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Permit;
 use App\Models\Incident;
 use App\Models\Supervisor;
+use App\Models\Environment;
 use App\Models\FirstResponder;
 use App\Models\PersonelPresent;
 use App\Http\Controllers\Controller;
