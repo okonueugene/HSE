@@ -40,6 +40,8 @@ class DashboardController extends Controller
         $data['first_aider'] = FirstResponder::where('created_at', '>=', Carbon::today())->where('type', 'first_aider')->first()->name ?? 'No First Aider Assigned';
         //Permits Applicable
         $data['permits'] = Permit::where('created_at', '>=', Carbon::today())->count() ?? 0;
+        //Environmental Concerns
+        $data['environmental_concerns'] = Environment::where('created_at', '>=', Carbon::today())->count() ?? 0;
 
         return response()->json($data);
     }
