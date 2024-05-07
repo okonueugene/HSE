@@ -35,7 +35,13 @@
                             <tr>
                                 <td>{{ $concern->type }}</td>
                                 <td>{{ $concern->comments }}</td>
-                                <td>{{ $concern->corrective_action }}</td>
+                                <td>
+
+                                    @foreach ($concern->corrective_actions as $sub_action)
+                                        <li>{{ $sub_action }}</li>
+                                    @endforeach
+
+                                </td>
                                 <td>{{ $concern->status }}</td>
                                 <td>{{ $concern->project_manager }}</td>
                                 <td>{{ $concern->auditor }}</td>
@@ -58,16 +64,16 @@
                                                 </li>
                                             @endif
                                             @if (auth()->user()->can('delete_environment'))
-                                            <li>
-                                                {{-- <form action="{{ route('user-concerns.destroy', $permit->id) }}"
+                                                <li>
+                                                    {{-- <form action="{{ route('user-concerns.destroy', $permit->id) }}"
                                                     method="POST"
                                                     onsubmit="return confirm('Are you sure you want to delete this permit?');">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="dropdown-item">Delete</button>
                                                 </form> --}}
-                                            </li>
-                                        @endif
+                                                </li>
+                                            @endif
                                         </ul>
                                     </div>
                                 </td>
@@ -75,6 +81,14 @@
                         @endforeach
                     </tbody>
                 </table>
+            </div>
+        </div>
+        <br>
+        <div class="card card-bordered w-50 mx-auto">
+            <div class="card-inner">
+                <ul class="pagination justify-content-center" style="margin:10px 10px">
+                    {{ $concerns->links() }}
+                </ul>
             </div>
         </div>
     </div>
@@ -88,7 +102,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('environment-store-form') }}" method="POST">
+                <form id="addForm">
                     @csrf
                     <div class="mb-3">
                         <label for="name" class="form-label">Type</label>
@@ -109,9 +123,15 @@
                         <label for="comment" class="form-label">Comment</label>
                         <textarea class="form-control" id="comment" name="comment" required></textarea>
                     </div>
-                    <div class="mb-3">
-                        <label for="corrective_action" class="form-label">Corrective Action</label>
-                        <textarea class="form-control" id="corrective_action" name="corrective_action" required></textarea>
+                    <div class="form-group" style="margin-top: 10px;">
+                        <label for="corrective_action">Corrective Actions</label>
+                        <div class="actions-container">
+                            <ul id="corrective_actions_list" class="list-group">
+                            </ul>
+                        </div>
+                        <input type="hidden" name="corrective_action" id="corrective_action">
+                        <button type="button" class="btn btn-primary" onclick="addAction()">Add
+                            Action</button>
                     </div>
                     <div class="mb-3">
                         <label for="status" class="form-label">Status</label>
@@ -147,3 +167,88 @@
 
 
 @include('commons.footer')
+
+<script>
+    function addAction() {
+        // Create a new list item element for the step
+        const newStep = document.createElement('li');
+        newStep.classList.add('list-group-item');
+
+        // Input field for step description
+        const stepInput = document.createElement('input');
+        stepInput.type = 'text';
+        stepInput.classList.add('form-control');
+        stepInput.placeholder = 'Enter Action Description';
+        stepInput.addEventListener('input', () => updateStepsJson()); // Update JSON on input change
+
+        newStep.appendChild(stepInput);
+
+        // Button to remove the step
+        const removeButton = document.createElement('button');
+        removeButton.classList.add('btn', 'btn-sm', 'btn-danger');
+        removeButton.textContent = 'Remove';
+        removeButton.onclick = function() {
+            this.parentNode.remove();
+            updateStepsJson(); // Update JSON after removing a step
+        };
+        newStep.appendChild(removeButton);
+
+        // Append the new step to the list
+        const stepsList = document.getElementById('corrective_actions_list');
+        stepsList.appendChild(newStep);
+    }
+
+    function updateStepsJson() {
+        let steps = {}; // Initialize steps as an object
+
+        const stepElements = document.querySelectorAll('#corrective_actions_list li input');
+
+        let index = 1; // Start index from 1
+
+        stepElements.forEach((element) => {
+            const trimmedStep = element.value.trim();
+            if (trimmedStep) {
+                steps[index] = trimmedStep; // Use index as key and step description as value
+                index++;
+            }
+        });
+
+        const stepsJson = JSON.stringify(steps); // Convert object to JSON string
+
+        document.getElementById('corrective_action').value = stepsJson;
+
+        console.log(stepsJson);
+    }
+
+    // Handle form submission
+    $('#addForm').submit(function(e) {
+        e.preventDefault();
+        let comments = $('#comment').val();
+        let type = $('#type').val();
+        let corrective_action = $('#corrective_action').val();
+        let status = $('#status').val();
+        let project_manager = $('#project_manager').val();
+        let auditor = $('#auditor').val();
+
+        let data = {
+            comment: comments,
+            type: type,
+            corrective_action: corrective_action,
+            status: status,
+            project_manager: project_manager,
+            auditor: auditor
+        };
+
+        console.log(data);
+
+        axios.post('{{ route('environment-store-form') }}', data)
+            .then(function(response) {
+                console.log(response);
+
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+
+    });
+</script>

@@ -1,34 +1,20 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\v1;
 
+use App\Http\Controllers\Controller;
 use App\Models\Environment;
 use Illuminate\Http\Request;
 
-class EnvironmentController extends Controller
+class EnvironmentalController extends Controller
 {
-    //
-
-    public function __construct()
-    {
-        $this->middleware('auth');
-        $this->middleware('permission:view_environment');
-        $this->middleware('permission:add_environment');
-        $this->middleware('permission:edit_environment');
-        $this->middleware('permission:delete_environment');
-    }
-
     public function index()
     {
+        $environment = Environment::orderBy('created_at', 'desc')->get();
 
-        $concerns = Environment::orderBy('created_at', 'desc')->paginate(10);
+        $environment->load('user');
 
-        return view('admin/environment_concerns')->with('concerns', $concerns);
-    }
-
-    public function environmentalPolicyChecklist()
-    {
-        return view('admin/environmental_policy_checklist');
+        return response()->json($environment);
     }
 
     public function storeFreeForm(Request $request)
@@ -62,13 +48,11 @@ class EnvironmentController extends Controller
 
         $environment->save();
 
-        return redirect()->back()->with('success', 'Free Form Environment Concerns Added Successfully');
+        return response()->json($environment);
     }
 
     public function storeCheckList(Request $request)
     {
-
-        // return response()->json($request->all());
         $rules = [
             'checklist' => 'required',
             'comments' => 'required',
@@ -95,10 +79,10 @@ class EnvironmentController extends Controller
         $environment->corrective_actions = $corrective_actions;
         $environment->project_manager = $request->input('project_manager');
         $environment->auditor = $request->input('auditor');
+        $environment->status = $request->input('status');
 
         $environment->save();
 
-        return redirect()->back()->with('success', 'Checklist Environment Concerns Added Successfully');
+        return response()->json($environment);
     }
-
 }

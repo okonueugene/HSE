@@ -1,18 +1,18 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\Api\v1\IcaController;
-use App\Http\Controllers\Api\v1\SorController;
-use App\Http\Controllers\Api\v1\TasksController;
-use App\Http\Controllers\Api\v1\PermitsController;
-use App\Http\Controllers\Api\v1\DashboardController;
-use App\Http\Controllers\Api\v1\IncidentsController;
-use App\Http\Controllers\Api\v1\PersonellController;
-use App\Http\Controllers\Api\v1\SupervisorsController;
 use App\Http\Controllers\Api\v1\AuthenticationController;
+use App\Http\Controllers\Api\v1\DashboardController;
+use App\Http\Controllers\Api\v1\EnvironmentalController;
 use App\Http\Controllers\Api\v1\FirstResponderController;
+use App\Http\Controllers\Api\v1\IcaController;
+use App\Http\Controllers\Api\v1\IncidentsController;
 use App\Http\Controllers\Api\v1\PermitsApplicableController;
+use App\Http\Controllers\Api\v1\PersonellController;
+use App\Http\Controllers\Api\v1\SorController;
+use App\Http\Controllers\Api\v1\SupervisorsController;
+use App\Http\Controllers\Api\v1\TasksController;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -92,7 +92,10 @@ Route::prefix('/v1')->group(
             Route::get('/first-responders', [FirstResponderController::class, 'index']);
             Route::post('/add-first-responder', [FirstResponderController::class, 'store']);
 
-            
+            //environmental policy
+            Route::get('/environmental-policy', [EnvironmentalController::class, 'index']);
+            Route::post('/add-environmental-form', [EnvironmentalController::class, 'storeFreeForm']);
+            Route::post('/add-environmental-checklist', [EnvironmentalController::class, 'storeCheckList']);
 
         });
     }
