@@ -109,4 +109,18 @@ class SorController extends Controller
         $sors->load('media');
         return response()->json(['data' => $sors], 200);
     }
+
+    public function show($id)
+    {
+        $sor = SOR::find($id);
+        $sor->load('media');
+        return response()->json(['data' => $sor], 200);
+    }
+
+    public function destroy($id)
+    {
+        $sor = SOR::find($id);
+        $sor->delete();
+        return response()->json(['message' => 'SOR deleted successfully'], 200);
+    }
 }

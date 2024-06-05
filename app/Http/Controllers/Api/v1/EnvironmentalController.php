@@ -53,20 +53,7 @@ class EnvironmentalController extends Controller
 
     public function storeCheckList(Request $request)
     {
-        // $rules = [
-        //     'checklist' => 'required',
-        //     'comments' => 'required',
-        //     'project_manager' => 'required',
-        //     'auditor' => 'required',
-        // ];
 
-        // $messages = [
-        //     'checklist.required' => 'Checklist is required',
-        //     'project_manager.required' => 'Project Manager is required',
-        //     'auditor.required' => 'Auditor is required',
-        //     'status.required' => 'Status is required',
-        // ];
-        // $this->validate($request, $rules, $messages);
 
         $corrective_actions = json_decode($request->input('corrective_action'), true);
         $checklist = json_decode($request->input('checklist'), true);
@@ -84,5 +71,20 @@ class EnvironmentalController extends Controller
         $environment->save();
 
         return response()->json($environment);
+    }
+
+    public function update(Request $request, Environment $environment)
+    {
+        $environment->update($request->all());
+
+        return response()->json($environment);
+    }
+
+    public function destroy($id)
+    {
+        $environment = Environment::find($id);
+        $environment->delete();
+
+        return response()->json('Environment deleted successfully');
     }
 }

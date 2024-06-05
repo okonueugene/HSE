@@ -38,4 +38,44 @@ class PersonellController extends Controller
             , 200,
         ]);
     }
+
+    public function show($id)
+    {
+        $data = PersonelPresent::find($id);
+        $data->load('user');
+
+        return response()->json([
+            'data' => $data
+            , 200,
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'number' => 'required',
+            'designation' => 'required',
+        ]);
+
+        $personel = PersonelPresent::find($id);
+        $personel->number = $request->number;
+        $personel->designation = $request->designation;
+        $personel->save();
+
+        return response()->json([
+            'data' => $personel
+            , 200,
+        ]);
+    }
+
+    public function destroy($id)
+    {
+        $personel = PersonelPresent::find($id);
+        $personel->delete();
+
+        return response()->json([
+            'message' => 'Personel deleted successfully'
+            , 200,
+        ]);
+    }
 }

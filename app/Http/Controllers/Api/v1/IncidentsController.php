@@ -109,4 +109,48 @@ class IncidentsController extends Controller
         return response()->json(['data' => $incidents]);
     }
 
+    public function update(Request $request, $id)
+    {
+        $rules = [
+            'incident_type_id' => 'required',
+            'investigation_status' => 'required',
+            'incident_description' => 'required',
+            'incident_status' => 'required',
+        ];
+
+        $messages = [
+            'incident_type_id.required' => 'Incident type is required',
+            'investigation_status.required' => 'Investigation status is required',
+            'incident_description.required' => 'Incident description is required',
+            'incident_status.required' => 'Incident status is required',
+        ];
+
+        $this->validate($request, $rules, $messages);
+
+        $incident = Incident::find($id);
+        $incident->incident_type_id = $request->input('incident_type_id');
+        $incident->investigation_status = $request->input('investigation_status');
+        $incident->incident_description = $request->input('incident_description');
+        $incident->incident_status = $request->input('incident_status');
+
+        // Handle file uploads
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                $incident->addMedia($image)->toMediaCollection('incident_images');
+            }
+        }
+
+        $incident->save();
+
+        return response()->json(['message' => 'Incident updated successfully']);
+    }
+
+    public function destroy($id)
+    {
+        $incident = Incident::find($id);
+        $incident->delete();
+
+        return response()->json(['message' => 'Incident deleted successfully']);
+    }
+
 }
