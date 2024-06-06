@@ -32,13 +32,13 @@ class DashboardController extends Controller
         //Safety Observation Record
         $data['sors'] = SOR::where('created_at', '>=', Carbon::today())->count();
         // Supervisor
-        $data['supervisor'] = Supervisor::where('created_at', '>=', Carbon::today())->first()->name ?? 'No Supervisor Assigned';
+        $data['supervisor'] = Supervisor::orderBy('id', 'desc')->first()->name ?? 'No Supervisor Assigned';
         // Personnel Present
         $data['personells'] = PersonelPresent::where('created_at', '>=', Carbon::today())->first()->number ?? 0;
         //Fire Marshal
-        $data['fire_marshal'] = FirstResponder::where('created_at', '>=', Carbon::today())->where('type', 'fire_marshal')->first()->name ?? 'No Fire Marshal Assigned';
+        $data['fire_marshal'] = FirstResponder::orderBy('id', 'desc')->first()->name ?? 'No Fire Marshal Assigned';
         //First Aider
-        $data['first_aider'] = FirstResponder::where('created_at', '>=', Carbon::today())->where('type', 'first_aider')->first()->name ?? 'No First Aider Assigned';
+        $data['first_aider'] = FirstResponder::orderBy('id', 'desc')->first()->name ?? 'No First Aider Assigned';
         //Permits Applicable
         $data['permits'] = Permit::where('created_at', '>=', Carbon::today())->count() ?? 0;
         //Environmental Concerns
