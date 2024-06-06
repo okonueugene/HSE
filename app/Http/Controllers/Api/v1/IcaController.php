@@ -23,16 +23,6 @@ class IcaController extends Controller
     public function store(Request $request)
     {
 
-        // $rules = [
-
-        //     'action_owner' => 'required',
-        //     'observation' => 'required',
-        //     'status' => 'required',
-        //     'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-
-        // ];
-
-        $this->validate($request, $rules);
 
         $steps_taken = json_decode($request->input('steps_taken'), true);
 
