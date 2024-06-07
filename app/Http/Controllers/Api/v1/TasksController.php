@@ -11,7 +11,12 @@ class TasksController extends Controller
 {
     public function index()
     {
-        return Task::orderBy('id', 'desc')->where('user_id', auth()->id())->load('media')->get();
+        $tasks = Task::orderBy('id', 'desc')->where('user_id', auth()->id())->get();
+
+        return response()->json([
+            'data' => $tasks
+            , 200,
+        ]);
     }
 
     public function store(Request $request)
