@@ -37,6 +37,7 @@ Route::prefix('/v1')->group(
             Route::ApiResource('/tasks', TasksController::class);
             //delete task
             Route::delete('/delete-task/{id}', [TasksController::class, 'destroy']);
+            Route::post('/complete-task', [TasksController::class, 'markTaskAsCompleted']);
             //dashboard
             Route::get('/dashboard-stats', [DashboardController::class, 'index']);
             //sor types

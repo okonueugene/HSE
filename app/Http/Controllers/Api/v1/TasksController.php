@@ -85,5 +85,26 @@ class TasksController extends Controller
             , 200,
         ]);
     }
-    
+
+    public function markTaskAsCompleted(Request $request)
+    {
+        $task = Task::find($request->task_id);
+
+        $task->status = 'completed';
+
+        // Upload media
+        if ($request->hasFile('media')) {
+            foreach ($request->file('media') as $image) {
+                $task->addMedia($image)->toMediaCollection('task_images'); // Specify the media collection
+            }
+        }
+
+        $task->save();
+
+        return response()->json([
+            'data' => $task
+            , 200,
+        ]);
+    }
+ 
 }
