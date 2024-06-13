@@ -22,27 +22,27 @@ class DashboardController extends Controller
         //initialize data array to hold the data
         $data = array();
         //Live Number Of People On Site
-        $data['attendance'] = User::where('last_login_at', '>=', Carbon::today())->count();
+        $data['attendance'] = User::all()->count();
         //Tasks Of The Day
-        $data['tasks'] = Task::where('created_at', '>=', Carbon::today())->count();
+        $data['tasks'] = Task::all()->count();
         //Incidents Recorded
-        $data['incidents'] = Incident::where('created_at', '>=', Carbon::today())->count();
+        $data['incidents'] = Incident::all()->count();
         //Immediate Corrective Actions
-        $data['icas'] = Icas::where('created_at', '>=', Carbon::today())->count();
+        $data['icas'] = Icas::all()->count();
         //Safety Observation Record
-        $data['sors'] = SOR::where('created_at', '>=', Carbon::today())->count();
+        $data['sors'] = SOR::all()->count();
         // Supervisor
         $data['supervisor'] = Supervisor::orderBy('id', 'desc')->first()->name ?? 'No Supervisor Assigned';
         // Personnel Present
-        $data['personells'] = PersonelPresent::where('created_at', '>=', Carbon::today())->first()->number ?? 0;
+        $data['personells'] = PersonelPresent::orderBy('id', 'desc')->first()->number ?? 0;
         //Fire Marshal
         $data['fire_marshal'] = FirstResponder::orderBy('id', 'desc')->first()->name ?? 'No Fire Marshal Assigned';
         //First Aider
         $data['first_aider'] = FirstResponder::orderBy('id', 'desc')->first()->name ?? 'No First Aider Assigned';
         //Permits Applicable
-        $data['permits'] = Permit::where('created_at', '>=', Carbon::today())->count() ?? 0;
+        $data['permits'] = Permit::orderBy('id', 'desc')->count() ?? 0;
         //Environmental Concerns
-        $data['environmental_concerns'] = Environment::where('created_at', '>=', Carbon::today())->count() ?? 0;
+        $data['environmental_concerns'] = Environment::orderBy('id', 'desc')->count();
 
         return response()->json($data);
     }
