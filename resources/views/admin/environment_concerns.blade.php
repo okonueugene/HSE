@@ -34,13 +34,23 @@
                         @foreach ($concerns as $concern)
                             <tr>
                                 <td>{{ $concern->type }}</td>
-                                <td>{{ $concern->comments }}</td>
+                                <td>{{ $concern->comments ?? 'No Comment' }}</td>
                                 <td>
-
+                                    @if($concern->corrective_actions)
                                     @foreach ($concern->corrective_actions as $sub_action)
-                                        <li>{{ $sub_action }}</li>
+                                        @if (is_array($sub_action))
+                                            <ul>
+                                                @foreach ($sub_action as $action)
+                                                    <li>{{ $action }}</li>
+                                                @endforeach
+                                            </ul>
+                                        @else
+                                            <li>{{ $sub_action }}</li>
+                                        @endif
                                     @endforeach
-
+                                    @else
+                                        <span>No Corrective Action</span>
+                                    @endif
                                 </td>
                                 <td>{{ $concern->status }}</td>
                                 <td>{{ $concern->project_manager }}</td>
@@ -231,7 +241,7 @@
         let auditor = $('#auditor').val();
 
         let data = {
-            comment: comments,
+            comments: comments,
             type: type,
             corrective_action: corrective_action,
             status: status,
@@ -244,11 +254,12 @@
         axios.post('{{ route('environment-store-form') }}', data)
             .then(function(response) {
                 console.log(response);
-
+                if (response.data) {
+                    window.location.reload();
+                }
             })
             .catch(function(error) {
                 console.log(error);
             });
-
     });
 </script>

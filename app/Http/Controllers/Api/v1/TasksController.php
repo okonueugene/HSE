@@ -23,18 +23,22 @@ class TasksController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'assignee_id' => 'required',
             'title' => 'required',
             'description' => 'required',
-            'date' => 'required',
-            'time' => 'required',
+            'comments' => 'required',
+            'from' => 'required',
+            'to' => 'required',
         ]);
 
         $task = new Task();
         $task->user_id = auth()->id();
+        $task->assignee_id = $request->assignee_id;
         $task->title = $request->title;
         $task->description = $request->description;
-        $task->date = $request->date;
-        $task->time = $request->time;
+        $task->comments = $request->comments;
+        $task->from = $request->from;
+        $task->to = $request->to;
         $task->save();
 
         return response()->json([

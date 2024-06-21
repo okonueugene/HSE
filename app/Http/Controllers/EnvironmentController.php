@@ -35,7 +35,7 @@ class EnvironmentController extends Controller
     {
         $rules = [
             'type' => 'required',
-            'comment' => 'required',
+            'comments' => 'required',
             'project_manager' => 'required',
             'auditor' => 'required',
             'status' => 'required',
@@ -54,7 +54,7 @@ class EnvironmentController extends Controller
         $environment = new Environment();
         $environment->user_id = auth()->user()->id;
         $environment->type = $request->input('type');
-        $environment->comments = $request->input('comment');
+        $environment->comments = $request->input('comments');
         $environment->corrective_actions = json_decode($request->input('corrective_action'), true);
         $environment->project_manager = $request->input('project_manager');
         $environment->auditor = $request->input('auditor');
@@ -82,6 +82,8 @@ class EnvironmentController extends Controller
             'auditor.required' => 'Auditor is required',
             'status.required' => 'Status is required',
         ];
+
+        
         $this->validate($request, $rules, $messages);
 
         $corrective_actions = json_decode($request->input('corrective_action'), true);

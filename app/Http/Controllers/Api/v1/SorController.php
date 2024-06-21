@@ -43,7 +43,7 @@ class SorController extends Controller
         try {
             // Create a new SOR record
             $sor = SOR::create([
-                'assignor_id' => $request->input('assignor_id'),
+                'assignor_id' => auth()->id(),
                 'action_owner' => $request->input('action_owner'),
                 'observation' => $request->input('observation'),
                 'status' => $request->input('status'),
