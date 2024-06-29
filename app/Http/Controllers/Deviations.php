@@ -13,6 +13,6 @@ class Deviations extends Controller
 
         $deviations= [];
 
-        return view('admin/deviations', compact('deviations'));
+        return view('admin/deviations/index', compact('deviations'));
     }
 }

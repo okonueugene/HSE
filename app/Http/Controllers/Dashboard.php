@@ -41,6 +41,7 @@ class Dashboard extends Controller
         //First Aider
         $data['first_aider'] = FirstResponder::where('created_at', '>=', Carbon::today())->where('type', 'first_aider')->first()->name ?? 'No First Aider Assigned';
 
-        return view('admin/dashboard', compact('data'));
+        return view('admin/dashboard/index', compact('data'));
+        // resources/views/admin/dashboard/index.blade.php
     }
 }

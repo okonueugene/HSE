@@ -23,7 +23,7 @@ class SupervisorDetailController extends Controller
 
         $supervisors->load('user');
 
-        return view('admin.supervisor' , ['supervisors' => $supervisors]);
+        return view('admin.supervisors.index' , ['supervisors' => $supervisors]);
     }
 
     public function store(Request $request)

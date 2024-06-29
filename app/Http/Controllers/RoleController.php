@@ -27,7 +27,7 @@ class RoleController extends Controller
 
         $permissions = Permission::all();
 
-        return view('admin/roles')->with([
+        return view('admin/roles/index')->with([
             'roles' => $roles,
             'permissions' => $permissions,
         ]);

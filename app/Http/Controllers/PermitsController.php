@@ -22,7 +22,7 @@ class PermitsController extends Controller
     {
         $permits = Permit::orderBy('id', 'desc')->paginate(10);
 
-        return view('admin/permits')->with('permits', $permits);
+        return view('admin/permits/index')->with('permits', $permits);
     }
 
     public function store(Request $request)

@@ -23,12 +23,12 @@ class EnvironmentController extends Controller
 
         $concerns = Environment::orderBy('created_at', 'desc')->paginate(10);
 
-        return view('admin/environment_concerns')->with('concerns', $concerns);
+        return view('admin/environment_concerns.index')->with('concerns', $concerns);
     }
 
     public function environmentalPolicyChecklist()
     {
-        return view('admin/environmental_policy_checklist');
+        return view('admin/environment_concerns/environmental_policy_checklist');
     }
 
     public function storeFreeForm(Request $request)

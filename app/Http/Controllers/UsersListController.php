@@ -24,7 +24,7 @@ class UsersListController extends Controller
     {
         $users = User::orderBy('id', 'desc')->paginate(10);
 
-        return view('admin/userslist')->with([
+        return view('admin/users/index')->with([
             'users' => $users,
             'roles' => Role::all(),
         ]);
@@ -67,7 +67,7 @@ class UsersListController extends Controller
         $user = User::find($id);
         $roles = Role::all();
 
-        return view('admin/edituserlist')->with([
+        return view('admin/users/edit')->with([
             'user' => $user,
             'roles' => $roles,
         ]);
