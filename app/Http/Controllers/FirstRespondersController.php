@@ -23,7 +23,7 @@ class FirstRespondersController extends Controller
 
         $first_responders->load('user');
 
-        return view('admin.first_responders', ['firstResponders' => $first_responders]);
+        return view('admin.first_responders/index', ['firstResponders' => $first_responders]);
     }
 
     public function store(Request $request)

@@ -22,7 +22,7 @@ class PersonnelPresentController extends Controller
         $personells = PersonelPresent::all();
 
         $personells->load('user');
-        return view('admin.personnel', ['personells' => $personells]);
+        return view('admin.personnel.index', ['personells' => $personells]);
     }
 
     public function store(Request $request)

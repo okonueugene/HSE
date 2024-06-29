@@ -12,6 +12,6 @@ class Attendance extends Controller
     {
         $records =[];
 
-        return view('admin/attendance', compact('records'));
+        return view('admin/attendance/index', compact('records'));
     }
 }

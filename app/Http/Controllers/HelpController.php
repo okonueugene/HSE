@@ -8,6 +8,6 @@ class HelpController extends Controller
 {
     public function index()
     {
-        return view('admin/help');
+        return view('admin/help/index');
     }
 }

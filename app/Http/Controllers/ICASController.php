@@ -38,7 +38,7 @@ class ICASController extends Controller
 
         $icas = $query->paginate($perPage);
 
-        return view('admin/icas')->with([
+        return view('admin/icas/index')->with([
 
             'icas' => $icas,
 
@@ -51,7 +51,7 @@ class ICASController extends Controller
     {
 
         $users = User::all();
-        return view('admin/add-icas')->with([
+        return view('admin/icas/create')->with([
             'users' => $users,
         ]);
     }
